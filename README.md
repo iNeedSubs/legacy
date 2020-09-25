@@ -2,41 +2,29 @@
 
 Download subtitles for movies, tv shows and anime in your preferred language.
 
+## Running locally
 
-## Contributions
+### Prerequisites
 
-1. Make sure you have python 3 installed. Preferably 3.8.x
-2. Make sure you have nodejs installed
-3. Install pipenv: `pip install pipenv`
-4. Install all requirements using `pipenv install` which should also create a virtual env
-5. Install all requirements using `yarn`
-6. Create a `.env` file with the variables in [environment variables section](#environment-variables)
-7. Run `pipenv shell` to activate the virtual env and load `.env` vars
-8. Run `python manage.py runserver` to start the development server
+Your system should have these installed before you continue with the local setup:
 
-NEVER run 8 for production. Gunicorn should deal with start the server for production set inside
-of Procfile.
+- Python3 (3.8.x preferably)
+- NodeJS
 
+### Installation
+
+1. Install pipenv: `pip install pipenv`.
+2. Install python dependancies by running `pipenv install`, which also creates a virtual env.
+3. Install node dependancies by running `yarn`.
+4. Create the `.env` file and fill it in using the variables listed under [environment variables section](#environment-variables).
+5. Run `pipenv shell` to activate the virtual env and load `.env` variables.
+6. Run `python manage.py runserver` to start the development server. _(local-only)_
 
 ## Environment Variables
 
-Database and cloudinary related variables are only needed for production.
-No need for them if you are developing on a local machine.
-
-SETTING var is either `subtitles.settings.dev` or `subtitles.settings.prod`.
-Use dev on local machine and prod on host.
-
-HOST is the URL of the web app. Leave this blank local machine.
+Keep the the `SETTING` variable as it is.
 
 ```
 SECRET_KEY=secret_key
-DATABASE_NAME=database_name
-DATABASE_HOST=database_host
-DATABASE_USER=database_username
-DATABASE_PASS=database_password
-CLOUD_NAME=cloudinary_name
-CLOUD_KEY=cloudinary_key
-CLOUD_SECRET=cloudinary_secret
-SETTING=setting
-HOST=host
+SETTING=subtitles.settings.dev
 ```
