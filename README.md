@@ -10,7 +10,7 @@ Download subtitles for movies, tv shows and anime in your preferred language.
 3. Install pipenv: `pip install pipenv`
 4. Install all requirements using `pipenv install` which should also create a virtual env
 5. Install all requirements using `yarn` or `npm install`
-6. Create a `.env` file with the variables in [environment variables section](environment-variables)
+6. Create a `.env` file with the variables in [environment variables section](#environment-variables)
 7. Run `pipenv shell` to activate the virtual env and load `.env` vars
 8. Run `python manage.py runserver` to start the development server
 
