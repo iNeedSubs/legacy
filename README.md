@@ -25,6 +25,9 @@ No need for them if you are developing on a local machine.
 
 SETTING var is either `subtitles.settings.dev` or `subtitles.settings.prod`.
 Use dev on local machine and prod on host.
+
+HOST is the URL of the web app. Leave this blank local machine.
+
 ```
 SECRET_KEY=secret_key
 DATABASE_NAME=database_name
@@ -35,4 +38,5 @@ CLOUD_NAME=cloudinary_name
 CLOUD_KEY=cloudinary_key
 CLOUD_SECRET=cloudinary_secret
 SETTING=setting
+HOST=host
 ```
