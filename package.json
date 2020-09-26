@@ -1,11 +1,6 @@
 {
-  "name": "frontend",
-  "version": "1.0.0",
-  "description": "Frontend for subtitles app",
-  "author": "Spimy <officialspyme@gmail.com>",
-  "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --host 0.0.0.0 --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "test": "npm run unit",
@@ -14,6 +9,9 @@
     "postinstall": "npm run build"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@fortawesome/vue-fontawesome": "2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
