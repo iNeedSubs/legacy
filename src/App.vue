@@ -5,9 +5,11 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'App'
+<style>
+@font-face {
+  font-family: Rubik;
+  src: url("assets/fonts/rubik_bold.ttf");
+}
 }
 </script>
 
