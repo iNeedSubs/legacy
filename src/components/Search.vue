@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <div class="inputContainer">
-      <input placeholder="Search for a movie name"/>
+      <input placeholder="Search"/>
         <button>
           <font-awesome-icon icon="search"/>
         </button>
