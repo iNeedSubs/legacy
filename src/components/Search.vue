@@ -50,7 +50,7 @@ export default {
 
 input {
     background: #51555c;
-    padding: 1em;
+    padding: 1em 0 1em 1em;
     width: 100%;
     min-width: 0;
     border: none;
