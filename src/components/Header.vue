@@ -1,8 +1,8 @@
 <template>
-    <header>
-        <h1>Subtitles</h1>
-        <Nav/>
-    </header>
+  <header>
+    <h1>Subtitles</h1>
+    <Nav/>
+  </header>
 </template>
 
 <script>
@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 header {
   background: #d65a31;
   padding: 30px;

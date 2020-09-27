@@ -1,16 +1,10 @@
-<script>
-export default {
-  name: 'App'
-}
-</script>
-
 <template>
   <div id="app">
     <router-view/>
   </div>
 </template>
 
-<style>
+<style lang="scss">
 @font-face {
   font-family: Rubik;
   src: url("assets/fonts/rubik_bold.ttf");
@@ -41,5 +35,14 @@ body {
   font-family: Source Sans Pro Regular;
   background: #222831;
   color: #fff;
+}
+
+.icon {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -.125em;
+  width: 1em;
 }
 </style>
