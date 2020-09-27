@@ -14,8 +14,8 @@ Your system should have these installed before you continue with the local setup
 ### Installation
 
 1. Install pipenv: `pip install pipenv`.
-2. Install python dependancies by running `pipenv install`, which also creates a virtual env.
-3. Install node dependancies by running `yarn`.
+2. Install python dependencies by running `pipenv install`, which also creates a virtual env.
+3. Install node dependencies by running `yarn`.
 4. Create the `.env` file and fill it in using the variables listed under [environment variables section](#environment-variables).
 5. Run `python manage.py migrate` if there are changes made to the database.
 6. Run `pipenv shell` to activate the virtual env and load `.env` variables.
