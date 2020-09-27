@@ -23,7 +23,7 @@ header {
 }
 
 h1 {
-  font-size: 4em;
+  font-size: 3.5em;
   margin-bottom: .5em;
   font-family: Rubik;
 }
