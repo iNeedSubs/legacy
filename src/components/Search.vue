@@ -39,8 +39,10 @@ export default {
 
 <style scoped>
 .search {
+  margin: 0 auto;
   background: #51555c;
   border-radius: 5px;
+  max-width: 600px;
 }
 
 .inputContainer {
