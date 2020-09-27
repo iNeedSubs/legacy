@@ -32,11 +32,9 @@ class SearchEndpoint(GenericAPIView):
         for result in results:
             if result.get('MovieKind') not in ['tv series', 'episode']:
                 if result.get('MovieKind') == query_type.lower():
-                    current = self.set_result(result)
-
-            current = self.set_result(result)
-
-            final.append(current)
+                    final.append(self.set_result(result))
+            else:
+                final.append(self.set_result(result))
 
         return final
 
