@@ -103,7 +103,7 @@ button {
 }
 
 .filters button:hover {
-  background: #6d7076;
+  background: #6d707622;
 }
 
 .filters button.active {
