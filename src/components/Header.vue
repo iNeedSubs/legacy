@@ -23,8 +23,20 @@ header {
 }
 
 h1 {
-  font-size: 4em;
+  font-size: 3.5em;
   margin-bottom: .5em;
   font-family: Rubik;
+}
+
+@media only screen and (min-width: 800px) {
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h1 {
+    margin-bottom: 0;
+  }
 }
 </style>

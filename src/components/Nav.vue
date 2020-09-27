@@ -30,4 +30,10 @@ nav a:hover {
 nav a.router-link-exact-active {
     background: #de7b5a;
 }
+
+@media only screen and (min-width: 800px) {
+  nav {
+    gap: 1em;
+  }
+}
 </style>

@@ -15,8 +15,10 @@ main {
 }
 
 .desc {
-  margin-bottom: 2em;
-  font-size: 18px;
+  margin: 0 auto 2em auto;
+  line-height: 1.5em;
+  font-size: 1.3em;
+  max-width: 40ch;
   text-align: center;
 }
 </style>
