@@ -21,7 +21,7 @@ class SearchEndpoint(GenericAPIView):
         query_type: str = self.request.query_params.get('type', 'movie')
 
         if query is None:
-            return {'err': 'Provide a search query.'}
+            return [{'err': 'Provide a search query.'}]
 
         external_api = f'{EXTERNAL_BASE_URL}/search/query-{query}/sublanguageid-{language}'
         response = requests.get(external_api, headers=HEADERS)
