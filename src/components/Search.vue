@@ -1,19 +1,41 @@
 <template>
-    <div class="search">
-        <div class="inputContainer">
-            <input placeholder="Search for a movie name"/>
-            <button>
-                <font-awesome-icon icon="search"/>
-            </button>
-        </div>
-        <div class="filters">
-            <button class="movie active">Movie</button>
-            <button class="tvShow">Tv Show</button>
-            <button class="anime">Anime</button>
-            <button class="lang">English (US)</button>
-        </div>
+  <div class="search">
+    <div class="inputContainer">
+      <input placeholder="Search for a movie name"/>
+        <button>
+          <font-awesome-icon icon="search"/>
+        </button>
     </div>
+    <div class="filters">
+      <button :class="movie" @click="setFilter('movie')">Movie</button>
+      <button :class="tvShow" @click="setFilter('tvShow')">TV Show</button>
+      <button :class="anime" @click="setFilter('anime')">Anime</button>
+      <button class="lang">English (US)</button>
+    </div>
+  </div>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    filter: 'movie',
+    setFilter (filter) {
+      this.filter = filter
+    }
+  }),
+  computed: {
+    movie () {
+      return this.filter === 'movie' ? 'movie active' : 'movie'
+    },
+    tvShow () {
+      return this.filter === 'tvShow' ? 'tvShow active' : 'tvShow'
+    },
+    anime () {
+      return this.filter === 'anime' ? 'anime active' : 'anime'
+    }
+  }
+}
+</script>
 
 <style scoped>
 .search {
@@ -45,7 +67,6 @@ input::placeholder {
 
 button {
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     outline: none;
 }
@@ -54,6 +75,7 @@ button {
     margin: 10px;
     padding: 0 1em;
     background: #d65a31;
+    border-radius: 5px;
     color: #fff;
     transition: background .1s ease-in-out;
 }
@@ -77,6 +99,11 @@ button {
     color: #fff;
     font-family: Source Sans Pro SemiBold;
     font-size: 18px;
+    transition: background .1s ease-in-out;
+}
+
+.filters button:hover {
+  background: #6d7076;
 }
 
 .filters button.active {
@@ -97,5 +124,6 @@ button {
 
 .lang {
     grid-area: lang;
+    border-radius: 0 0 5px 5px;
 }
 </style>
