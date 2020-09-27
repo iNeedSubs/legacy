@@ -28,13 +28,15 @@ class SearchEndpoint(GenericAPIView):
         results: List[dict] = response.json()
 
         final: List[dict] = []
+        show_list = ['episode', 'tv series']
 
         for result in results:
-            if result.get('MovieKind') not in ['tv series', 'episode']:
-                if result.get('MovieKind') == query_type.lower():
+            if query_type.lower() in show_list:
+                if result.get('MovieKind') in show_list:
                     final.append(self.set_result(result))
             else:
-                final.append(self.set_result(result))
+                if result.get('MovieKind') == query_type.lower():
+                    final.append(self.set_result(result))
 
         return final
 
