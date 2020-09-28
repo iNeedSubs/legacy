@@ -10,6 +10,8 @@
 nav {
   font-family: 'Open Sans Bold';
   display: flex;
+  flex-direction: column;
+  gap: 5px;
   justify-content: space-evenly;
   align-items: center;
   font-size: 1.1em;
@@ -28,6 +30,12 @@ nav {
     &.router-link-exact-active {
         background: #de7b5a;
     }
+  }
+}
+
+@media only screen and (min-width: 300px) {
+  nav {
+    flex-direction: row;
   }
 }
 
