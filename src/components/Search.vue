@@ -70,7 +70,7 @@ input {
   min-width: 0;
   border: none;
   border-radius: 5px;
-  font-family: Source Sans Pro Regular;
+  font-family: 'Open Sans Regular';
   font-size: 18px;
   color: #fff;
   outline: none;
@@ -94,7 +94,7 @@ button {
     background: #494d54;
     padding: .5em 1em;
     color: #fff;
-    font-family: Source Sans Pro SemiBold;
+    font-family: 'Open Sans Bold';
     font-size: 18px;
     transition: background .1s ease-in-out;
 

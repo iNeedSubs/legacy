@@ -25,7 +25,7 @@ header {
 h1 {
   font-size: 3.5em;
   margin-bottom: .5em;
-  font-family: Rubik;
+  font-family: 'Open Sans Bold';
 }
 
 @media only screen and (min-width: 800px) {

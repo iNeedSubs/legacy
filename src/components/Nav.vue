@@ -8,7 +8,7 @@
 
 <style lang="scss" scoped>
 nav {
-  font-family: Source Sans Pro SemiBold;
+  font-family: 'Open Sans Bold';
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -6,18 +6,18 @@
 
 <style lang="scss">
 @font-face {
-  font-family: Rubik;
-  src: url("assets/fonts/rubik_bold.ttf");
+  font-family: 'Open Sans Bold';
+  src: url("assets/fonts/open_sans_bold.ttf");
 }
 
 @font-face {
-  font-family: Source Sans Pro SemiBold;
-  src: url("assets/fonts/source_sans_pro_semi_bold.ttf");
+  font-family: 'Open Sans Regular';
+  src: url("assets/fonts/open_sans_regular.ttf");
 }
 
 @font-face {
-  font-family: Source Sans Pro Regular;
-  src: url("assets/fonts/source_sans_pro_regular.ttf");
+  font-family: 'Open Sans Light';
+  src: url("assets/fonts/open_sans_light.ttf");
 }
 
 * {
@@ -32,7 +32,7 @@ html, body, #app {
 }
 
 body {
-  font-family: Source Sans Pro Regular;
+  font-family: 'Open Sans Regular';
   background: #222831;
   color: #fff;
 }
