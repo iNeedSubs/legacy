@@ -56,6 +56,8 @@ export default defineComponent({
 .glasses {
   display: flex;
   justify-content: center;
+  width: 60%;
+  margin: 0 auto;
 }
 
 .search {
@@ -108,8 +110,9 @@ button {
   background: #494d54;
   display: grid;
   grid-template-areas:
-    "movie tvShow"
-    "lang lang";
+    "movie"
+    "tvShow"
+    "lang";
 
   button {
     background: #494d54;
@@ -141,5 +144,13 @@ button {
   box-shadow: 0px -1px 15px #22283155;
   grid-area: lang;
   border-radius: 0 0 5px 5px;
+}
+
+@media only screen and (min-width: 300px) {
+  .filters {
+    grid-template-areas:
+      "movie tvShow"
+      "lang lang";
+  }
 }
 </style>
