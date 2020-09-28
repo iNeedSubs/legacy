@@ -129,6 +129,10 @@ button {
     &.active {
       background: #d65a31;
     }
+
+    &:not(.active) {
+      color: #ddd;
+    }
   }
 }
 
