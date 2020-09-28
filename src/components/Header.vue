@@ -23,7 +23,7 @@ header {
 }
 
 h1 {
-  font-size: 3.5em;
+  font-size: 3em;
   margin-bottom: .5em;
   font-family: 'Open Sans Bold';
 }
