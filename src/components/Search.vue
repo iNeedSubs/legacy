@@ -10,16 +10,18 @@
         </button>
     </div>
     <div class="filters">
-      <button
-        class="movie"
-        v-bind:class="{active: filter === Types.MOVIE}"
-        @click="setFilter('movie')"
-      >Movie</button>
-      <button
-        class="tvShow"
-        v-bind:class="{active: filter === Types.TV_SHOW}"
-        @click="setFilter('tvShow')"
-      >TV Show</button>
+      <div class="types">
+        <button
+          class="movie"
+          v-bind:class="{active: filter === Types.MOVIE}"
+          @click="setFilter('movie')"
+        >Movie</button>
+        <button
+          class="tvShow"
+          v-bind:class="{active: filter === Types.TV_SHOW}"
+          @click="setFilter('tvShow')"
+        >TV Show</button>
+      </div>
       <button class="lang">English (US) <fa icon="angle-down"/></button>
     </div>
   </div>
@@ -61,16 +63,15 @@ export default defineComponent({
 }
 
 .search {
+  border-radius: 5px;
+  overflow: hidden;
   margin: 0 auto;
   background: #51555c;
-  border-radius: 5px;
   max-width: 600px;
 }
 
 .inputContainer {
   display: flex;
-  border-radius: 5px;
-  z-index: 1;
 
    button {
     margin: 10px;
@@ -92,7 +93,6 @@ input {
   width: 100%;
   min-width: 0;
   border: none;
-  border-radius: 5px;
   font-family: 'Open Sans Regular';
   font-size: 18px;
   color: #fff;
@@ -106,12 +106,10 @@ button {
 }
 
 .filters {
-  border-radius: 5px;
   background: #494d54;
   display: grid;
   grid-template-areas:
-    "movie"
-    "tvShow"
+    "types"
     "lang";
 
   button {
@@ -120,7 +118,8 @@ button {
     color: #fff;
     font-family: 'Open Sans Bold';
     font-size: 18px;
-    transition: background .1s ease-in-out;
+    transition: .1s ease-in-out;
+    transition-property: background, color;
 
     &:hover {
       background: #6d707622;
@@ -136,12 +135,12 @@ button {
   }
 }
 
-.movie {
-  grid-area: movie;
-}
-
-.tvShow {
-  grid-area: tvShow;
+.types {
+  display: grid;
+  grid-template-areas:
+    "movie"
+    "tvShow";
+  grid-area: types;
 }
 
 .lang {
@@ -153,8 +152,26 @@ button {
 @media only screen and (min-width: 300px) {
   .filters {
     grid-template-areas:
-      "movie tvShow"
-      "lang lang";
+      "types"
+      "lang";
+  }
+  .types {
+    grid-template-areas: "movie tvShow";
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .inputContainer {
+    box-shadow: 0 0 5px red;
+  }
+
+  .filters {
+    justify-content: space-between;
+    grid-template-areas: "types lang";
+
+    .lang {
+      box-shadow: none;
+    }
   }
 }
 </style>
