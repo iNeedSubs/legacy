@@ -3,7 +3,7 @@
     <div class="inputContainer">
       <input placeholder="Search"/>
         <button>
-          <font-awesome-icon icon="search"/>
+          <fa icon="search"/>
         </button>
     </div>
     <div class="filters">
@@ -19,8 +19,8 @@
 export default {
   data: () => ({
     filter: 'movie',
-    setFilter (filter) {
-      this.filter = filter
+    setFilter(filter) {
+      this.filter = filter;
     }
   }),
   computed: {
@@ -37,7 +37,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .search {
   margin: 0 auto;
   background: #51555c;
@@ -48,6 +48,19 @@ export default {
 .inputContainer {
   display: flex;
   border-radius: 5px;
+
+   button {
+    margin: 10px;
+    padding: 0 1em;
+    background: #d65a31;
+    border-radius: 5px;
+    color: #fff;
+    transition: background .1s ease-in-out;
+
+    &:hover {
+      background: #de7b5a;
+    }
+  }
 }
 
 input {
@@ -63,27 +76,10 @@ input {
   outline: none;
 }
 
-input::placeholder {
-  color: #fff;
-}
-
 button {
   border: none;
   cursor: pointer;
   outline: none;
-}
-
-.inputContainer button {
-  margin: 10px;
-  padding: 0 1em;
-  background: #d65a31;
-  border-radius: 5px;
-  color: #fff;
-  transition: background .1s ease-in-out;
-}
-
-.inputContainer button:hover {
-  background: #de7b5a;
 }
 
 .filters {
@@ -93,23 +89,23 @@ button {
   grid-template-areas:
     "movie tvShow anime"
     "lang lang lang";
-}
 
-.filters button {
-  background: #494d54;
-  padding: .5em 1em;
-  color: #fff;
-  font-family: Source Sans Pro SemiBold;
-  font-size: 18px;
-  transition: background .1s ease-in-out;
-}
+  button {
+    background: #494d54;
+    padding: .5em 1em;
+    color: #fff;
+    font-family: Source Sans Pro SemiBold;
+    font-size: 18px;
+    transition: background .1s ease-in-out;
 
-.filters button:hover {
-  background: #6d707622;
-}
+    &:hover {
+      background: #6d707622;
+    }
 
-.filters button.active {
-  background: #d65a31;
+    &.active {
+      background: #d65a31;
+    }
+  }
 }
 
 .movie {
