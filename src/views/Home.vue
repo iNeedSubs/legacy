@@ -31,5 +31,6 @@ main {
   font-size: 1.3em;
   max-width: 35ch;
   text-align: center;
+  color: #ddd;
 }
 </style>
