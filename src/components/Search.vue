@@ -1,4 +1,7 @@
 <template>
+  <div class="glasses">
+    <Glasses/>
+  </div>
   <div class="search">
     <div class="inputContainer">
       <input placeholder="Search"/>
@@ -17,13 +20,14 @@
         v-bind:class="{active: filter === Types.TV_SHOW}"
         @click="setFilter('tvShow')"
       >TV Show</button>
-      <button class="lang">English (US)</button>
+      <button class="lang">English (US) <fa icon="angle-down"/></button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import Glasses from '../assets/Glasses.vue'
 
 enum Types {
   MOVIE = 'movie',
@@ -31,6 +35,9 @@ enum Types {
 }
 
 export default defineComponent({
+  components: {
+    Glasses
+  },
   setup() {
     const filter = ref('movie')
 
@@ -46,6 +53,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.glasses {
+  display: flex;
+  justify-content: center;
+}
+
 .search {
   margin: 0 auto;
   background: #51555c;
