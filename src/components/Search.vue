@@ -7,34 +7,42 @@
         </button>
     </div>
     <div class="filters">
-      <button :class="movie" @click="setFilter('movie')">Movie</button>
-      <button :class="tvShow" @click="setFilter('tvShow')">TV Show</button>
-      <button :class="anime" @click="setFilter('anime')">Anime</button>
+      <button
+        class="movie"
+        v-bind:class="{active: filter === Types.MOVIE}"
+        @click="setFilter('movie')"
+      >Movie</button>
+      <button
+        class="tvShow"
+        v-bind:class="{active: filter === Types.TV_SHOW}"
+        @click="setFilter('tvShow')"
+      >TV Show</button>
       <button class="lang">English (US)</button>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    filter: 'movie',
-    setFilter(filter) {
-      this.filter = filter;
-    }
-  }),
-  computed: {
-    movie () {
-      return this.filter === 'movie' ? 'movie active' : 'movie'
-    },
-    tvShow () {
-      return this.filter === 'tvShow' ? 'tvShow active' : 'tvShow'
-    },
-    anime () {
-      return this.filter === 'anime' ? 'anime active' : 'anime'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+enum Types {
+  MOVIE = 'movie',
+  TV_SHOW = 'tvShow'
+}
+
+export default defineComponent({
+  setup() {
+    const filter = ref('movie')
+
+    const setFilter = (type: Types) => filter.value = type;
+
+    return {
+      filter,
+      setFilter,
+      Types
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>
@@ -48,6 +56,7 @@ export default {
 .inputContainer {
   display: flex;
   border-radius: 5px;
+  z-index: 1;
 
    button {
     margin: 10px;
@@ -87,8 +96,8 @@ button {
   background: #494d54;
   display: grid;
   grid-template-areas:
-    "movie tvShow anime"
-    "lang lang lang";
+    "movie tvShow"
+    "lang lang";
 
   button {
     background: #494d54;
@@ -114,10 +123,6 @@ button {
 
 .tvShow {
   grid-area: tvShow;
-}
-
-.anime {
-  grid-area: anime;
 }
 
 .lang {
