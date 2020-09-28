@@ -2,7 +2,7 @@
   <div>
     <Header/>
     <main>
-      <p class="desc">Download subtitles for Movies, TV Shows and Anime in your preferred language.</p>
+      <p class="desc">Download subtitles for Movies, TV Shows and Anime in your preferred&nbsp;language.</p>
       <Search/>
     </main>
   </div>
@@ -29,7 +29,7 @@ main {
   margin: 0 auto 2em auto;
   line-height: 1.5em;
   font-size: 1.3em;
-  max-width: 40ch;
+  max-width: 35ch;
   text-align: center;
 }
 </style>
