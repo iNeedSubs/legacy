@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'apps.middleman_api_v1'
+    'apps.v1.search'
 ]
 
 MIDDLEWARE = [
