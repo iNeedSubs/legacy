@@ -1,50 +1,62 @@
-import requests
-from typing import List
+from django.urls import reverse
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
+from apps.core.models import open_subs
 
 
-EXTERNAL_BASE_URL = 'https://rest.opensubtitles.org'
-HEADERS = {
-    'User-Agent': 'TemporaryUserAgent'
-}
-
-
-class SearchEndpoint(GenericAPIView):
+class Search(GenericAPIView):
 
     def get(self, *args, **kwargs):
         return Response(self.get_queryset())
 
     def get_queryset(self):
-        query: str or None = self.request.query_params.get('query', None)
+        query: str or None = self.request.query_params.get('query')
+        media_type: str = self.request.query_params.get('type', 'movie')
+        return_type: str = self.request.query_params.get('return', 'media')
         language: str = self.request.query_params.get('language', 'eng')
-        query_type: str = self.request.query_params.get('type', 'movie')
 
         if query is None:
             return [{'err': 'Provide a search query.'}]
 
-        external_api = f'{EXTERNAL_BASE_URL}/search/query-{query}/sublanguageid-{language}'
-        response = requests.get(external_api, headers=HEADERS)
-        results: List[dict] = response.json()
+        if media_type not in ['tv', 'movie']:
+            return [{'err': 'Unknown media type provided: movie or tv'}]
 
-        final: List[dict] = []
-        show_list = ['episode', 'tv series']
+        media = open_subs.get_media(query, media_type)
 
-        for result in results:
-            if query_type.lower() in show_list:
-                if result.get('MovieKind') in show_list:
-                    final.append(self.set_result(result))
-            else:
-                if result.get('MovieKind') == query_type.lower():
-                    final.append(self.set_result(result))
+        if return_type.lower() == 'media':
+            return media
+        elif return_type.lower() == 'subtitles':
+            return open_subs.get_subtitles(media[0].get('imdb_id'), language)
+        else:
+            return [{'err': 'Unknown return type provided: media or subtitles.'}]
 
-        return final
 
-    def set_result(self, result) -> dict:
-        current = {
-            'title': result.get('MovieReleaseName'),
-            'name': result.get('SubFileName'),
-            'language': result.get('SubLanguageID'),
-            'downloadUrl': result.get('SubDownloadLink')
-        }
-        return current
+class SearchMedia(GenericAPIView):
+
+    def get(self, *args, **kwargs):
+        return Response(self.get_queryset())
+
+    def get_queryset(self):
+        query: str or None = self.request.query_params.get('query')
+        if query is None:
+            return [{'err': 'Provide a search query.'}]
+
+        if self.request.path == reverse('search_v1:search_movie'):
+            return open_subs.get_media(query)
+        else:
+            return open_subs.get_media(query, 'tv')
+
+
+class SearchSubtitles(GenericAPIView):
+
+    def get(self, *args, **kwargs):
+        return Response(self.get_queryset())
+
+    def get_queryset(self):
+        imdb_id: str or None = self.request.query_params.get('imdb_id')
+        language: str = self.request.query_params.get('language', None)
+
+        if imdb_id is None:
+            return [{'err': 'Provide the imbd_id of a movie/show.'}]
+
+        return open_subs.get_subtitles(imdb_id, language)
