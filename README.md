@@ -1,6 +1,10 @@
-# Subtitles
+# <img height="45" src="./public/static/icons/128.png" align="top"> Subtitles
 
 Download subtitles for movies, tv shows and anime in your preferred language.
+
+<a href="https://github.com/Spimy/Subtitles/graphs/contributors" alt="Contributors">
+  <img src="https://img.shields.io/github/contributors/Spimy/Subtitles"/>
+</a>
 
 ## Running locally
 

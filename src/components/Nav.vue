@@ -8,11 +8,13 @@
 
 <style lang="scss" scoped>
 nav {
-  font-family: Source Sans Pro SemiBold;
+  font-family: 'Open Sans Bold';
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: space-evenly;
   align-items: center;
-  font-size: 1.5em;
+  font-size: 1.1em;
 
   a {
     color: #fff;
@@ -28,6 +30,12 @@ nav {
     &.router-link-exact-active {
         background: #de7b5a;
     }
+  }
+}
+
+@media only screen and (min-width: 300px) {
+  nav {
+    flex-direction: row;
   }
 }
 
