@@ -26,7 +26,6 @@ class OpenSubs(object):
         self.subtitles_headers = {'User-Agent': 'TemporaryUserAgent'}
 
     def get_media(self, query: str, media_type: 'movie' or 'tv' = 'movie') -> List[dict]:
-
         response: dict = requests.get(
             f'{self.base_url}/search/{media_type}?query={query}',
             headers=self.headers
@@ -36,11 +35,11 @@ class OpenSubs(object):
         return [self.media_result(result) for result in data]
 
     def get_subtitles(self, imdb_id: str, language: str = 'eng') -> List[dict]:
-
         data: List[dict] = requests.get(
             f'{self.subtitles_url}/imdbid-{imdb_id}/sublanguageid-{language}',
             headers=self.subtitles_headers
         ).json()
+
         return [self.sub_result(result, result.get('MovieKind')) for result in data]
 
     def media_result(self, result: dict) -> dict:
