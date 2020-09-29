@@ -60,5 +60,5 @@ class OpenSubs(object):
             'download_url': result.get('SubDownloadLink')
         }
         if query_type != 'movie':
-            current['episode'] = result.get('SeriesEpisode')
+            current['episode'] = int(result.get('SeriesEpisode'))
         return current
