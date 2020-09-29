@@ -13,7 +13,7 @@ class Search(GenericAPIView):
         query: str or None = self.request.query_params.get('query')
         media_type: str = self.request.query_params.get('type', 'movie')
         return_type: str = self.request.query_params.get('return', 'media')
-        language: str = self.request.query_params.get('language', 'eng')
+        language: str = self.request.query_params.get('lang', 'eng')
 
         if query is None:
             return [{'err': 'Provide a search query.'}]
@@ -54,7 +54,7 @@ class SearchSubtitles(GenericAPIView):
 
     def get_queryset(self):
         imdb_id: str or None = self.request.query_params.get('imdb_id')
-        language: str = self.request.query_params.get('language', None)
+        language: str = self.request.query_params.get('lang', None)
 
         if imdb_id is None:
             return [{'err': 'Provide the imbd_id of a movie/show.'}]
