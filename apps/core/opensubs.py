@@ -25,10 +25,10 @@ class OpenSubs(object):
         self.headers = {'Authorization': self.token}
         self.subtitles_headers = {'User-Agent': 'TemporaryUserAgent'}
 
-    def get_media(self, query: str, query_type: 'movie' or 'tv' = 'movie') -> List[dict]:
+    def get_media(self, query: str, media_type: 'movie' or 'tv' = 'movie') -> List[dict]:
 
         response: dict = requests.get(
-            f'{self.base_url}/search/{query_type}?query={query}',
+            f'{self.base_url}/search/{media_type}?query={query}',
             headers=self.headers
         ).json()
 
@@ -53,12 +53,12 @@ class OpenSubs(object):
         }
         return current
 
-    def sub_result(self, result: dict, query_type: str) -> dict:
+    def sub_result(self, result: dict, media_type: str) -> dict:
         current = {
             'name': result.get('SubFileName'),
             'language': result.get('SubLanguageID'),
             'download_url': result.get('SubDownloadLink')
         }
-        if query_type != 'movie':
+        if media_type != 'movie':
             current['episode'] = int(result.get('SeriesEpisode'))
         return current
