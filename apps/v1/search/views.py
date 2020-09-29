@@ -26,7 +26,7 @@ class Search(GenericAPIView):
         if return_type.lower() == 'media':
             return media
         elif return_type.lower() == 'subtitles':
-            return open_subs.get_subtitles(media[0].get('imdb_id'), language)
+            return open_subs.get_subtitles(media[0].get('imdb_id'), language) if len(media) > 0 else []
         else:
             return [{'err': 'Unknown return type provided: media or subtitles.'}]
 
