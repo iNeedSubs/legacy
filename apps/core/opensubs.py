@@ -48,7 +48,7 @@ class OpenSubs(object):
         current = {
             'title': attributes.get('title'),
             'key_visual': attributes.get('img_url'),
-            'imdb_id': attributes.get('imdb_id'),
+            'imdb_id': str(attributes.get('imdb_id')),
             'release_year': attributes.get('year')
         }
         return current
