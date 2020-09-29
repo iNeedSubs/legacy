@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'apps.core',
     'apps.v1.search'
 ]
 
@@ -115,3 +116,9 @@ STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [
     BASE_DIR / 'dist' / 'static'
 ]
+
+
+# OPENSUBS = OpenSubs(
+#     os.getenv('OPENSUBS_USERNAME'),
+#     os.getenv('OPENSUBS_PASSWORD')
+# )
