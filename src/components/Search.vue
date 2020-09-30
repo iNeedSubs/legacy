@@ -93,7 +93,7 @@ export default defineComponent({
     background: #d65a31;
     border-radius: 5px;
     color: #fff;
-    transition: background .1s ease-in-out;
+    transition: background .2s ease-in-out;
 
     &:hover {
       background: #de7b5a;
@@ -134,7 +134,7 @@ button {
     color: #fff;
     font-family: 'Open Sans Bold';
     font-size: 18px;
-    transition: .1s ease-in-out;
+    transition: .2s ease-in-out;
     transition-property: background, color;
 
     &:hover {
