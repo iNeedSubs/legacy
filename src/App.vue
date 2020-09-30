@@ -20,6 +20,20 @@
   src: url("assets/fonts/open_sans_light.ttf");
 }
 
+::-webkit-scrollbar {
+  width: 1em;
+
+  &-track {
+    border-radius: 5px;
+    background: #333942;
+  }
+
+  &-thumb {
+    border-radius: 5px;
+    background: #d65a31;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
