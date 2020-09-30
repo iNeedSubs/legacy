@@ -96,6 +96,7 @@ button {
   position: absolute;
   background: #51555c;
   border-radius: 5px;
+  scrollbar-color: #d65a31 #333942;
 
   &::-webkit-scrollbar {
     &-track {
