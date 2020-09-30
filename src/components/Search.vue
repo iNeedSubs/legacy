@@ -84,6 +84,8 @@ export default defineComponent({
 
 .inputContainer {
   display: flex;
+  box-shadow: 0 5px 5px #22283111;
+  position: relative;
 
    button {
     margin: 10px;
