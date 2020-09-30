@@ -5,9 +5,9 @@
   <div class="search">
     <div class="inputContainer">
       <input placeholder="Search"/>
-        <button>
-          <fa icon="search"/>
-        </button>
+      <button>
+        <fa icon="search"/>
+      </button>
     </div>
     <div class="filters">
       <div class="types">
@@ -22,7 +22,9 @@
           @click="setFilter('tvShow')"
         >TV Show</button>
       </div>
-      <button class="lang">English (US) <fa icon="angle-down"/></button>
+      <div class="lang">
+        <LangSelect @update-lang="updateLang"/>
+      </div>
     </div>
   </div>
 </template>
@@ -30,6 +32,8 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import Glasses from '../assets/Glasses.vue'
+import LangSelect from './LangSelect.vue'
+import { LangCode } from '../ts/languages'
 
 enum Types {
   MOVIE = 'movie',
@@ -38,16 +42,24 @@ enum Types {
 
 export default defineComponent({
   components: {
-    Glasses
+    Glasses,
+    LangSelect
   },
   setup() {
     const filter = ref('movie')
+    const lang = ref(LangCode.ENGLISH)
 
-    const setFilter = (type: Types) => filter.value = type;
+    const setFilter = (type: Types) => filter.value = type
+
+    const updateLang = (payload: LangCode) => {
+      lang.value = payload
+    }
 
     return {
       filter,
       setFilter,
+      LangSelect,
+      updateLang,
       Types
     }
   }
@@ -63,8 +75,8 @@ export default defineComponent({
 }
 
 .search {
+  position: relative;
   border-radius: 5px;
-  overflow: hidden;
   margin: 0 auto;
   background: #51555c;
   max-width: 600px;
@@ -97,6 +109,7 @@ input {
   font-size: 18px;
   color: #fff;
   outline: none;
+  border-radius: 5px 5px 0 0;
 }
 
 button {
@@ -111,6 +124,7 @@ button {
   grid-template-areas:
     "types"
     "lang";
+  border-radius: 0 0 5px 5px;
 
   button {
     background: #494d54;
@@ -141,12 +155,10 @@ button {
     "movie"
     "tvShow";
   grid-area: types;
-}
 
-.lang {
-  box-shadow: 0px -1px 15px #22283155;
-  grid-area: lang;
-  border-radius: 0 0 5px 5px;
+  .movie {
+    border-radius: 0 0 0 5px;
+  }
 }
 
 @media only screen and (min-width: 300px) {
@@ -161,17 +173,9 @@ button {
 }
 
 @media only screen and (min-width: 500px) {
-  .inputContainer {
-    box-shadow: 0 0 5px red;
-  }
-
   .filters {
     justify-content: space-between;
     grid-template-areas: "types lang";
-
-    .lang {
-      box-shadow: none;
-    }
   }
 }
 </style>
