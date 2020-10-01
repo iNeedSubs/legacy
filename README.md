@@ -20,16 +20,31 @@ Your system should have these installed before you continue with the local setup
 1. Install pipenv: `pip install pipenv`.
 2. Install python dependencies by running `pipenv install`, which also creates a virtual env.
 3. Install node dependencies by running `yarn`.
-4. Create the `.env` file and fill it in using the variables listed under [environment variables section](#environment-variables).
+4. Create the `.env` file and fill it in using the variables listed below.
 5. Run `python manage.py migrate` if there are changes made to the database.
-6. Run `pipenv shell` to activate the virtual env and load `.env` variables.
-7. Run `python manage.py runserver` to start the development server. _(local-only)_
 
-## Environment Variables
+#### Environment Variables
 
 Keep the the `SETTING` variable as it is.
 
 ```
-SECRET_KEY=secret_key
+OPENSUBS_USERNAME=
+OPENSUBS_PASSWORD=
+SECRET_KEY=
 SETTING=subtitles.settings.dev
 ```
+
+### Running locally
+
+#### Production preview
+1. Build the frontend with `yarn build`.
+2. Run `pipenv shell` to activate the virtual env environment.
+3. Run `python manage.py runserver` to start the server.
+
+#### Development
+
+You'd need to run two shell instances here, one for the Vue frontend and one for he Django backend which provides the API endpoints.
+
+1. Run `pipenv shell` to activate the virtual environment.
+2. Run `python manage.py runserver` to start the Django backend.
+3. Run `yarn serve` to start the Vue frontend.
