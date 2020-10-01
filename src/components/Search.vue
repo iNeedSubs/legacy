@@ -4,8 +4,8 @@
   </div>
   <div class="search">
     <div class="inputContainer">
-      <input placeholder="Search"/>
-      <button>
+      <input placeholder="Search" v-model="query" v-on:keyup.enter="search"/>
+      <button @click="search">
         <fa icon="search"/>
       </button>
     </div>
@@ -31,9 +31,9 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import Glasses from '../assets/Glasses.vue'
+import Glasses from '@/assets/Glasses.vue'
 import LangSelect from './LangSelect.vue'
-import { LangCode } from '../ts/languages'
+import { LangCode } from '@/ts/languages'
 
 enum Types {
   MOVIE = 'movie',
@@ -45,17 +45,24 @@ export default defineComponent({
     Glasses,
     LangSelect
   },
-  setup() {
+  emits: [
+    'update-lang',
+    'update-query'
+  ],
+  setup(props, { emit }) {
+    const query = ref('')
     const filter = ref('movie')
-    const lang = ref(LangCode.ENGLISH)
 
+    const search = () => emit('update-query', query.value)
     const setFilter = (type: Types) => filter.value = type
 
     const updateLang = (payload: LangCode) => {
-      lang.value = payload
+      emit('update-lang', payload)
     }
 
     return {
+      search,
+      query,
       filter,
       setFilter,
       LangSelect,
