@@ -3,8 +3,12 @@
     <Header/>
     <main>
       <p class="desc">Download subtitles for Movies, TV Shows and Anime in your preferred&nbsp;language.</p>
-      <Search @update-lang="updateLang" @update-query="updateQuery"/>
-      <SearchResults :query="query"/>
+      <Search
+        @update-lang="updateLang"
+        @update-query="updateQuery"
+        @update-type="updateType"
+      />
+      <SearchResults :query="query" :mediaType="mediaType"/>
     </main>
   </div>
 </template>
@@ -15,6 +19,7 @@ import Header from '@/components/Header.vue'
 import Search from '@/components/Search.vue'
 import SearchResults from '@/components/SearchResults.vue'
 import { LangCode } from '@/ts/languages'
+import { Media } from '@/ts/media'
 
 export default {
   components: {
@@ -25,6 +30,7 @@ export default {
   setup() {
     const query = ref('')
     const lang = ref(LangCode.ENGLISH)
+    const mediaType = ref(Media.MOVIE)
 
     const updateQuery = (value: string) => {
       query.value = value
@@ -34,10 +40,16 @@ export default {
       lang.value = newCode
     }
 
+    const updateType = (newType: Media) => {
+      mediaType.value = newType
+    }
+
     return {
       updateQuery,
       updateLang,
-      query
+      updateType,
+      query,
+      mediaType
     }
   }
 }
