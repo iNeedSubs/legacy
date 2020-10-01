@@ -135,7 +135,7 @@ img {
 
 @media only screen and (min-width: 350px) {
   .results {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
 
   .result {
