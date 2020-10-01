@@ -6,7 +6,7 @@ Download subtitles for movies, tv shows and anime in your preferred language.
   <img src="https://img.shields.io/github/contributors/Spimy/Subtitles"/>
 </a>
 
-## Running locally
+## Local setup
 
 ### Prerequisites
 
@@ -34,14 +34,16 @@ SECRET_KEY=
 SETTING=subtitles.settings.dev
 ```
 
-### Running locally
+### Running
+
+You can either run the production preview which hosted by Django or run the development server made by Vue with features such as hot reloading which is ideal when developing.
 
 #### Production preview
 1. Build the frontend with `yarn build`.
 2. Run `pipenv shell` to activate the virtual env environment.
 3. Run `python manage.py runserver` to start the server.
 
-#### Development
+#### Development server
 
 You'd need to run two shell instances here, one for the Vue frontend and one for he Django backend which provides the API endpoints.
 
