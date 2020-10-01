@@ -36,11 +36,6 @@ import LangSelect from './LangSelect.vue'
 import { LangCode } from '@/ts/languages'
 import { Media } from '@/ts/media'
 
-enum Types {
-  MOVIE = 'movie',
-  TV_SHOW = 'tvShow'
-}
-
 export default defineComponent({
   components: {
     Glasses,
@@ -48,14 +43,19 @@ export default defineComponent({
   },
   emits: [
     'update-lang',
-    'update-query'
+    'update-query',
+    'update-type'
   ],
   setup(props, { emit }) {
     const query = ref('')
     const filter = ref(Media.MOVIE)
 
     const search = () => emit('update-query', query.value)
-    const setFilter = (type: Types) => filter.value = type
+
+    const setFilter = (type: Media) => {
+      filter.value = type
+      emit('update-type', type)
+    }
 
     const updateLang = (payload: LangCode) => {
       emit('update-lang', payload)
@@ -163,7 +163,7 @@ button {
   display: grid;
   grid-template-areas:
     "movie"
-    "tvShow";
+    "show";
   grid-area: types;
 
   .movie {
@@ -178,7 +178,7 @@ button {
       "lang";
   }
   .types {
-    grid-template-areas: "movie tvShow";
+    grid-template-areas: "movie show";
   }
 }
 
