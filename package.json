@@ -8,7 +8,8 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "start": "python manage.py runserver"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
