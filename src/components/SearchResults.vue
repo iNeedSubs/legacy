@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
-import { Movie } from '@/ts/movies'
+import { Movie } from '@/ts/media'
 import Load from './Load.vue'
 
 export default defineComponent({
@@ -29,7 +29,8 @@ export default defineComponent({
     Load
   },
   props: {
-    query: String
+    query: String,
+    mediaType: String
   },
   setup(props) {
     const results = ref<Movie[]>([])
@@ -38,14 +39,14 @@ export default defineComponent({
     const loaded = ref(false)
     const err = ref('')
 
-    const fetchQuery = async (query: string) => {
+    const fetchQuery = async (query: string, mediaType: string) => {
       results.value = []
       showResults.value = false
       loading.value = true
       loaded.value = false
 
       try {
-        const req = await fetch(`/api/v1/search/movie/?query=${query}`)
+        const req = await fetch(`/api/v1/search/${mediaType}/?query=${query}`)
 
         if (req.status !== 200) {
           return console.error('err', req)
@@ -62,15 +63,15 @@ export default defineComponent({
       }
     }
 
-    watch(() => props.query, (query) => {
-      if (!query) {
+    watch(() => [props.query, props.mediaType], ([query, mediaType]) => {
+      if (!query || !mediaType) {
         results.value = []
         showResults.value = false
 
         return
       }
 
-      fetchQuery(query)
+      fetchQuery(query, mediaType)
     })
 
     return {
