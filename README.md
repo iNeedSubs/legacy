@@ -5,7 +5,19 @@ https://subtitles-app.herokuapp.com/
 Download subtitles for movies, tv shows and anime in your preferred language.
 
 <a href="https://github.com/Spimy/Subtitles/graphs/contributors" alt="Contributors">
-  <img src="https://img.shields.io/github/contributors/Spimy/Subtitles"/>
+  <img src="https://img.shields.io/github/contributors/Spimy/Subtitles?style=flat-square"/>
+</a>
+<a href="https://github.com/Spimy/Subtitles/stargazers" alt="Contributors">
+  <img src="https://img.shields.io/github/stars/Spimy/Subtitles?style=flat-square"/>
+</a>
+<a href="https://github.com/Spimy/Subtitles/network/members" alt="Contributors">
+  <img src="https://img.shields.io/github/forks/Spimy/Subtitles?style=flat-square"/>
+</a>
+<a href="https://github.com/Spimy/Subtitles/issues" alt="Contributors">
+  <img src="https://img.shields.io/github/issues/Spimy/Subtitles?style=flat-square"/>
+</a>
+<a href="https://github.com/Spimy/Subtitles/blob/master/LICENSE.txt" alt="Contributors">
+  <img src="https://img.shields.io/github/license/Spimy/Subtitles?style=flat-square"/>
 </a>
 
 ## Local setup
