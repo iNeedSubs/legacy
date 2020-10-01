@@ -13,13 +13,13 @@
       <div class="types">
         <button
           class="movie"
-          v-bind:class="{active: filter === Types.MOVIE}"
-          @click="setFilter('movie')"
+          v-bind:class="{active: filter === Media.MOVIE}"
+          @click="setFilter(Media.MOVIE)"
         >Movie</button>
         <button
-          class="tvShow"
-          v-bind:class="{active: filter === Types.TV_SHOW}"
-          @click="setFilter('tvShow')"
+          class="show"
+          v-bind:class="{active: filter === Media.SHOW}"
+          @click="setFilter(Media.SHOW)"
         >TV Show</button>
       </div>
       <div class="lang">
@@ -34,6 +34,7 @@ import { defineComponent, ref } from 'vue'
 import Glasses from '@/assets/Glasses.vue'
 import LangSelect from './LangSelect.vue'
 import { LangCode } from '@/ts/languages'
+import { Media } from '@/ts/media'
 
 enum Types {
   MOVIE = 'movie',
@@ -51,7 +52,7 @@ export default defineComponent({
   ],
   setup(props, { emit }) {
     const query = ref('')
-    const filter = ref('movie')
+    const filter = ref(Media.MOVIE)
 
     const search = () => emit('update-query', query.value)
     const setFilter = (type: Types) => filter.value = type
@@ -67,7 +68,7 @@ export default defineComponent({
       setFilter,
       LangSelect,
       updateLang,
-      Types
+      Media
     }
   }
 })
