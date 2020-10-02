@@ -40,6 +40,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body, #app {
   height: 100%;
   width: 100%;
@@ -75,6 +79,29 @@ body {
   &-enter-from,
   &-leave-to {
     transform: scale(.9);
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}
+
+.fall {
+  &-enter-active,
+  &-leave-active {
+    transition: .4s cubic-bezier(0.2, 0.8, 0.3, 1.3);
+    transition-property: opacity, transform;
+  }
+
+  &-enter-to,
+  &-leave-from {
+    transform: scale(1) translateY(0);
+  }
+
+  &-enter-from,
+  &-leave-to {
+    transform: scale(.9) translateY(-100%);
   }
 
   &-enter-from,

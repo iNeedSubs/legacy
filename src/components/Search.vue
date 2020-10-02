@@ -4,8 +4,8 @@
   </div>
   <div class="search">
     <div class="inputContainer">
-      <input placeholder="Search"/>
-      <button>
+      <input placeholder="Search" v-model="query" v-on:keyup.enter="search"/>
+      <button @click="search">
         <fa icon="search"/>
       </button>
     </div>
@@ -13,13 +13,13 @@
       <div class="types">
         <button
           class="movie"
-          v-bind:class="{active: filter === Types.MOVIE}"
-          @click="setFilter('movie')"
+          v-bind:class="{active: filter === Media.MOVIE}"
+          @click="setFilter(Media.MOVIE)"
         >Movie</button>
         <button
-          class="tvShow"
-          v-bind:class="{active: filter === Types.TV_SHOW}"
-          @click="setFilter('tvShow')"
+          class="show"
+          v-bind:class="{active: filter === Media.SHOW}"
+          @click="setFilter(Media.SHOW)"
         >TV Show</button>
       </div>
       <div class="lang">
@@ -31,36 +31,46 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import Glasses from '../assets/Glasses.vue'
+import Glasses from '@/assets/Glasses.vue'
 import LangSelect from './LangSelect.vue'
-import { LangCode } from '../ts/languages'
-
-enum Types {
-  MOVIE = 'movie',
-  TV_SHOW = 'tvShow'
-}
+import { LangCode } from '@/ts/languages'
+import { Media } from '@/ts/media'
 
 export default defineComponent({
   components: {
     Glasses,
     LangSelect
   },
-  setup() {
-    const filter = ref('movie')
-    const lang = ref(LangCode.ENGLISH)
+  emits: [
+    'update-lang',
+    'update-query',
+    'update-type'
+  ],
+  setup(props, { emit }) {
+    const query = ref('')
+    const filter = ref(Media.MOVIE)
 
-    const setFilter = (type: Types) => filter.value = type
+    const search = () => emit('update-query', query.value)
+
+    const setFilter = (type: Media) => {
+      window.scroll(0, 0)
+      filter.value = type
+      emit('update-type', type)
+    }
 
     const updateLang = (payload: LangCode) => {
-      lang.value = payload
+      window.scroll(0, 0)
+      emit('update-lang', payload)
     }
 
     return {
+      search,
+      query,
       filter,
       setFilter,
       LangSelect,
       updateLang,
-      Types
+      Media
     }
   }
 })
@@ -155,7 +165,7 @@ button {
   display: grid;
   grid-template-areas:
     "movie"
-    "tvShow";
+    "show";
   grid-area: types;
 
   .movie {
@@ -170,7 +180,7 @@ button {
       "lang";
   }
   .types {
-    grid-template-areas: "movie tvShow";
+    grid-template-areas: "movie show";
   }
 }
 

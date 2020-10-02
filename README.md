@@ -1,12 +1,26 @@
 # <img height="45" src="./public/static/icons/128.png" align="top"> Subtitles
 
+https://subtitles-app.herokuapp.com/
+
 Download subtitles for movies, tv shows and anime in your preferred language.
 
 <a href="https://github.com/Spimy/Subtitles/graphs/contributors" alt="Contributors">
-  <img src="https://img.shields.io/github/contributors/Spimy/Subtitles"/>
+  <img src="https://img.shields.io/github/contributors/Spimy/Subtitles?style=flat-square"/>
+</a>
+<a href="https://github.com/Spimy/Subtitles/stargazers" alt="Contributors">
+  <img src="https://img.shields.io/github/stars/Spimy/Subtitles?style=flat-square"/>
+</a>
+<a href="https://github.com/Spimy/Subtitles/network/members" alt="Contributors">
+  <img src="https://img.shields.io/github/forks/Spimy/Subtitles?style=flat-square"/>
+</a>
+<a href="https://github.com/Spimy/Subtitles/issues" alt="Contributors">
+  <img src="https://img.shields.io/github/issues/Spimy/Subtitles?style=flat-square"/>
+</a>
+<a href="https://github.com/Spimy/Subtitles/blob/master/LICENSE.txt" alt="Contributors">
+  <img src="https://img.shields.io/github/license/Spimy/Subtitles?style=flat-square"/>
 </a>
 
-## Running locally
+## Local setup
 
 ### Prerequisites
 
@@ -20,16 +34,33 @@ Your system should have these installed before you continue with the local setup
 1. Install pipenv: `pip install pipenv`.
 2. Install python dependencies by running `pipenv install`, which also creates a virtual env.
 3. Install node dependencies by running `yarn`.
-4. Create the `.env` file and fill it in using the variables listed under [environment variables section](#environment-variables).
+4. Create the `.env` file and fill it in using the variables listed below.
 5. Run `python manage.py migrate` if there are changes made to the database.
-6. Run `pipenv shell` to activate the virtual env and load `.env` variables.
-7. Run `python manage.py runserver` to start the development server. _(local-only)_
 
-## Environment Variables
+#### Environment Variables
 
 Keep the the `SETTING` variable as it is.
 
 ```
-SECRET_KEY=secret_key
+OPENSUBS_USERNAME=
+OPENSUBS_PASSWORD=
+SECRET_KEY=
 SETTING=subtitles.settings.dev
 ```
+
+### Running
+
+You can either run the production preview which hosted by Django or run the development server made by Vue with features such as hot reloading which is ideal when developing.
+
+#### Production preview
+1. Build the frontend with `yarn build`.
+2. Run `pipenv shell` to activate the virtual env environment.
+3. Run `python manage.py runserver` to start the server.
+
+#### Development server
+
+You'd need to run two shell instances here, one for the Vue frontend and one for he Django backend which provides the API endpoints.
+
+1. Run `pipenv shell` to activate the virtual environment.
+2. Run `python manage.py runserver` to start the Django backend.
+3. Run `yarn serve` to start the Vue frontend.
