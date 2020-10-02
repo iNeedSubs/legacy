@@ -8,7 +8,8 @@
       <p v-if="err.length > 1">Error: {{err}}</p>
       <p v-if="results.length === 0">Nothing has been found with that name.</p>
       <div class="results">
-        <div
+        <router-link
+          :to="{ name: mediaType, params: { id: result.imdb_id }}"
           class="result"
           v-for="(result, i) in results"
           :ref="e => {resultItems[i] = e}"
@@ -17,7 +18,7 @@
           <img v-if="result.key_visual" :src="result.key_visual"/>
           <div class="noImage" v-else/>
           <p>{{result.title}}</p>
-        </div>
+        </router-link>
       </div>
     </div>
   </transition>
