@@ -53,11 +53,13 @@ export default defineComponent({
     const search = () => emit('update-query', query.value)
 
     const setFilter = (type: Media) => {
+      window.scroll(0, 0)
       filter.value = type
       emit('update-type', type)
     }
 
     const updateLang = (payload: LangCode) => {
+      window.scroll(0, 0)
       emit('update-lang', payload)
     }
 
