@@ -8,7 +8,12 @@
       <p v-if="err.length > 1">Error: {{err}}</p>
       <p v-if="results.length === 0">Nothing has been found with that name.</p>
       <div class="results">
-        <div v-for="(result, i) in results" :key="i" class="result">
+        <div
+          class="result"
+          v-for="(result, i) in results"
+          :ref="e => {resultItems[i] = e}"
+          :key="i"
+        >
           <img v-if="result.key_visual" :src="result.key_visual"/>
           <div class="noImage" v-else/>
           <p>{{result.title}}</p>
@@ -19,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, ref, watch, nextTick, onBeforeUpdate } from 'vue'
 import { Movie } from '@/ts/media'
 import Load from './Load.vue'
 
@@ -38,6 +43,12 @@ export default defineComponent({
     const loading = ref(false)
     const loaded = ref(false)
     const err = ref('')
+    const resultItems = ref<Array<HTMLDivElement>>([])
+
+    // reset the resultItems before each update
+    onBeforeUpdate(() => {
+      resultItems.value = []
+    })
 
     const fetchQuery = async (query: string, mediaType: string) => {
       results.value = []
@@ -58,6 +69,13 @@ export default defineComponent({
         showResults.value = true
         loading.value = false
         loaded.value = true
+
+        await nextTick()
+
+        // scrolls to first element in results
+        resultItems.value[0].scrollIntoView({
+          block: 'center'
+        })
       } catch (e) {
         err.value = e
       }
@@ -79,7 +97,8 @@ export default defineComponent({
       showResults,
       loading,
       loaded,
-      err
+      err,
+      resultItems
     }
   }
 })
