@@ -40,6 +40,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body, #app {
   height: 100%;
   width: 100%;
