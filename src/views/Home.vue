@@ -1,16 +1,14 @@
 <template>
-  <div>
-    <Header/>
-    <main>
-      <p class="desc">Download subtitles for Movies, TV Shows and Anime in your preferred&nbsp;language.</p>
-      <Search
-        @update-lang="updateLang"
-        @update-query="updateQuery"
-        @update-type="updateType"
-      />
-      <SearchResults :query="query" :mediaType="mediaType"/>
-    </main>
-  </div>
+  <Header/>
+  <main>
+    <p class="desc">Download subtitles for Movies, TV Shows and Anime in your preferred&nbsp;language.</p>
+    <Search
+      @update-lang="updateLang"
+      @update-query="updateQuery"
+      @update-type="updateType"
+    />
+    <SearchResults :query="query" :mediaType="mediaType"/>
+  </main>
 </template>
 
 <script lang="ts">
