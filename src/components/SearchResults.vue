@@ -8,17 +8,18 @@
       <p v-if="err.length > 1">Error: {{err}}</p>
       <p v-if="results.length === 0">Nothing has been found with that name.</p>
       <div class="results">
-        <router-link
-          :to="{ name: mediaType, params: { id: result.imdb_id }}"
+        <div
           class="result"
-          v-for="(result, i) in results"
           :ref="e => {resultItems[i] = e}"
+            v-for="(result, i) in results"
           :key="i"
         >
-          <img v-if="result.key_visual" :src="result.key_visual"/>
-          <div class="noImage" v-else/>
-          <p>{{result.title}}</p>
-        </router-link>
+          <router-link :to="{ name: mediaType, params: { id: result.imdb_id }}">
+            <img v-if="result.key_visual" :src="result.key_visual"/>
+            <div class="noImage" v-else/>
+            <p>{{result.title}}</p>
+          </router-link>
+        </div>
       </div>
     </div>
   </transition>
@@ -127,7 +128,7 @@ h3 {
   display: grid;
   gap: 1em;
 
-  .result {
+  .result a {
     background: #2C343F;
     border-radius: 5px;
     text-align: center;
@@ -159,7 +160,7 @@ img {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
 
-  .result {
+  .result a {
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
