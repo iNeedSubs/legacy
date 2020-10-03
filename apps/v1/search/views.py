@@ -7,8 +7,8 @@ from apps.core.models import open_subs
 def _get_response(queryset) -> Response:
     status_code = 200
 
-    if len(queryset) > 0:
-        status_code = status_code if 'err' not in queryset[0] else 400
+    if isinstance(queryset, dict):
+        status_code = status_code if 'detail' not in queryset else 400
 
     return Response(queryset, status=status_code)
 
@@ -25,10 +25,10 @@ class Search(GenericAPIView):
         language: str = self.request.query_params.get('lang', 'eng')
 
         if query is None:
-            return [{'err': 'Provide a search query.'}]
+            return {'detail': 'Provide a search query.'}
 
         if media_type not in ['tv', 'movie']:
-            return [{'err': 'Unknown media type provided: movie or tv'}]
+            return {'detail': 'Unknown media type provided: movie or tv'}
 
         media = open_subs.get_media(query, media_type)
 
@@ -37,7 +37,7 @@ class Search(GenericAPIView):
         elif return_type.lower() == 'subtitles':
             return open_subs.get_subtitles(media[0].get('imdb_id'), language) if len(media) > 0 else []
         else:
-            return [{'err': 'Unknown return type provided: media or subtitles.'}]
+            return {'detail': 'Unknown return type provided: media or subtitles.'}
 
 
 class SearchMedia(GenericAPIView):
@@ -48,7 +48,7 @@ class SearchMedia(GenericAPIView):
     def get_queryset(self):
         query: str or None = self.request.query_params.get('query')
         if query is None:
-            return [{'err': 'Provide a search query.'}]
+            return {'detail': 'Provide a search query.'}
 
         if self.request.path == reverse('search_v1:search_movie'):
             return open_subs.get_media(query)
@@ -66,6 +66,6 @@ class SearchSubtitles(GenericAPIView):
         language: str = self.request.query_params.get('lang', 'eng')
 
         if imdb_id is None:
-            return [{'err': 'Provide the imbd_id of a movie/show.'}]
+            return {'detail': 'Provide the imbd_id of a movie/show.'}
 
         return open_subs.get_subtitles(imdb_id, language)
