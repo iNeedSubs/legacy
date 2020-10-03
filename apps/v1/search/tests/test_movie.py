@@ -25,11 +25,13 @@ class SearchMovieTestCase(APITestCase):
 
         if len(data) > 0:
             '''
-            Testing for first item as the rest should be the same.
             Check if an item's content contains the correct keys.
+            Testing for first item as the rest should be the same.
             '''
             first_item: dict = data[0]
-            keys = ['title', 'key_visual', 'imdb_id', 'release_year']
+            keys = ['title', 'poster', 'banner', 'imdb_id', 'release_date']
+
+            self.assertEqual(len(first_item.keys()), len(keys))
 
             for key in first_item.keys():
                 self.assertIn(key, keys)

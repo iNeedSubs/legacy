@@ -1,6 +1,6 @@
 # <img height="45" src="./public/static/icons/128.png" align="top"> Subtitles
 
-https://subtitles-app.herokuapp.com/
+https://subtitles.pw/
 
 Download subtitles for movies, tv shows and anime in your preferred language.
 
