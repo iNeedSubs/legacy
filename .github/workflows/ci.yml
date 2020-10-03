@@ -40,5 +40,7 @@ jobs:
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         SETTING: subtitles.settings.dev
+        OPENSUBS_USERNAME: ${{ secrets.OPENSUBS_USERNAME }}
+        OPENSUBS_PASSWORD: ${{ secrets.OPENSUBS_PASSWORD }}
       run: |
         pipenv run python manage.py test
