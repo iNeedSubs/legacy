@@ -1,21 +1,27 @@
 <template>
   <Header/>
   <main>
-    <p v-if="err">Error: {{err}}</p>
     <div class="actions">
       <h3>Results ({{subtitles.length}})</h3>
+      <p v-if="err">Error: {{err}}</p>
+      <p v-if="loaded && subtitles.length === 0">No subtitles have been found for this media.</p>
       <div class="buttonContainer">
         <LangSelect/>
       </div>
+      <transition name="fall">
+        <Load v-if="loading"/>
+      </transition>
     </div>
-    <div class="subtitles">
-      <div class="subtitle" v-for="(subtitle, i) in subtitles" :key="i">
-        <p>{{subtitle.name}}</p>
-        <a class="download" :href="subtitle.download_url" download>
-          <fa icon="download"/>
-        </a>
+    <transition name="bounceIn">
+      <div class="subtitles" v-if="subtitles.length > 0">
+        <div class="subtitle" v-for="(subtitle, i) in subtitles" :key="i">
+          <p>{{subtitle.name}}</p>
+          <a class="download" :href="subtitle.download_url" download>
+            <fa icon="download"/>
+          </a>
+        </div>
       </div>
-    </div>
+    </transition>
   </main>
 </template>
 
@@ -25,22 +31,29 @@ import Header from '@/components/Header.vue'
 import { useRoute } from 'vue-router';
 import { MovieSubtitle } from '@/ts/media';
 import LangSelect from '@/components/LangSelect.vue'
+import Load from '@/components/Load.vue'
 
 export default defineComponent({
   name: 'Movie',
   components: {
     Header,
-    LangSelect
+    LangSelect,
+    Load
   },
   props: {
     id: String
   },
   setup() {
     const route = useRoute()
+    const loaded = ref(false)
+    const loading = ref(true)
     const err = ref('')
     const subtitles = ref<Array<MovieSubtitle>>([])
 
     const fetchSubtitles = async () => {
+      loaded.value = false
+      loading.value = true
+
       try {
         const req = await fetch(`/api/v1/search/subtitles/?imdb_id=${route.params.id}`)
 
@@ -50,10 +63,14 @@ export default defineComponent({
         }
 
         const payload = await req.json()
-        console.log(payload)
+
         subtitles.value = payload
+        loaded.value = true
+        loading.value = false
       } catch (e) {
         err.value = e
+        loaded.value = true
+        loading.value = false
       }
     }
 
@@ -61,7 +78,9 @@ export default defineComponent({
 
     return {
       subtitles,
-      err
+      err,
+      loaded,
+      loading
     }
   }
 })
@@ -70,6 +89,15 @@ export default defineComponent({
 <style lang="scss" scoped>
 main {
   padding: 30px;
+}
+
+.load {
+  right: 0;
+  left: calc(50% - 40px);
+  position: absolute;
+  text-align: center;
+  margin-top: 1em;
+  z-index: -1;
 }
 
 .actions {
