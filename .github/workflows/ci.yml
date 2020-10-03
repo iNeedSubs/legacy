@@ -41,4 +41,5 @@ jobs:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         SETTING: subtitles.settings.dev
       run: |
+        pipenv shell
         python manage.py test
