@@ -66,6 +66,6 @@ class SearchSubtitles(GenericAPIView):
         language: str = self.request.query_params.get('lang', 'eng')
 
         if imdb_id is None:
-            return {'detail': 'Provide the imbd_id of a movie/show.'}
+            return {'detail': 'Provide the imdb_id of a movie/show.'}
 
         return get_subtitles(imdb_id, language)

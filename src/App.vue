@@ -55,6 +55,11 @@ body {
   color: #fff;
 }
 
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
 .icon {
   display: inline-block;
   font-size: inherit;
