@@ -1,7 +1,7 @@
 from django.urls import reverse
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
-from apps.core.models import open_subs
+from .models import tmdb, get_subtitles
 
 
 def _get_response(queryset) -> Response:
@@ -30,12 +30,12 @@ class Search(GenericAPIView):
         if media_type not in ['tv', 'movie']:
             return {'detail': 'Unknown media type provided: movie or tv'}
 
-        media = open_subs.get_media(query, media_type)
+        media = tmdb.get_media(query, media_type.lower())
 
         if return_type.lower() == 'media':
             return media
         elif return_type.lower() == 'subtitles':
-            return open_subs.get_subtitles(media[0].get('imdb_id'), language) if len(media) > 0 else []
+            return get_subtitles(media[0].get('imdb_id'), language) if len(media) > 0 else []
         else:
             return {'detail': 'Unknown return type provided: media or subtitles.'}
 
@@ -51,9 +51,9 @@ class SearchMedia(GenericAPIView):
             return {'detail': 'Provide a search query.'}
 
         if self.request.path == reverse('search_v1:search_movie'):
-            return open_subs.get_media(query)
+            return tmdb.get_movie(query)
         else:
-            return open_subs.get_media(query, 'tv')
+            return tmdb.get_show(query)
 
 
 class SearchSubtitles(GenericAPIView):
@@ -68,4 +68,4 @@ class SearchSubtitles(GenericAPIView):
         if imdb_id is None:
             return {'detail': 'Provide the imbd_id of a movie/show.'}
 
-        return open_subs.get_subtitles(imdb_id, language)
+        return get_subtitles(imdb_id, language)
