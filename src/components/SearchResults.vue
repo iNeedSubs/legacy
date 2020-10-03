@@ -15,9 +15,12 @@
           :key="i"
         >
           <router-link :to="{ name: mediaType, params: { id: result.imdb_id }}">
-            <img v-if="result.key_visual" :src="result.key_visual"/>
+            <img class="poster" v-if="result.poster" :src="result.poster" loading="lazy"/>
             <div class="noImage" v-else/>
-            <p>{{result.title}}</p>
+            <div class="name">
+              <img class="banner" v-if="result.banner" :src="result.banner" loading="lazy"/>
+              <p>{{result.title}}</p>
+            </div>
           </router-link>
         </div>
       </div>
@@ -67,7 +70,8 @@ export default defineComponent({
 
         const payload = await req.json() as Movie[]
 
-        results.value = payload
+        // ! TEMPORARY FIX TO REMOVE NULL ITEMS FROM PAYLOAD
+        results.value = payload.filter(x => !!x)
         showResults.value = true
         loading.value = false
         loaded.value = true
@@ -133,14 +137,39 @@ h3 {
     border-radius: 5px;
     text-align: center;
     cursor: pointer;
+    display: grid;
+    grid-template-rows: 1fr auto;
 
     &:hover img {
       filter: brightness(1);
     }
+
+    .name {
+      height: 100%;
+      position: relative;
+
+      .banner {
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 5px;
+        object-fit: cover;
+        opacity: .1;
+      }
+
+      p {
+        padding: 1em;
+        z-index: 1;
+      }
+    }
+
   }
 }
 
-img {
+.poster {
   border-radius: 5px;
   width: 100%;
   filter: brightness(.8);
@@ -148,11 +177,10 @@ img {
 }
 
 .noImage {
-  border-radius: 5px 0 0 5px;
-  width: 101px;
-  height: 150px;
-  background: #2C343F;
-  border-right: solid 1px #1b232e;
+  border-radius: 5px;
+  background: #3D454F;
+  width: 100%;
+  height: 411px;
 }
 
 @media only screen and (min-width: 350px) {
@@ -163,14 +191,29 @@ img {
   .result a {
     display: grid;
     grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr !important;
     align-items: center;
-    gap: 15px;
     text-align: left !important;
-    padding-right: 1em;
+
+    .name {
+      display: flex;
+      align-items: center;
+
+      p {
+        padding: 0 1em;
+      }
+    }
   }
+
   img {
     width: auto;
     height: 150px;
+  }
+
+  .noImage {
+    border-radius: 5px 0 0 5px;
+    height: 150px;
+    width: 101px;
   }
 }
 </style>
