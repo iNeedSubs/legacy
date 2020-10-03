@@ -4,16 +4,19 @@ from rest_framework.response import Response
 from apps.core.models import open_subs
 
 
+def _get_response(queryset) -> Response:
+    status_code = 200
+
+    if len(queryset) > 0:
+        status_code = status_code if 'err' not in queryset[0] else 400
+
+    return Response(queryset, status=status_code)
+
+
 class Search(GenericAPIView):
 
     def get(self, *args, **kwargs):
-        queryset = self.get_queryset()
-        status_code = 200
-
-        if len(queryset) > 0:
-            status_code = status_code if 'err' not in queryset[0] else 400
-
-        return Response(queryset, status=status_code)
+        return _get_response(self.get_queryset())
 
     def get_queryset(self):
         query: str or None = self.request.query_params.get('query')
@@ -40,13 +43,7 @@ class Search(GenericAPIView):
 class SearchMedia(GenericAPIView):
 
     def get(self, *args, **kwargs):
-        queryset = self.get_queryset()
-        status_code = 200
-
-        if len(queryset) > 0:
-            status_code = status_code if 'err' not in queryset[0] else 400
-
-        return Response(queryset, status=status_code)
+        return _get_response(self.get_queryset())
 
     def get_queryset(self):
         query: str or None = self.request.query_params.get('query')
@@ -62,13 +59,7 @@ class SearchMedia(GenericAPIView):
 class SearchSubtitles(GenericAPIView):
 
     def get(self, *args, **kwargs):
-        queryset = self.get_queryset()
-        status_code = 200
-
-        if len(queryset) > 0:
-            status_code = status_code if 'err' not in queryset[0] else 400
-
-        return Response(queryset, status=status_code)
+        return _get_response(self.get_queryset())
 
     def get_queryset(self):
         imdb_id: str or None = self.request.query_params.get('imdb_id')
