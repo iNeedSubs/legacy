@@ -30,9 +30,9 @@ class SearchMovieTestCase(APITestCase):
             '''
             first_item: dict = data[0]
             keys = ['title', 'poster', 'banner', 'imdb_id', 'release_date']
-            
+
             self.assertEqual(len(first_item.keys()), len(keys))
-            
+
             for key in first_item.keys():
                 self.assertIn(key, keys)
 
