@@ -1,7 +1,8 @@
 export interface Movie {
+  banner: string;
+  poster: string;
   imdb_id: string;
-  key_visual: string;
-  release_year: string;
+  release_date: string;
   title: string;
 }
 
