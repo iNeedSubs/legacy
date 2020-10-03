@@ -9,7 +9,7 @@ class TMDB(object):
     '''
     img_url = 'https://image.tmdb.org/t/p/original'
     base_url = 'https://api.themoviedb.org/3/search'
-    id_lookup_url = 'https://api.themoviedb.org/3/movie'
+    id_lookup_url = 'https://api.themoviedb.org/3'
 
     def __init__(self, api_key: str) -> None:
         self.api_key = f'api_key={api_key}'
@@ -22,7 +22,7 @@ class TMDB(object):
             f'{self.base_url}/movie?query={query}&{self.api_key}'
         ).json()
         results: List[str] = list(response.get('results'))
-        return [self._media_result(result) for result in results]
+        return [self._media_result(result, 'movie') for result in results]
 
     def get_show(self, query: str):
         '''
@@ -32,12 +32,15 @@ class TMDB(object):
             f'{self.base_url}/tv?query={query}&{self.api_key}'
         ).json()
         results = response.get('results')
-        return [self._media_result(result) for result in results]
+        return [self._media_result(result, 'tv') for result in results]
 
     def get_media(self, query: str, media_type='movie' or 'tv'):
         return self.get_movie(query) if media_type == 'movie' else self.get_show(query)
 
-    def _media_result(self, result: dict) -> Dict[str, str or None] or None:
+    def get_media_from_id(self, imdb_id):
+        pass
+
+    def _media_result(self, result: dict, media_type: 'movie' or 'tv') -> Dict[str, str or None] or None:
         '''
         Private helper method to return only required
         data from response fetched using TMDB's API. 
@@ -53,16 +56,20 @@ class TMDB(object):
             'title': result.get('title') or result.get('name'),
             'poster': poster,
             'banner': banner,
-            'imdb_id': self._get_imdb_id(result.get('id')),
+            'imdb_id': self._get_imdb_id(result.get('id'), media_type),
             'release_date': None if (rd := result.get('release_date')) in [None, ''] else rd
         }
         return None if current.get('imdb_id') is None else current
 
-    def _get_imdb_id(self, tmdb_id) -> str:
+    def _get_imdb_id(self, tmdb_id: str, media_type: 'movie' or 'tv') -> str:
         response: dict = requests.get(
-            f'{self.id_lookup_url}/{tmdb_id}?{self.api_key}'
+            f'{self.id_lookup_url}/{media_type}/{tmdb_id}?{self.api_key}&append_to_response=external_ids'
         ).json()
-        return response.get('imdb_id')
+
+        if media_type == 'movie':
+            return response.get('imdb_id')
+        else:
+            return response.get('external_ids').get('imdb_id')
 
 
 def _sub_result(result: dict) -> dict:
