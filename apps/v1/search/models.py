@@ -65,7 +65,7 @@ class TMDB(object):
         return response.get('imdb_id')
 
 
-def _sub_result(self, result: dict) -> dict:
+def _sub_result(result: dict) -> dict:
     '''
     Helper function for get_subtitles() to set properties needed only.
     This is a private function and use should be avoided anywhere else.
