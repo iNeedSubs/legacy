@@ -42,7 +42,6 @@ export default defineComponent({
 
     const fetchSubtitles = async () => {
       try {
-        console.log(route.params.id)
         const req = await fetch(`/api/v1/search/subtitles/?imdb_id=${route.params.id}`)
 
         if (req.status !== 200) {
@@ -76,6 +75,7 @@ main {
 .actions {
   position: relative;
   margin-bottom: 2em;
+  width: 100%;
 
   h3 {
     margin-bottom: 1em;
@@ -83,6 +83,7 @@ main {
 
   .buttonContainer {
     border-radius: 5px;
+    overflow: hidden;
     background: #494d54;
   }
 }
@@ -101,20 +102,36 @@ main {
   align-items: center;
   gap: 1em;
 
+  .download {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: #D65A31;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    transition: .2s ease-in-out;
+    transition-property: opacity, background, transform;
+
+    &:active {
+      transform: scale(.9);
+    }
+
+    &:hover {
+      background: #de7b5a;
+    }
+  }
+
   p {
     word-break: break-all;
   }
 }
 
-.download {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  background: #D65A31;
-  padding: 0 1em;
-  height: 50px;
-  width: 50px;
-  text-align: center;
+@media only screen and (min-width: 500px) {
+  .actions {
+    width: 200px;
+  }
 }
+
 </style>
