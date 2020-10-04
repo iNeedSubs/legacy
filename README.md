@@ -26,10 +26,13 @@ Download subtitles for movies, tv shows and anime in your preferred language.
 
 Your system should have these installed before you continue with the local setup:
 
-- Python3 (3.8.x preferably)
+- Python 3.8.x
 - NodeJS
 
 ### Installation
+
+Ignore step 5 for now even if Django tells you to do do so as this could pose errors
+in the future since we don't currently need or have a database.
 
 1. Install pipenv: `pip install pipenv`.
 2. Install python dependencies by running `pipenv install`, which also creates a virtual env.
@@ -42,8 +45,7 @@ Your system should have these installed before you continue with the local setup
 Keep the the `SETTING` variable as it is.
 
 ```
-OPENSUBS_USERNAME=
-OPENSUBS_PASSWORD=
+TMDB_KEY=
 SECRET_KEY=
 SETTING=subtitles.settings.dev
 ```
@@ -59,7 +61,7 @@ You can either run the production preview which hosted by Django or run the deve
 
 #### Development server
 
-You'd need to run two shell instances here, one for the Vue frontend and one for he Django backend which provides the API endpoints.
+You'd need to run two shell instances here, one for the Vue frontend and one for the Django backend which provides the API endpoints.
 
 1. Run `pipenv shell` to activate the virtual environment.
 2. Run `python manage.py runserver` to start the Django backend.
