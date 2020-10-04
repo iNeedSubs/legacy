@@ -10,13 +10,14 @@ class SearchMovieTestCase(APITestCase):
 
     def setUp(self) -> None:
         self.movie = 'the dark knight'
+        self.base_url = '/api/v1/search/movie/?query='
 
-    def test_search_movie_valid(self):
+    def test_search_valid(self):
         '''
         Test for correct querying of data.
         Checks whether data returned is in correct format.
         '''
-        response = self.client.get(f'/api/v1/search/movie/?query={self.movie}')
+        response = self.client.get(f'{self.base_url}{self.movie}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         data = response.json()
@@ -41,12 +42,12 @@ class SearchMovieTestCase(APITestCase):
             # No items in the list should return None
             self.assertFalse(None in data)
 
-    def test_search_movie_invalid(self):
+    def test_search_invalid(self):
         '''
         Test for when no query has been provided to the endpoint.
         Checks whether error returned is in correct format.
         '''
-        response = self.client.get(f'/api/v1/search/movie/')
+        response = self.client.get(self.base_url)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
         data = response.json()
@@ -54,12 +55,12 @@ class SearchMovieTestCase(APITestCase):
         self.assertEqual(len(data.keys()), 1)
         self.assertEqual(list(data.keys())[0], 'detail')
 
-    def test_search_movie_not_get(self):
+    def test_search_not_get(self):
         '''
         Test for when a request other than GET is sent.
         Uses PUT to test but this should be more or less the same for other request types.
         '''
-        response = self.client.put(f'/api/v1/search/movie/?query={self.movie}')
+        response = self.client.put(f'{self.base_url}{self.movie}')
         self.assertEqual(
             response.status_code,
             status.HTTP_405_METHOD_NOT_ALLOWED
@@ -70,12 +71,12 @@ class SearchMovieTestCase(APITestCase):
         self.assertEqual(len(data.keys()), 1)
         self.assertEqual(list(data.keys())[0], 'detail')
 
-    def test_search_fake_movie(self):
+    def test_search_fake(self):
         '''
         Test for when a query of movie that does not exist in the database.
         Simple check if it returns an empty list: [].
         '''
-        response = self.client.get(f'/api/v1/search/movie/?query={FAKE_MEDIA}')
+        response = self.client.get(f'{self.base_url}{FAKE_MEDIA}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         data = response.json()

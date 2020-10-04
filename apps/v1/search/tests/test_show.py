@@ -10,13 +10,14 @@ class SearchShowTestCase(APITestCase):
 
     def setUp(self) -> None:
         self.show = 'gotham'
+        self.base_url = '/api/v1/search/show/?query='
 
-    def test_search_show_valid(self):
+    def test_search_valid(self):
         '''
         Test for correct querying of data.
         Checks whether data returned is in correct format.
         '''
-        response = self.client.get(f'/api/v1/search/show/?query={self.show}')
+        response = self.client.get(f'{self.base_url}{self.show}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         data = response.json()
@@ -41,12 +42,12 @@ class SearchShowTestCase(APITestCase):
             # No items in the list should return None
             self.assertFalse(None in data)
 
-    def test_search_show_invalid(self):
+    def test_search_invalid(self):
         '''
         Test for when no query has been provided to the endpoint.
         Checks whether error returned is in correct format.
         '''
-        response = self.client.get(f'/api/v1/search/show/')
+        response = self.client.get(self.base_url)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
         data = response.json()
@@ -54,12 +55,12 @@ class SearchShowTestCase(APITestCase):
         self.assertEqual(len(data.keys()), 1)
         self.assertEqual(list(data.keys())[0], 'detail')
 
-    def test_search_show_not_get(self):
+    def test_search_not_get(self):
         '''
         Test for when a request other than GET is sent.
         Uses PUT to test but this should be more or less the same for other request types.
         '''
-        response = self.client.put(f'/api/v1/search/show/?query={self.show}')
+        response = self.client.put(f'{self.base_url}{self.show}')
         self.assertEqual(
             response.status_code,
             status.HTTP_405_METHOD_NOT_ALLOWED
@@ -70,12 +71,12 @@ class SearchShowTestCase(APITestCase):
         self.assertEqual(len(data.keys()), 1)
         self.assertEqual(list(data.keys())[0], 'detail')
 
-    def test_search_fake_show(self):
+    def test_search_fake(self):
         '''
         Test for when a query of show that does not exist in the database.
         Simple check if it returns an empty list: [].
         '''
-        response = self.client.get(f'/api/v1/search/show/?query={FAKE_MEDIA}')
+        response = self.client.get(f'{self.base_url}{FAKE_MEDIA}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         data = response.json()
