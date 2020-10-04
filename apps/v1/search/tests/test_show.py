@@ -35,6 +35,11 @@ class SearchShowTestCase(APITestCase):
 
             for key in first_item.keys():
                 self.assertIn(key, keys)
+                if key == 'imdb_id':
+                    self.assertNotIn(key, [None, ''])
+
+            # No items in the list should return None
+            self.assertFalse(None in data)
 
     def test_search_show_invalid(self):
         '''
