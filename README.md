@@ -59,7 +59,7 @@ You can either run the production preview which hosted by Django or run the deve
 
 #### Production preview
 1. Build the frontend with `yarn build`.
-2. Run `pipenv shell` to activate the virtual env environment.
+2. Run `pipenv shell` to activate the virtual environment.
 3. Run `python manage.py runserver` to start the server.
 
 #### Development server
