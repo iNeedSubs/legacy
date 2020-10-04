@@ -1,7 +1,7 @@
 from django.urls import reverse
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
-from .models import tmdb, get_subtitles
+from .models import tmdb
 
 
 def _get_response(queryset) -> Response:
@@ -35,7 +35,7 @@ class Search(GenericAPIView):
         if return_type.lower() == 'media':
             return media
         elif return_type.lower() == 'subtitles':
-            return get_subtitles(media[0].get('imdb_id'), language) if len(media) > 0 else []
+            return tmdb.get_subtitles(media[0].get('imdb_id'), language) if len(media) > 0 else []
         else:
             return {'detail': 'Unknown return type provided: media or subtitles.'}
 
@@ -68,4 +68,4 @@ class SearchSubtitles(GenericAPIView):
         if imdb_id is None:
             return {'detail': 'Provide the imdb_id of a movie/show.'}
 
-        return get_subtitles(tmdb, imdb_id, language)
+        return tmdb.get_subtitles(imdb_id, language)
