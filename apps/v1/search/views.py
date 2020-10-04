@@ -4,6 +4,9 @@ from rest_framework.response import Response
 from .models import tmdb
 
 
+EMPTY = [None, '']
+
+
 def _get_response(queryset) -> Response:
     status_code = 200
 
@@ -24,7 +27,7 @@ class Search(GenericAPIView):
         return_type: str = self.request.query_params.get('return', 'media')
         language: str = self.request.query_params.get('lang', 'eng')
 
-        if query is None:
+        if query in EMPTY:
             return {'detail': 'Provide a search query.'}
 
         if media_type not in ['tv', 'movie']:
@@ -47,7 +50,7 @@ class SearchMedia(GenericAPIView):
 
     def get_queryset(self):
         query: str or None = self.request.query_params.get('query')
-        if query is None:
+        if query in EMPTY:
             return {'detail': 'Provide a search query.'}
 
         if self.request.path == reverse('search_v1:movie'):
@@ -65,7 +68,7 @@ class SearchSubtitles(GenericAPIView):
         imdb_id: str or None = self.request.query_params.get('imdb_id')
         language: str = self.request.query_params.get('lang', 'eng')
 
-        if imdb_id is None:
+        if imdb_id in EMPTY:
             return {'detail': 'Provide the imdb_id of a movie/show.'}
 
         return tmdb.get_subtitles(imdb_id, language)
