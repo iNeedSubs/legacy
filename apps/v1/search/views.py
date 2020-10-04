@@ -50,7 +50,7 @@ class SearchMedia(GenericAPIView):
         if query is None:
             return {'detail': 'Provide a search query.'}
 
-        if self.request.path == reverse('search_v1:search_movie'):
+        if self.request.path == reverse('search_v1:movie'):
             return tmdb.get_movie(query)
         else:
             return tmdb.get_show(query)
