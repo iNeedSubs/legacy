@@ -64,10 +64,13 @@ class TMDB(object):
         subtitles_url = 'https://rest.opensubtitles.org/search'
         headers = {'User-Agent': 'TemporaryUserAgent'}
 
-        data: List[dict] = requests.get(
-            f'{subtitles_url}/imdbid-{imdb_id}/sublanguageid-{language}',
-            headers=headers
-        ).json()
+        try:
+            data: List[dict] = requests.get(
+                f'{subtitles_url}/imdbid-{imdb_id}/sublanguageid-{language}',
+                headers=headers
+            ).json()
+        except:
+            data = []
 
         media = self.get_media_from_id(imdb_id)
         return [self._sub_result(result, media) for result in data]
