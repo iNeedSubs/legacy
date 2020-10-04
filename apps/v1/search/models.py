@@ -9,8 +9,9 @@ class TMDB(object):
     '''
     empty = [None, '']
     img_url = 'https://image.tmdb.org/t/p/original'
-    base_url = 'https://api.themoviedb.org/3/search'
-    id_lookup_url = 'https://api.themoviedb.org/3'
+    base_url = 'https://api.themoviedb.org/3'
+    search_url = 'https://api.themoviedb.org/3/search'
+    external_id_url = 'https://api.themoviedb.org/3/find'
 
     def __init__(self, api_key: str) -> None:
         self.api_key = f'api_key={api_key}'
@@ -20,7 +21,7 @@ class TMDB(object):
         Returns a list of movies with given query from TMDB API.
         '''
         response: dict = requests.get(
-            f'{self.base_url}/movie?query={query}&{self.api_key}'
+            f'{self.search_url}/movie?query={query}&{self.api_key}'
         ).json()
         results: List[str] = list(response.get('results'))
         return [r for result in results if (r := self._media_result(result, 'movie')) is not None]
@@ -30,7 +31,7 @@ class TMDB(object):
         Returns a list of movies with given query from TMDB API.
         '''
         response: dict = requests.get(
-            f'{self.base_url}/tv?query={query}&{self.api_key}'
+            f'{self.search_url}/tv?query={query}&{self.api_key}'
         ).json()
         results = response.get('results')
         return [r for result in results if (r := self._media_result(result, 'tv')) is not None]
@@ -64,7 +65,7 @@ class TMDB(object):
 
     def _get_imdb_id(self, tmdb_id: str, media_type: 'movie' or 'tv') -> str:
         response: dict = requests.get(
-            f'{self.id_lookup_url}/{media_type}/{tmdb_id}?{self.api_key}&append_to_response=external_ids'
+            f'{self.base_url}/{media_type}/{tmdb_id}?{self.api_key}&append_to_response=external_ids'
         ).json()
 
         if media_type == 'movie':
@@ -88,7 +89,7 @@ def _sub_result(result: dict) -> dict:
     return current
 
 
-def get_subtitles(imdb_id: str, language: str = 'eng', media=None) -> List[dict]:
+def get_subtitles(imdb_id: str, language: str) -> List[dict]:
     subtitles_url = 'https://rest.opensubtitles.org/search'
     headers = {'User-Agent': 'TemporaryUserAgent'}
 
