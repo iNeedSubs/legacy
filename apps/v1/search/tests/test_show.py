@@ -10,7 +10,7 @@ class SearchShowTestCase(APITestCase):
 
     def setUp(self) -> None:
         self.show = 'gotham'
-        self.base_url = '/api/v1/search/show/?query='
+        self.base_url = '/api/v1/search/show?query='
 
     def test_search_valid(self):
         '''
