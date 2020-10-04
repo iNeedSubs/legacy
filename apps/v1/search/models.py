@@ -77,7 +77,7 @@ class TMDB(object):
             'poster': poster,
             'banner': banner,
             'imdb_id': self._get_imdb_id(result.get('id'), media_type),
-            'release_date': None if (rd := result.get('release_date')) in self.empty else rd
+            'release_date': None if (rd := result.get('release_date', result.get('first_air_date'))) in self.empty else rd
         }
         return None if current.get('imdb_id') is None else current
 
