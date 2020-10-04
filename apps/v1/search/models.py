@@ -8,10 +8,10 @@ class TMDB(object):
     Class to wrap TMDB API endpoints into methods for ease of use.
     '''
     empty = [None, '']
-    img_url = 'https://image.tmdb.org/t/p/original'
     base_url = 'https://api.themoviedb.org/3'
-    search_url = 'https://api.themoviedb.org/3/search'
-    external_id_url = 'https://api.themoviedb.org/3/find'
+    img_url = 'https://image.tmdb.org/t/p/original'
+    search_url = f'{base_url}/search'
+    external_id_url = f'{base_url}/find'
 
     def __init__(self, api_key: str) -> None:
         self.api_key = f'api_key={api_key}'
