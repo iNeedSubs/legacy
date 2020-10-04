@@ -19,6 +19,7 @@ Download subtitles for movies, tv shows and anime in your preferred language.
 <a href="https://github.com/Spimy/Subtitles/blob/master/LICENSE.txt" alt="Contributors">
   <img src="https://img.shields.io/github/license/Spimy/Subtitles?style=flat-square"/>
 </a>
+![CI](https://github.com/Spimy/Subtitles/workflows/CI/badge.svg?branch=master)
 
 ## Local setup
 
