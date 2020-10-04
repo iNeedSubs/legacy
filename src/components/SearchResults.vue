@@ -62,7 +62,7 @@ export default defineComponent({
       loaded.value = false
 
       try {
-        const req = await fetch(`/api/v1/search/${mediaType}/?query=${query}`)
+        const req = await fetch(`/api/v1/search/${mediaType}?query=${query}`)
 
         if (req.status !== 200) {
           return console.error('err', req)
@@ -171,7 +171,8 @@ h3 {
 
 .poster {
   border-radius: 5px;
-  width: 100%;
+  width: 100px;
+  object-fit: cover;
   filter: brightness(.8);
   transition: filter .2s ease-in-out;
 }
@@ -213,7 +214,7 @@ h3 {
   .noImage {
     border-radius: 5px 0 0 5px;
     height: 150px;
-    width: 101px;
+    width: 100px;
   }
 }
 </style>
