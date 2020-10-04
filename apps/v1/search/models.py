@@ -7,6 +7,7 @@ class TMDB(object):
     '''
     Class to wrap TMDB API endpoints into methods for ease of use.
     '''
+    empty = [None, '']
     img_url = 'https://image.tmdb.org/t/p/original'
     base_url = 'https://api.themoviedb.org/3/search'
     id_lookup_url = 'https://api.themoviedb.org/3'
@@ -22,7 +23,7 @@ class TMDB(object):
             f'{self.base_url}/movie?query={query}&{self.api_key}'
         ).json()
         results: List[str] = list(response.get('results'))
-        return [self._media_result(result, 'movie') for result in results]
+        return [r for result in results if (r := self._media_result(result, 'movie')) is not None]
 
     def get_show(self, query: str):
         '''
@@ -32,7 +33,7 @@ class TMDB(object):
             f'{self.base_url}/tv?query={query}&{self.api_key}'
         ).json()
         results = response.get('results')
-        return [self._media_result(result, 'tv') for result in results]
+        return [r for result in results if (r := self._media_result(result, 'tv')) is not None]
 
     def get_media(self, query: str, media_type='movie' or 'tv'):
         return self.get_movie(query) if media_type == 'movie' else self.get_show(query)
@@ -57,7 +58,7 @@ class TMDB(object):
             'poster': poster,
             'banner': banner,
             'imdb_id': self._get_imdb_id(result.get('id'), media_type),
-            'release_date': None if (rd := result.get('release_date')) in [None, ''] else rd
+            'release_date': None if (rd := result.get('release_date')) in self.empty else rd
         }
         return None if current.get('imdb_id') is None else current
 
@@ -67,9 +68,9 @@ class TMDB(object):
         ).json()
 
         if media_type == 'movie':
-            return response.get('imdb_id')
+            return _id if (_id := response.get('imdb_id')) not in self.empty else None
         else:
-            return response.get('external_ids').get('imdb_id')
+            return _id if (_id := response.get('external_ids').get('imdb_id')) not in self.empty else None
 
 
 def _sub_result(result: dict) -> dict:
