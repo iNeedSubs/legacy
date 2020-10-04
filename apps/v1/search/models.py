@@ -39,8 +39,26 @@ class TMDB(object):
     def get_media(self, query: str, media_type='movie' or 'tv'):
         return self.get_movie(query) if media_type == 'movie' else self.get_show(query)
 
-    def get_media_from_id(self, imdb_id):
-        pass
+    def get_media_from_id(self, imdb_id) -> dict:
+        '''
+        This method is purely for get_subtitles() function and use of
+        this method elsewhere should be avoided if possible.
+        '''
+        response: dict = requests.get(
+            f'{self.external_id_url}/{imdb_id}?external_source=imdb_id&{self.api_key}'
+        ).json()
+
+        results = response.get('movie_results')
+        media_type = 'movie'
+
+        if results is None or len(results) == 0:
+            results = response.get('tv_results')
+            media_type = 'tv'
+
+        if results is not None and len(results) > 0:
+            return self._media_result(results[0], media_type)
+        else:
+            return {}
 
     def _media_result(self, result: dict, media_type: 'movie' or 'tv') -> Dict[str, str or None] or None:
         '''
@@ -74,7 +92,7 @@ class TMDB(object):
             return _id if (_id := response.get('external_ids').get('imdb_id')) not in self.empty else None
 
 
-def _sub_result(result: dict) -> dict:
+def _sub_result(result: dict, media: dict) -> dict:
     '''
     Helper function for get_subtitles() to set properties needed only.
     This is a private function and use should be avoided anywhere else.
@@ -86,10 +104,11 @@ def _sub_result(result: dict) -> dict:
     }
     if result.get('MovieKind') != 'movie':
         current['episode'] = int(result.get('SeriesEpisode'))
+    current = {**current, **media}
     return current
 
 
-def get_subtitles(imdb_id: str, language: str) -> List[dict]:
+def get_subtitles(tmdb: TMDB, imdb_id: str, language: str) -> List[dict]:
     subtitles_url = 'https://rest.opensubtitles.org/search'
     headers = {'User-Agent': 'TemporaryUserAgent'}
 
@@ -98,7 +117,8 @@ def get_subtitles(imdb_id: str, language: str) -> List[dict]:
         headers=headers
     ).json()
 
-    return [_sub_result(result) for result in data]
+    media = tmdb.get_media_from_id(imdb_id)
+    return [_sub_result(result, media) for result in data]
 
 
 tmdb = TMDB(os.getenv('TMDB_KEY'))

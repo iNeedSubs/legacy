@@ -68,4 +68,4 @@ class SearchSubtitles(GenericAPIView):
         if imdb_id is None:
             return {'detail': 'Provide the imdb_id of a movie/show.'}
 
-        return get_subtitles(imdb_id, language)
+        return get_subtitles(tmdb, imdb_id, language)
