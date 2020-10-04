@@ -60,6 +60,18 @@ class TMDB(object):
         else:
             return {}
 
+    def get_subtitles(self, imdb_id: str, language: str) -> List[dict]:
+        subtitles_url = 'https://rest.opensubtitles.org/search'
+        headers = {'User-Agent': 'TemporaryUserAgent'}
+
+        data: List[dict] = requests.get(
+            f'{subtitles_url}/imdbid-{imdb_id}/sublanguageid-{language}',
+            headers=headers
+        ).json()
+
+        media = self.get_media_from_id(imdb_id)
+        return [self._sub_result(result, media) for result in data]
+
     def _media_result(self, result: dict, media_type: 'movie' or 'tv') -> Dict[str, str or None] or None:
         '''
         Private helper method to return only required
@@ -91,34 +103,20 @@ class TMDB(object):
         else:
             return _id if (_id := response.get('external_ids').get('imdb_id')) not in self.empty else None
 
-
-def _sub_result(result: dict, media: dict) -> dict:
-    '''
-    Helper function for get_subtitles() to set properties needed only.
-    This is a private function and use should be avoided anywhere else.
-    '''
-    current = {
-        'name': result.get('SubFileName'),
-        'language': result.get('SubLanguageID'),
-        'download_url': result.get('SubDownloadLink')
-    }
-    if result.get('MovieKind') != 'movie':
-        current['episode'] = int(result.get('SeriesEpisode'))
-    current = {**current, **media}
-    return current
-
-
-def get_subtitles(tmdb: TMDB, imdb_id: str, language: str) -> List[dict]:
-    subtitles_url = 'https://rest.opensubtitles.org/search'
-    headers = {'User-Agent': 'TemporaryUserAgent'}
-
-    data: List[dict] = requests.get(
-        f'{subtitles_url}/imdbid-{imdb_id}/sublanguageid-{language}',
-        headers=headers
-    ).json()
-
-    media = tmdb.get_media_from_id(imdb_id)
-    return [_sub_result(result, media) for result in data]
+    def _sub_result(self, result: dict, media: dict) -> dict:
+        '''
+        Helper method for get_subtitles() to set properties needed only.
+        This is a private method and use should be avoided anywhere else.
+        '''
+        current = {
+            'name': result.get('SubFileName'),
+            'language': result.get('SubLanguageID'),
+            'download_url': result.get('SubDownloadLink')
+        }
+        if result.get('MovieKind') != 'movie':
+            current['episode'] = int(result.get('SeriesEpisode'))
+        current = {**current, **media}
+        return current
 
 
 tmdb = TMDB(os.getenv('TMDB_KEY'))
