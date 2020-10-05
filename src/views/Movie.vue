@@ -2,12 +2,22 @@
   <Header/>
   <main>
     <div class="actions">
-      <h3>Results ({{subtitles.length}})</h3>
-      <p v-if="err">Error: {{err}}</p>
-      <p v-if="loaded && subtitles.length === 0">No subtitles have been found for this media.</p>
-      <div class="buttonContainer">
-        <LangSelect/>
-      </div>
+      <transition name="bounceIn">
+        <h3 v-if="loaded">Results ({{subtitles.length}})</h3>
+      </transition>
+      <transition name="bounceIn">
+        <p class="err" v-if="loaded && err">Error: {{err}}</p>
+      </transition>
+      <transition name="bounceIn">
+        <p class="notice" v-if="!err && loaded && subtitles.length === 0">
+          No subtitles have been found for this media.
+        </p>
+      </transition>
+      <transition name="bounceIn">
+        <div v-if="!err && loaded && subtitles.length > 0" class="buttonContainer">
+          <LangSelect/>
+        </div>
+      </transition>
       <transition name="fall">
         <Load v-if="loading"/>
       </transition>
@@ -40,9 +50,6 @@ export default defineComponent({
     LangSelect,
     Load
   },
-  props: {
-    id: String
-  },
   setup() {
     const route = useRoute()
     const loaded = ref(false)
@@ -55,14 +62,17 @@ export default defineComponent({
       loading.value = true
 
       try {
-        const req = await fetch(`/api/v1/search/subtitles/?imdb_id=${route.params.id}`)
+        const req = await fetch(`/api/v1/search/subtitles?imdb_id=${route.params.id}`)
+        const payload = await req.json()
 
         if (req.status !== 200) {
-          err.value = 'There has been an error searching for subtitles'
+          loaded.value = true
+          loading.value = false
+          err.value = payload.detail || 'There has been an error searching for subtitles'
           return
         }
 
-        const payload = await req.json()
+        console.log(payload);
 
         subtitles.value = payload
         loaded.value = true
@@ -98,6 +108,10 @@ main {
   text-align: center;
   margin-top: 1em;
   z-index: -1;
+}
+
+.err {
+  width: 50ch;
 }
 
 .actions {
