@@ -70,8 +70,7 @@ export default defineComponent({
 
         const payload = await req.json() as Movie[]
 
-        // ! TEMPORARY FIX TO REMOVE NULL ITEMS FROM PAYLOAD
-        results.value = payload.filter(x => !!x)
+        results.value = payload
         showResults.value = true
         loading.value = false
         loaded.value = true
