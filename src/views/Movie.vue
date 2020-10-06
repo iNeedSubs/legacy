@@ -177,6 +177,10 @@ main {
 }
 
 @media only screen and (min-width: 500px) {
+  .subtitles {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+
   .actions {
     width: 200px;
   }
