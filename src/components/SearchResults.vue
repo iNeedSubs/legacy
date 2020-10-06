@@ -138,6 +138,7 @@ h3 {
     text-align: center;
     cursor: pointer;
     display: grid;
+    min-height: 150px;
     grid-template-rows: 1fr auto;
 
     &:hover {
