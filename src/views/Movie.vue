@@ -1,5 +1,8 @@
 <template>
   <main>
+    <transition name="fall">
+        <Load v-if="loading"/>
+    </transition>
     <div class="actions">
       <transition name="bounceIn">
         <h3 v-if="loaded">Results ({{subtitles.length}})</h3>
@@ -16,9 +19,6 @@
         <div v-if="!err && loaded && subtitles.length > 0" class="buttonContainer">
           <LangSelect/>
         </div>
-      </transition>
-      <transition name="fall">
-        <Load v-if="loading"/>
       </transition>
     </div>
     <transition name="bounceIn">
@@ -96,6 +96,15 @@ export default defineComponent({
 <style lang="scss" scoped>
 main {
   padding: 30px;
+}
+
+.load {
+  right: 0;
+  left: calc(50% - 40px);
+  position: absolute;
+  text-align: center;
+  margin-top: 1em;
+  z-index: -1;
 }
 
 .load {
