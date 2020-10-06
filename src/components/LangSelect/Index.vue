@@ -1,19 +1,21 @@
 <template>
-  <Button
-    :name="name"
-    :showOptions="showOptions"
-    @update-menu-visibility="toggleOptions"
-  />
-  <transition name="bounceIn">
-    <Options
+  <div ref="container" class="lang">
+    <Button
+      :name="name"
       :showOptions="showOptions"
-      @update-lang="updateLang"
+      @update-menu-visibility="toggleOptions"
     />
-  </transition>
+    <transition name="bounceIn">
+      <Options
+        :showOptions="showOptions"
+        @update-lang="updateLang"
+      />
+    </transition>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import { LangCode, LangName } from '@/ts/languages'
 import Button from './Button.vue'
 import Options from './Options.vue'
@@ -28,6 +30,26 @@ export default defineComponent({
   setup() {
     const name = ref(LangName.ENG)
     const showOptions = ref(false)
+    const container = ref<HTMLDivElement>()
+
+    // close language options if clicked outside menu
+    const handleClick = (e: MouseEvent) => {
+      const targetNode = e.target as Node
+
+      if (targetNode.nodeName === "BUTTON" || !showOptions.value) return
+
+      if (!container.value?.contains(targetNode)) {
+        showOptions.value = false
+      }
+    }
+
+    onMounted(() => {
+      window.addEventListener('click', handleClick)
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('click', handleClick)
+    })
 
     const toggleOptions = () => showOptions.value = !showOptions.value
 
@@ -37,6 +59,7 @@ export default defineComponent({
     }
 
     return {
+      container,
       name,
       languages: LangName,
       showOptions,
