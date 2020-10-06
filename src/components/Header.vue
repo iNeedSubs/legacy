@@ -29,11 +29,12 @@ header {
 
 div {
   display: flex;
-  gap: 1em;
+  flex-direction: column;
   align-items: center;
 
   svg {
-    width: 5em;
+    margin-bottom: 1em;
+    height: 3em;
   }
 }
 
@@ -48,6 +49,16 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  div {
+    flex-direction: row;
+    gap: 1em;
+
+    svg {
+      margin-bottom: 0;
+      width: 5em;
+    }
   }
 
   h1 {
