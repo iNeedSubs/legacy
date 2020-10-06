@@ -22,9 +22,7 @@
           @click="setFilter(Media.SHOW)"
         >TV Show</button>
       </div>
-      <div class="lang">
-        <LangSelect @update-lang="updateLang"/>
-      </div>
+      <LangSelect @update-lang="updateLang"/>
     </div>
   </div>
 </template>
