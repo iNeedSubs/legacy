@@ -1,5 +1,4 @@
 <template>
-  <Header/>
   <main>
     <p class="desc">Download subtitles for Movies, TV Shows and Anime in your preferred&nbsp;language.</p>
     <Search
@@ -13,7 +12,6 @@
 
 <script lang="ts">
 import { ref } from 'vue'
-import Header from '@/components/Header.vue'
 import Search from '@/components/Search.vue'
 import SearchResults from '@/components/SearchResults.vue'
 import { LangCode } from '@/ts/languages'
@@ -21,7 +19,6 @@ import { Media } from '@/ts/media'
 
 export default {
   components: {
-    Header,
     Search,
     SearchResults
   },

@@ -1,5 +1,4 @@
 <template>
-  <Header/>
   <main>
     <div class="actions">
       <transition name="bounceIn">
@@ -37,7 +36,6 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import Header from '@/components/Header.vue'
 import { useRoute } from 'vue-router';
 import { MovieSubtitle } from '@/ts/media';
 import LangSelect from '@/components/LangSelect/Index.vue'
@@ -46,7 +44,6 @@ import Load from '@/components/Load.vue'
 export default defineComponent({
   name: 'Movie',
   components: {
-    Header,
     LangSelect,
     Load
   },

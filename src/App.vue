@@ -1,8 +1,18 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+  <Header/>
+  <router-view/>
 </template>
+
+<script lang="ts">
+import Header from './components/Header.vue'
+
+export default {
+  name: 'App',
+  components: {
+    Header
+  }
+}
+</script>
 
 <style lang="scss">
 @font-face {
@@ -44,7 +54,7 @@ html {
   scroll-behavior: smooth;
 }
 
-html, body, #app {
+html, body {
   height: 100%;
   width: 100%;
 }
@@ -53,6 +63,10 @@ body {
   font-family: 'Open Sans Regular';
   background: #222831;
   color: #fff;
+}
+
+main {
+  padding: 30px;
 }
 
 a {

@@ -1,34 +1,23 @@
 <template>
-    <Header/>
-    <main>
-        <h3>Developer Note</h3>
-        <p>Hi there, we're currently still working on this page, check back here soon!</p>
-    </main>
+  <main>
+    <h3>Developer Note</h3>
+    <p>Hi there, we're currently still working on this page, check back here soon!</p>
+  </main>
 </template>
-
-<script>
-import Header from '../components/Header'
-
-export default {
-  components: {
-    Header
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 main {
-    padding: 30px;
-    text-align: center;
+  padding: 30px;
+  text-align: center;
 }
 
 h3 {
-    margin-bottom: 1em;
-    font-family: 'Open Sans Bold';
+  margin-bottom: 1em;
+  font-family: 'Open Sans Bold';
 }
 
 p {
-    margin: 0 auto;
-    max-width: 35ch;
+  margin: 0 auto;
+  max-width: 35ch;
 }
 </style>
