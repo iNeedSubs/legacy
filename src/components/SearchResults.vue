@@ -140,8 +140,10 @@ h3 {
     display: grid;
     grid-template-rows: 1fr auto;
 
-    &:hover img {
-      filter: brightness(1);
+    &:hover {
+      img, .noImage {
+        filter: brightness(1);
+      }
     }
 
     .name {
@@ -169,19 +171,22 @@ h3 {
   }
 }
 
-::v-deep {
-  img.poster {
-    border-radius: 5px 0 0 5px;
-    width: 100px;
-    object-fit: cover;
-    filter: brightness(.8);
-    transition: filter .2s ease-in-out;
-  }
+img.poster, .noImage {
+  margin: 1em auto;
+  border-radius: 5px;
+  width: 100px;
+  transition: filter .2s ease-in-out;
+}
 
-  .noImage {
-    background: #3D454F;
-    height: 411px;
-  }
+img.poster {
+  object-fit: cover;
+  filter: brightness(.8);
+}
+
+.noImage {
+  background: #3D454F;
+  height: 150px;
+  filter: brightness(.9);
 }
 
 @media only screen and (min-width: 350px) {
@@ -206,15 +211,9 @@ h3 {
     }
   }
 
-  img {
-    width: auto;
-    height: 150px;
-  }
-
-  .noImage {
+  img.poster, .noImage {
+    margin: unset;
     border-radius: 5px 0 0 5px;
-    height: 150px;
-    width: 100px;
   }
 }
 </style>
