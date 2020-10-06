@@ -103,7 +103,7 @@ export default defineComponent({
     color: #fff;
     transition: background .2s ease-in-out;
 
-    &:hover {
+    &:hover, &:focus {
       background: #de7b5a;
     }
   }
@@ -145,7 +145,7 @@ button {
     transition: .2s ease-in-out;
     transition-property: background, color;
 
-    &:hover {
+    &:hover, &:focus {
       background: #6d707622;
     }
 

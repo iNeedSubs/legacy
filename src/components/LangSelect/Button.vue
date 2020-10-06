@@ -47,7 +47,7 @@ button {
   box-shadow: 0px -1px 15px #22283155;
   border-radius: 0 0 5px 5px;
 
-  &:hover {
+  &:hover, &:focus {
     background: #6d707622;
   }
 

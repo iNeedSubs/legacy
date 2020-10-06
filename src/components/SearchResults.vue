@@ -141,7 +141,7 @@ h3 {
     min-height: 150px;
     grid-template-rows: 1fr auto;
 
-    &:hover {
+    &:hover, &:focus {
       img, .noImage {
         filter: brightness(1);
       }

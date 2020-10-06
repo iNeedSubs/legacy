@@ -166,7 +166,7 @@ main {
       transform: scale(.9);
     }
 
-    &:hover {
+    &:hover, &:focus {
       background: #de7b5a;
     }
   }

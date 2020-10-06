@@ -23,7 +23,7 @@ nav {
     padding: 5px 10px;
     transition: background .1s ease-in-out;
 
-    &:hover {
+    &:hover, &:focus {
       background: #de7b5a55;
     }
 
