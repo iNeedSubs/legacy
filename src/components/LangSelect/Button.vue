@@ -21,7 +21,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const toggleOptions = () => {
-      emit('update-menu-visibility', !!props.showOptions)
+      emit('update-menu-visibility', !props.showOptions)
     }
 
     return {
