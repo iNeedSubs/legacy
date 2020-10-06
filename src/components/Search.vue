@@ -32,7 +32,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import Glasses from '@/assets/Glasses.vue'
-import LangSelect from './LangSelect.vue'
+import LangSelect from './LangSelect/Index.vue'
 import { LangCode } from '@/ts/languages'
 import { Media } from '@/ts/media'
 
