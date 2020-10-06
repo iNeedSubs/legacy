@@ -1,16 +1,21 @@
 <template>
   <header>
-    <h1>Subtitles</h1>
+    <div>
+      <Logo/>
+      <h1>Subtitles</h1>
+    </div>
     <Nav/>
   </header>
 </template>
 
-<script>
-import Nav from './Nav'
+<script lang="ts">
+import Nav from './Nav.vue'
+import Logo from '@/assets/Logo.vue'
 
 export default {
   components: {
-    Nav
+    Nav,
+    Logo
   }
 }
 </script>
@@ -20,6 +25,16 @@ header {
   background: #d65a31;
   padding: 30px;
   text-align: center;
+}
+
+div {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+
+  svg {
+    width: 5em;
+  }
 }
 
 h1 {
