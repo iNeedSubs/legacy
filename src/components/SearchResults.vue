@@ -15,8 +15,7 @@
           :key="i"
         >
           <router-link :to="{ name: mediaType, params: { id: result.imdb_id }}">
-            <img class="poster" v-if="result.poster" :src="result.poster" loading="lazy"/>
-            <div class="noImage" v-else/>
+            <Image name="poster" :src="result.poster"/>
             <div class="name">
               <img class="banner" v-if="result.banner" :src="result.banner" loading="lazy"/>
               <p>{{result.title}}</p>
@@ -32,11 +31,13 @@
 import { defineComponent, ref, watch, nextTick, onBeforeUpdate } from 'vue'
 import { Movie } from '@/ts/media'
 import Load from './Load.vue'
+import Image from './Image.vue'
 
 export default defineComponent({
   name: 'SearchResults',
   components: {
-    Load
+    Load,
+    Image
   },
   props: {
     query: String,
@@ -139,8 +140,10 @@ h3 {
     display: grid;
     grid-template-rows: 1fr auto;
 
-    &:hover img {
-      filter: brightness(1);
+    &:hover {
+      img, .noImage {
+        filter: brightness(1);
+      }
     }
 
     .name {
@@ -168,19 +171,22 @@ h3 {
   }
 }
 
-.poster {
+img.poster, .noImage {
+  margin: 1em auto;
   border-radius: 5px;
   width: 100px;
-  object-fit: cover;
-  filter: brightness(.8);
   transition: filter .2s ease-in-out;
 }
 
+img.poster {
+  object-fit: cover;
+  filter: brightness(.8);
+}
+
 .noImage {
-  border-radius: 5px;
   background: #3D454F;
-  width: 100%;
-  height: 411px;
+  height: 150px;
+  filter: brightness(.9);
 }
 
 @media only screen and (min-width: 350px) {
@@ -205,15 +211,9 @@ h3 {
     }
   }
 
-  img {
-    width: auto;
-    height: 150px;
-  }
-
-  .noImage {
+  img.poster, .noImage {
+    margin: unset;
     border-radius: 5px 0 0 5px;
-    height: 150px;
-    width: 100px;
   }
 }
 </style>
