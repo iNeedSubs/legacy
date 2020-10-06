@@ -51,10 +51,6 @@ button {
     background: #6d707622;
   }
 
-  &.active {
-    background: #d65a31;
-  }
-
   &:not(.active) {
     color: #ddd;
   }
