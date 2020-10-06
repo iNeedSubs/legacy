@@ -5,6 +5,7 @@
       :key="langName"
       :class="{active: code.toUpperCase() === langCode.toUpperCase()}"
       @click="setLang(langCode)"
+      tabindex="0"
     >
       {{langName}}
     </p>
@@ -75,7 +76,7 @@ export default defineComponent({
     height: 30px;
     transition: background .2s ease-in-out;
 
-    &:hover {
+    &:hover, &:focus {
       background: #6d707622;
     }
 
