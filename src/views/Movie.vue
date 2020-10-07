@@ -1,11 +1,16 @@
 <template>
   <main>
+    <Media
+      :poster="subtitles[0].poster"
+      :banner="subtitles[0].banner"
+      :title="subtitles[0].title"
+    />
     <transition name="fall">
         <Load v-if="loading"/>
     </transition>
     <div class="actions">
       <transition name="bounceIn">
-        <h3 v-if="loaded">Results ({{subtitles.length}})</h3>
+        <h3 v-if="loaded">Subtitles ({{subtitles.length}})</h3>
       </transition>
       <transition name="bounceIn">
         <p class="err" v-if="loaded && err">Error: {{err}}</p>
@@ -40,12 +45,14 @@ import { useRoute } from 'vue-router';
 import { MovieSubtitle } from '@/ts/media';
 import LangSelect from '@/components/LangSelect/Index.vue'
 import Load from '@/components/Load.vue'
+import Media from '@/components/Media.vue'
 
 export default defineComponent({
   name: 'Movie',
   components: {
     LangSelect,
-    Load
+    Load,
+    Media
   },
   setup() {
     const route = useRoute()
@@ -68,8 +75,6 @@ export default defineComponent({
           err.value = payload.detail || 'There has been an error searching for subtitles'
           return
         }
-
-        console.log(payload);
 
         subtitles.value = payload
         loaded.value = true
@@ -96,6 +101,19 @@ export default defineComponent({
 <style lang="scss" scoped>
 main {
   padding: 30px;
+}
+
+::v-deep {
+  .media {
+    margin-bottom: 2em;
+    cursor: default;
+
+    .poster {
+      filter: brightness(1);
+      width: clamp(100px, 20vw, 200px);
+
+    }
+  }
 }
 
 .load {
