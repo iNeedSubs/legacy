@@ -6,7 +6,7 @@ export interface Movie {
   title: string;
 }
 
-export interface MovieSubtitle {
+export interface MovieSubtitle extends Movie {
   download_url: string;
   language: string;
   name: string;
