@@ -5,6 +5,6 @@ import router from './router';
 import { FontAwesomeIcon } from '@/plugins/fa';
 
 createApp(App)
-    .use(router)
-    .component('fa', FontAwesomeIcon)
-    .mount('#app');
+  .use(router)
+  .component('fa', FontAwesomeIcon)
+  .mount('#app');
