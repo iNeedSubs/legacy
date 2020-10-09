@@ -110,10 +110,8 @@ main {
     margin-bottom: 2em;
     cursor: default;
 
-    .poster {
+    .poster, .noImage {
       filter: brightness(1);
-      width: clamp(100px, 20vw, 200px);
-
     }
   }
 }
