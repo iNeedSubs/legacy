@@ -1,35 +1,29 @@
 <template>
   <main>
     <transition name="fall">
-        <Load v-if="loading"/>
+      <Load v-if="loading"/>
     </transition>
-    <div class="actions">
-      <transition name="bounceIn">
-        <h3 v-if="loaded">Results ({{subtitles.length}})</h3>
-      </transition>
-      <transition name="bounceIn">
-        <p class="err" v-if="loaded && err">Error: {{err}}</p>
-      </transition>
-      <transition name="bounceIn">
-        <p class="notice" v-if="!err && loaded && subtitles.length === 0">
-          No subtitles have been found for this media.
-        </p>
-      </transition>
-      <transition name="bounceIn">
-        <div v-if="!err && loaded && subtitles.length > 0" class="buttonContainer">
+    <transition name="bounceIn">
+      <Media v-if="loaded && !err" :data="movie"/>
+    </transition>
+    <transition name="bounceIn">
+      <div v-if="loaded && !err" class="actions">
+        <h3>Subtitles ({{movie.subtitles.length}})</h3>
+        <div v-if="movie.subtitles.length > 0" class="buttonContainer">
           <LangSelect/>
         </div>
-      </transition>
-    </div>
-    <transition name="bounceIn">
-      <div class="subtitles" v-if="subtitles.length > 0">
-        <div class="subtitle" v-for="(subtitle, i) in subtitles" :key="i">
-          <p>{{subtitle.name}}</p>
-          <a class="download" :href="subtitle.download_url" download>
-            <fa icon="download"/>
-          </a>
-        </div>
       </div>
+    </transition>
+    <transition name="bounceIn">
+      <p class="err" v-if="loaded && err">Error: {{err}}</p>
+    </transition>
+    <transition name="bounceIn">
+      <p class="notice" v-if="loaded && !err && movie.subtitles.length === 0">
+        No subtitles have been found for this media.
+      </p>
+    </transition>
+    <transition name="bounceIn">
+      <Subtitles v-if="!err && loaded" :subtitles="movie.subtitles"/>
     </transition>
   </main>
 </template>
@@ -40,19 +34,23 @@ import { useRoute } from 'vue-router';
 import { MovieSubtitle } from '@/ts/media';
 import LangSelect from '@/components/LangSelect/Index.vue'
 import Load from '@/components/Load.vue'
+import Media from '@/components/Media.vue'
+import Subtitles from '@/components/Subtitles.vue'
 
 export default defineComponent({
   name: 'Movie',
   components: {
     LangSelect,
-    Load
+    Load,
+    Media,
+    Subtitles
   },
   setup() {
     const route = useRoute()
     const loaded = ref(false)
     const loading = ref(true)
     const err = ref('')
-    const subtitles = ref<Array<MovieSubtitle>>([])
+    const movie = ref<MovieSubtitle>()
 
     const fetchSubtitles = async () => {
       loaded.value = false
@@ -69,9 +67,7 @@ export default defineComponent({
           return
         }
 
-        console.log(payload);
-
-        subtitles.value = payload
+        movie.value = payload
         loaded.value = true
         loading.value = false
       } catch (e) {
@@ -84,7 +80,7 @@ export default defineComponent({
     fetchSubtitles()
 
     return {
-      subtitles,
+      movie,
       err,
       loaded,
       loading
@@ -96,6 +92,19 @@ export default defineComponent({
 <style lang="scss" scoped>
 main {
   padding: 30px;
+}
+
+::v-deep {
+  .media {
+    margin: 0 auto;
+    max-width: 500px;
+    margin-bottom: 2em;
+    cursor: default;
+
+    .poster, .noImage {
+      filter: brightness(1);
+    }
+  }
 }
 
 .load {
@@ -122,7 +131,7 @@ main {
 
 .actions {
   position: relative;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   width: 100%;
 
   h3 {
@@ -136,54 +145,20 @@ main {
   }
 }
 
-.subtitles {
-  display: grid;
-  gap: 1em;
-}
-
-.subtitle {
-  padding: 1em;
-  border-radius: 5px;
-  background: #2C343F;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 1em;
-
-  .download {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    background: #D65A31;
-    height: 40px;
-    width: 40px;
-    text-align: center;
-    transition: .2s ease-in-out;
-    transition-property: opacity, background, transform;
-
-    &:active {
-      transform: scale(.9);
-    }
-
-    &:hover, &:focus {
-      background: #de7b5a;
-    }
-  }
-
-  p {
-    word-break: break-all;
-  }
-}
-
 @media only screen and (min-width: 500px) {
-  .subtitles {
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+      margin-bottom: unset;
+    }
   }
 
-  .actions {
-    width: 200px;
+  ::v-deep .lang .options {
+    width: 300px;
+    left: unset;
   }
 }
-
 </style>

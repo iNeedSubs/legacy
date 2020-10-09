@@ -11,15 +11,11 @@
         <div
           class="result"
           :ref="e => {resultItems[i] = e}"
-            v-for="(result, i) in results"
           :key="i"
+          v-for="(result, i) in results"
         >
           <router-link :to="{ name: mediaType, params: { id: result.imdb_id }}">
-            <Image name="poster" :src="result.poster"/>
-            <div class="name">
-              <img class="banner" v-if="result.banner" :src="result.banner" loading="lazy"/>
-              <p>{{result.title}}</p>
-            </div>
+            <Media :data="result"/>
           </router-link>
         </div>
       </div>
@@ -31,13 +27,13 @@
 import { defineComponent, ref, watch, nextTick, onBeforeUpdate } from 'vue'
 import { Movie } from '@/ts/media'
 import Load from './Load.vue'
-import Image from './Image.vue'
+import Media from './Media.vue'
 
 export default defineComponent({
   name: 'SearchResults',
   components: {
     Load,
-    Image
+    Media
   },
   props: {
     query: String,
@@ -49,7 +45,7 @@ export default defineComponent({
     const loading = ref(false)
     const loaded = ref(false)
     const err = ref('')
-    const resultItems = ref<Array<HTMLDivElement>>([])
+    const resultItems = ref<Array<HTMLAnchorElement>>([])
 
     // reset the resultItems before each update
     onBeforeUpdate(() => {
@@ -77,6 +73,8 @@ export default defineComponent({
         loaded.value = true
 
         await nextTick()
+
+        console.log(resultItems.value);
 
         // scrolls to first element in results
         resultItems.value[0].scrollIntoView({
@@ -131,90 +129,11 @@ h3 {
 .results {
   display: grid;
   gap: 1em;
-
-  .result a {
-    background: #2C343F;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    display: grid;
-    min-height: 150px;
-    grid-template-rows: 1fr auto;
-
-    &:hover, &:focus {
-      img, .noImage {
-        filter: brightness(1);
-      }
-    }
-
-    .name {
-      height: 100%;
-      position: relative;
-
-      .banner {
-        position: absolute;
-        height: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        border-radius: 5px;
-        object-fit: cover;
-        opacity: .1;
-      }
-
-      p {
-        padding: 1em;
-        z-index: 1;
-      }
-    }
-
-  }
-}
-
-img.poster, .noImage {
-  margin: 1em auto;
-  border-radius: 5px;
-  width: 100px;
-  transition: filter .2s ease-in-out;
-}
-
-img.poster {
-  object-fit: cover;
-  filter: brightness(.8);
-}
-
-.noImage {
-  background: #3D454F;
-  height: 150px;
-  filter: brightness(.9);
 }
 
 @media only screen and (min-width: 350px) {
   .results {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-
-  .result a {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr !important;
-    align-items: center;
-    text-align: left !important;
-
-    .name {
-      display: flex;
-      align-items: center;
-
-      p {
-        padding: 0 1em;
-      }
-    }
-  }
-
-  img.poster, .noImage {
-    margin: unset;
-    border-radius: 5px 0 0 5px;
   }
 }
 </style>
