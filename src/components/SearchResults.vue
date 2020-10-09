@@ -15,11 +15,7 @@
           v-for="(result, i) in results"
         >
           <router-link :to="{ name: mediaType, params: { id: result.imdb_id }}">
-            <Media
-              :poster="result.poster"
-              :banner="result.banner"
-              :title="result.title"
-            />
+            <Media :data="result"/>
           </router-link>
         </div>
       </div>
