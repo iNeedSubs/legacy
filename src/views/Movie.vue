@@ -4,22 +4,26 @@
       <Load v-if="loading"/>
     </transition>
     <transition name="bounceIn">
-      <Media v-if="movie" :data="movie"/>
+      <Media v-if="loaded && !err" :data="movie"/>
     </transition>
     <transition name="bounceIn">
-      <div class="actions">
-        <h3 v-if="loaded">Subtitles ({{movie.subtitles.length}})</h3>
-        <p class="err" v-if="loaded && err">Error: {{err}}</p>
-        <p class="notice" v-if="!err && loaded && movie.subtitles.length === 0">
-          No subtitles have been found for this media.
-        </p>
-        <div v-if="!err && loaded && movie.subtitles.length > 0" class="buttonContainer">
+      <div v-if="loaded && !err" class="actions">
+        <h3>Subtitles ({{movie.subtitles.length}})</h3>
+        <div v-if="movie.subtitles.length > 0" class="buttonContainer">
           <LangSelect/>
         </div>
       </div>
     </transition>
     <transition name="bounceIn">
-      <Subtitles v-if="movie" :subtitles="movie.subtitles"/>
+      <p class="err" v-if="loaded && err">Error: {{err}}</p>
+    </transition>
+    <transition name="bounceIn">
+      <p class="notice" v-if="loaded && !err && movie.subtitles.length === 0">
+        No subtitles have been found for this media.
+      </p>
+    </transition>
+    <transition name="bounceIn">
+      <Subtitles v-if="!err && loaded" :subtitles="movie.subtitles"/>
     </transition>
   </main>
 </template>
@@ -127,7 +131,7 @@ main {
 
 .actions {
   position: relative;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   width: 100%;
 
   h3 {
