@@ -105,6 +105,7 @@ main {
 
 ::v-deep {
   .media {
+    margin: 0 auto;
     max-width: 500px;
     margin-bottom: 2em;
     cursor: default;
