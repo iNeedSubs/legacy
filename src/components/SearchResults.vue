@@ -74,8 +74,6 @@ export default defineComponent({
 
         await nextTick()
 
-        console.log(resultItems.value);
-
         // scrolls to first element in results
         resultItems.value[0].scrollIntoView({
           block: 'center'
