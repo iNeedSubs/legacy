@@ -1,10 +1,12 @@
 <template>
   <div class="options" v-if="showOptions">
     <p
-      v-for="(langName, langCode) in languages"
+      v-for="(langName, langCode, i) in languages"
+      :ref="e => {options[i] = e}"
       :key="langName"
       :class="{active: code.toUpperCase() === langCode.toUpperCase()}"
       @click="setLang(langCode)"
+      @keydown="e => { if (e.keyCode === 13) { setLang(langCode)} }"
       tabindex="0"
     >
       {{langName}}
@@ -13,27 +15,80 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, onBeforeUpdate, onMounted, onUnmounted, ref, watch } from 'vue'
 import { LangName, LangCode } from '@/ts/languages'
 
 export default defineComponent({
   name: 'LangSelectOptions',
-  emits: ['update-lang'],
+  emits: [
+    'update-lang',
+    'update-menu-visibility'
+  ],
   props: {
     showOptions: Boolean
   },
   setup(props, { emit }) {
     const code = ref(LangCode.ENGLISH)
+    const searchLang = ref('')
+    const options = ref<Array<HTMLParagraphElement>>([])
 
     const setLang = (newCode: LangCode) => {
       code.value = newCode
       emit('update-lang', newCode)
-    };
+    }
+
+    const handleKbrd = (e: KeyboardEvent) => {
+      // close on escape
+      if (e.keyCode === 27) {
+        emit('update-menu-visibility', false)
+        return
+      }
+
+      if (!props.showOptions || e.key.length > 1) return
+
+      const onlyLetters = /[a-zA-Z]/g
+      if (!onlyLetters.test(e.key)) return
+
+      searchLang.value += e.key
+    }
+
+    // reset the resultItems before each update
+    onBeforeUpdate(() => {
+      options.value = []
+    })
+
+    onMounted(() => {
+      window.addEventListener('keydown', handleKbrd)
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('keydown', handleKbrd)
+    })
+
+    watch(() => searchLang.value, (value) => {
+      const filteredLanguages = options.value.filter(e => {
+        const langText = e.childNodes[0].textContent?.toLowerCase()
+        const enteredValue = value.toLowerCase()
+
+        return langText?.includes(enteredValue)
+      })
+
+      filteredLanguages[0]?.scrollIntoView({
+        behavior: 'smooth'
+      })
+
+      filteredLanguages[0]?.focus()
+    })
+
+    watch(() => props.showOptions, () => {
+      searchLang.value = ''
+    })
 
     return {
       code,
       setLang,
-      languages: LangName
+      languages: LangName,
+      options
     }
   }
 })
