@@ -1,14 +1,14 @@
 <template>
   <div class="media">
-    <Poster name="poster" :src="poster"/>
+    <Poster name="poster" :src="data.poster"/>
     <div class="name">
       <img
         class="banner"
-        v-if="banner"
-        :src="banner"
+        v-if="data.banner"
+        :src="data.banner"
         loading="lazy"
       />
-      <p>{{title}}</p>
+      <p>{{data.title}}</p>
     </div>
   </div>
 </template>
@@ -22,9 +22,7 @@ export default {
     Poster
   },
   props: {
-    poster: String,
-    banner: String,
-    title: String
+    data: Object
   }
 }
 </script>
