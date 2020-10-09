@@ -1,12 +1,12 @@
 <template>
   <main>
     <transition name="fall">
-        <Load v-if="loading"/>
+      <Load v-if="loading"/>
     </transition>
-      <transition name="bounceIn">
+    <transition name="bounceIn">
       <Media v-if="movie" :data="movie"/>
-      </transition>
-      <transition name="bounceIn">
+    </transition>
+    <transition name="bounceIn">
       <div class="actions">
         <h3 v-if="loaded">Subtitles ({{movie.subtitles.length}})</h3>
         <p class="err" v-if="loaded && err">Error: {{err}}</p>
@@ -16,7 +16,7 @@
         <div v-if="!err && loaded && movie.subtitles.length > 0" class="buttonContainer">
           <LangSelect/>
         </div>
-    </div>
+      </div>
     </transition>
     <transition name="bounceIn">
       <Subtitles v-if="movie" :subtitles="movie.subtitles"/>
@@ -141,49 +141,20 @@ main {
   }
 }
 
-.subtitles {
-  display: grid;
-  gap: 1em;
-}
-
-.subtitle {
-  padding: 1em;
-  border-radius: 5px;
-  background: #2C343F;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 1em;
-
-  .download {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    background: #D65A31;
-    height: 40px;
-    width: 40px;
-    text-align: center;
-    transition: .2s ease-in-out;
-    transition-property: opacity, background, transform;
-
-    &:active {
-      transform: scale(.9);
-    }
-
-    &:hover, &:focus {
-      background: #de7b5a;
-    }
-  }
-
-  p {
-    word-break: break-all;
-  }
-}
-
 @media only screen and (min-width: 500px) {
-  .subtitles {
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+      margin-bottom: unset;
+    }
+  }
+
+  ::v-deep .lang .options {
+    width: 300px;
+    left: unset;
   }
 }
 </style>
