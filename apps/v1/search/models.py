@@ -111,15 +111,15 @@ class TMDB(object):
         Helper method for get_subtitles() to set properties needed only.
         This is a private method and use should be avoided anywhere else.
         '''
-        current = {
+        sub_results = {
             'name': result.get('SubFileName'),
             'language': result.get('SubLanguageID'),
             'download_url': result.get('SubDownloadLink')
         }
         if result.get('MovieKind') != 'movie':
-            current['episode'] = int(result.get('SeriesEpisode'))
-        current = {**current, **media}
-        return current
+            sub_results['episode'] = int(result.get('SeriesEpisode'))
+        media = {**media, 'subtitles': [sub_results]}
+        return media
 
 
 tmdb = TMDB(os.getenv('TMDB_KEY'))
