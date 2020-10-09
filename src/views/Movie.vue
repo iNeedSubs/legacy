@@ -1,40 +1,25 @@
 <template>
   <main>
-    <Media
-      :poster="subtitles[0].poster"
-      :banner="subtitles[0].banner"
-      :title="subtitles[0].title"
-    />
     <transition name="fall">
         <Load v-if="loading"/>
     </transition>
-    <div class="actions">
       <transition name="bounceIn">
-        <h3 v-if="loaded">Subtitles ({{subtitles.length}})</h3>
+      <Media v-if="movie" :data="movie"/>
       </transition>
       <transition name="bounceIn">
+      <div class="actions">
+        <h3 v-if="loaded">Subtitles ({{movie.subtitles.length}})</h3>
         <p class="err" v-if="loaded && err">Error: {{err}}</p>
-      </transition>
-      <transition name="bounceIn">
-        <p class="notice" v-if="!err && loaded && subtitles.length === 0">
+        <p class="notice" v-if="!err && loaded && movie.subtitles.length === 0">
           No subtitles have been found for this media.
         </p>
-      </transition>
-      <transition name="bounceIn">
-        <div v-if="!err && loaded && subtitles.length > 0" class="buttonContainer">
+        <div v-if="!err && loaded && movie.subtitles.length > 0" class="buttonContainer">
           <LangSelect/>
         </div>
-      </transition>
     </div>
+    </transition>
     <transition name="bounceIn">
-      <div class="subtitles" v-if="subtitles.length > 0">
-        <div class="subtitle" v-for="(subtitle, i) in subtitles" :key="i">
-          <p>{{subtitle.name}}</p>
-          <a class="download" :href="subtitle.download_url" download>
-            <fa icon="download"/>
-          </a>
-        </div>
-      </div>
+      <Subtitles v-if="movie" :subtitles="movie.subtitles"/>
     </transition>
   </main>
 </template>
@@ -46,20 +31,22 @@ import { MovieSubtitle } from '@/ts/media';
 import LangSelect from '@/components/LangSelect/Index.vue'
 import Load from '@/components/Load.vue'
 import Media from '@/components/Media.vue'
+import Subtitles from '@/components/Subtitles.vue'
 
 export default defineComponent({
   name: 'Movie',
   components: {
     LangSelect,
     Load,
-    Media
+    Media,
+    Subtitles
   },
   setup() {
     const route = useRoute()
     const loaded = ref(false)
     const loading = ref(true)
     const err = ref('')
-    const subtitles = ref<Array<MovieSubtitle>>([])
+    const movie = ref<MovieSubtitle>()
 
     const fetchSubtitles = async () => {
       loaded.value = false
@@ -76,7 +63,7 @@ export default defineComponent({
           return
         }
 
-        subtitles.value = payload
+        movie.value = payload
         loaded.value = true
         loading.value = false
       } catch (e) {
@@ -89,7 +76,7 @@ export default defineComponent({
     fetchSubtitles()
 
     return {
-      subtitles,
+      movie,
       err,
       loaded,
       loading
