@@ -6,10 +6,15 @@ export interface Movie {
   title: string;
 }
 
-export interface MovieSubtitle extends Movie {
+// subtitles for movies
+export interface MSubtitle {
   download_url: string;
   language: string;
   name: string;
+}
+
+export interface MovieSubtitle extends Movie {
+  subtitles: Array<MSubtitle>;
 }
 
 export enum Media {
