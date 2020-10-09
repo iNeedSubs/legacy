@@ -105,6 +105,7 @@ main {
 
 ::v-deep {
   .media {
+    max-width: 500px;
     margin-bottom: 2em;
     cursor: default;
 
@@ -198,10 +199,5 @@ main {
   .subtitles {
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   }
-
-  .actions {
-    width: 200px;
-  }
 }
-
 </style>
