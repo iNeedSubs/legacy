@@ -23,18 +23,38 @@ class SubtitlesSearchTestCase(APITestCase):
             Testing for first item as the rest should be the same.
             '''
             first_item: dict = data[0]
-            keys = ['name', 'language', 'download_url', 'title',
-                    'poster', 'banner', 'imdb_id', 'release_date']
+            keys = [
+                'title', 'poster', 'banner',
+                'imdb_id', 'release_date', 'subtitles'
+            ]
+            sub_keys = ['name', 'language', 'download_url']
 
             self.assertGreaterEqual(len(first_item.keys()), len(keys))
 
-            if 'episode' in first_item.keys():
-                self.assertEqual(len(data) - 1, len(keys))
-
             for key in first_item.keys():
+
                 self.assertIn(key, keys)
                 if key == 'imdb_id':
                     self.assertNotIn(key, [None, ''])
+
+                if key == 'subtitles':
+
+                    self.assertGreaterEqual(len(first_item[key]), 0)
+
+                    if len(first_item[key]) > 0:
+
+                        first_sub = first_item[key][0]
+
+                        self.assertEqual(len(first_sub.keys()), len(sub_keys))
+
+                        if 'episode' in first_sub.keys():
+                            self.assertEqual(
+                                len(first_sub.keys()) - 1,
+                                len(sub_keys)
+                            )
+
+                        for sub_key in first_sub.keys():
+                            self.assertIn(sub_key, sub_keys)
 
             # No items in the list should return None
             self.assertFalse(None in data)
