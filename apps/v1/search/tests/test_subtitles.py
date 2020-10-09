@@ -14,50 +14,52 @@ class SubtitlesSearchTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         data = response.json()
-        self.assertIsInstance(data, list)
-        self.assertGreaterEqual(len(data), 0)
+        self.assertIsInstance(data, dict)
 
-        if len(data) > 0:
-            '''
-            Check if an item's content contains the correct keys.
-            Testing for first item as the rest should be the same.
-            '''
-            first_item: dict = data[0]
-            keys = [
-                'title', 'poster', 'banner',
-                'imdb_id', 'release_date', 'subtitles'
-            ]
-            sub_keys = ['name', 'language', 'download_url']
+        '''
+        ==============================================
+        Check if the result contains the correct keys
+        ==============================================
+        '''
+        keys = [
+            'title', 'poster', 'banner',
+            'imdb_id', 'release_date', 'subtitles'
+        ]
+        sub_keys = ['name', 'language', 'download_url']
 
-            self.assertGreaterEqual(len(first_item.keys()), len(keys))
+        self.assertGreaterEqual(len(data.keys()), len(keys))
 
-            for key in first_item.keys():
+        for key in data.keys():
 
-                self.assertIn(key, keys)
-                if key == 'imdb_id':
-                    self.assertNotIn(key, [None, ''])
+            self.assertIn(key, keys)
+            if key == 'imdb_id':
+                self.assertNotIn(key, [None, ''])
 
-                if key == 'subtitles':
+            if key == 'subtitles':
 
-                    self.assertGreaterEqual(len(first_item[key]), 0)
+                self.assertGreaterEqual(len(data[key]), 0)
 
-                    if len(first_item[key]) > 0:
+                if len(data[key]) > 0:
 
-                        first_sub = first_item[key][0]
+                    first_sub = data[key][0]
 
-                        self.assertEqual(len(first_sub.keys()), len(sub_keys))
+                    self.assertEqual(len(first_sub.keys()), len(sub_keys))
 
-                        if 'episode' in first_sub.keys():
-                            self.assertEqual(
-                                len(first_sub.keys()) - 1,
-                                len(sub_keys)
-                            )
+                    if 'episode' in first_sub.keys():
+                        self.assertEqual(
+                            len(first_sub.keys()) - 1,
+                            len(sub_keys)
+                        )
 
-                        for sub_key in first_sub.keys():
-                            self.assertIn(sub_key, sub_keys)
+                    for sub_key in first_sub.keys():
+                        self.assertIn(sub_key, sub_keys)
 
-            # No items in the list should return None
-            self.assertFalse(None in data)
+        '''
+        ==============================================
+        No items in the list should return None
+        ==============================================
+        '''
+        self.assertFalse(None in data)
 
     def test_search_invalid(self):
         '''
@@ -91,11 +93,11 @@ class SubtitlesSearchTestCase(APITestCase):
     def test_search_fake(self):
         '''
         Test for when imdb_id of show that does not exist in the database.
-        Simple check if it returns an empty list: [].
+        Simple check if it returns an empty dict: {}.
         '''
         response = self.client.get(f'{self.base_url}{FAKE_ID}')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         data = response.json()
-        self.assertIsInstance(data, list)
-        self.assertListEqual(data, [])
+        self.assertIsInstance(data, dict)
+        self.assertDictEqual(data, {})

@@ -70,10 +70,10 @@ class TMDB(object):
                 headers=headers
             ).json()
         except:
-            data = []
+            data = {}
 
         media = self.get_media_from_id(imdb_id)
-        return [self._sub_result(result, media) for result in data]
+        return {} if media == {} else {**media, 'subtitles': [self._sub_result(result) for result in data]}
 
     def _media_result(self, result: dict, media_type: 'movie' or 'tv') -> Dict[str, str or None] or None:
         '''
@@ -106,20 +106,19 @@ class TMDB(object):
         else:
             return _id if (_id := response.get('external_ids').get('imdb_id')) not in self.empty else None
 
-    def _sub_result(self, result: dict, media: dict) -> dict:
+    def _sub_result(self, result: dict) -> dict:
         '''
         Helper method for get_subtitles() to set properties needed only.
         This is a private method and use should be avoided anywhere else.
         '''
-        sub_results = {
+        current = {
             'name': result.get('SubFileName'),
             'language': result.get('SubLanguageID'),
             'download_url': result.get('SubDownloadLink')
         }
         if result.get('MovieKind') != 'movie':
-            sub_results['episode'] = int(result.get('SeriesEpisode'))
-        media = {**media, 'subtitles': [sub_results]}
-        return media
+            current['episode'] = int(result.get('SeriesEpisode'))
+        return current
 
 
 tmdb = TMDB(os.getenv('TMDB_KEY'))
