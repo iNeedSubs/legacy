@@ -2,7 +2,7 @@
 
 https://subtitles.pw/
 
-Download subtitles for Movies, TV Shows and Anime in your preferred language.
+Download subtitles for Movies and TV Shows in your preferred language.
 
 <a href="https://github.com/Spimy/Subtitles/actions?query=workflow%3ACI" alt="Contributors">
   <img src="https://github.com/Spimy/Subtitles/workflows/CI/badge.svg?branch=master"/>
