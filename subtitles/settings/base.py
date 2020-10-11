@@ -115,3 +115,10 @@ STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [
     BASE_DIR / 'dist' / 'static'
 ]
+
+
+# Rest framework settings
+
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'apps.v1.search.exceptions.handle_405_exception'
+}
