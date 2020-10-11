@@ -28,10 +28,16 @@ class Search(GenericAPIView):
         language: str = self.request.query_params.get('lang', 'eng')
 
         if query in EMPTY:
-            return {'detail': 'Provide a search query.'}
+            return {
+                'detail': 'No query has been passed or passed empty string',
+                'type': 'NO_QUERY'
+            }
 
         if media_type not in ['tv', 'movie']:
-            return {'detail': 'Unknown media type provided: movie or tv'}
+            return {
+                'detail': 'Unknown media type provided: movie or tv',
+                'type': 'WRONG_MEDIA_TYPE'
+            }
 
         media = tmdb.get_media(query, media_type.lower())
 
@@ -40,7 +46,10 @@ class Search(GenericAPIView):
         elif return_type.lower() == 'subtitles':
             return tmdb.get_subtitles(media[0].get('imdb_id'), language) if len(media) > 0 else []
         else:
-            return {'detail': 'Unknown return type provided: media or subtitles.'}
+            return {
+                'detail': 'Unknown return type provided: media or subtitles.',
+                'type': 'WRONG_RETURN_TYPE'
+            }
 
 
 class SearchMedia(GenericAPIView):
@@ -51,7 +60,10 @@ class SearchMedia(GenericAPIView):
     def get_queryset(self):
         query: str or None = self.request.query_params.get('query')
         if query in EMPTY:
-            return {'detail': 'Provide a search query.'}
+            return {
+                'detail': 'No query has been passed or passed empty string',
+                'type': 'NO_QUERY'
+            }
 
         if self.request.path == reverse('search_v1:movie'):
             return tmdb.get_movie(query)
@@ -69,6 +81,17 @@ class SearchSubtitles(GenericAPIView):
         language: str = self.request.query_params.get('lang', 'eng')
 
         if imdb_id in EMPTY:
-            return {'detail': 'Provide the imdb_id of a movie/show.'}
+            return {
+                'detail': 'No ID has been passed',
+                'type': 'NO_ID'
+            }
+
+        subtitles = tmdb.get_subtitles(imdb_id, language)
+
+        if not subtitles:
+            return {
+                'detail': 'Movie with that ID does not exist',
+                'type': 'WRONG_ID'
+            }
 
         return tmdb.get_subtitles(imdb_id, language)
