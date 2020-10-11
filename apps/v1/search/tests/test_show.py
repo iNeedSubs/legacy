@@ -52,8 +52,10 @@ class SearchShowTestCase(APITestCase):
 
         data = response.json()
         self.assertIsInstance(data, dict)
-        self.assertEqual(len(data.keys()), 1)
+        self.assertEqual(len(data.keys()), 2)
         self.assertEqual(list(data.keys())[0], 'detail')
+        self.assertEqual(list(data.keys())[1], 'type')
+        self.assertEqual(data['type'], 'NO_QUERY')
 
     def test_search_not_get(self):
         '''
@@ -68,8 +70,10 @@ class SearchShowTestCase(APITestCase):
 
         data = response.json()
         self.assertIsInstance(data, dict)
-        self.assertEqual(len(data.keys()), 1)
+        self.assertEqual(len(data.keys()), 2)
         self.assertEqual(list(data.keys())[0], 'detail')
+        self.assertEqual(list(data.keys())[1], 'type')
+        self.assertEqual(data['type'], 'INVALID_REQ_METHOD')
 
     def test_search_fake(self):
         '''

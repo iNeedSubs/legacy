@@ -71,8 +71,10 @@ class SubtitlesSearchTestCase(APITestCase):
 
         data = response.json()
         self.assertIsInstance(data, dict)
-        self.assertEqual(len(data.keys()), 1)
+        self.assertEqual(len(data.keys()), 2)
         self.assertEqual(list(data.keys())[0], 'detail')
+        self.assertEqual(list(data.keys())[1], 'type')
+        self.assertEqual(data['type'], 'NO_ID')
 
     def test_search_not_get(self):
         '''
@@ -87,8 +89,10 @@ class SubtitlesSearchTestCase(APITestCase):
 
         data = response.json()
         self.assertIsInstance(data, dict)
-        self.assertEqual(len(data.keys()), 1)
+        self.assertEqual(len(data.keys()), 2)
         self.assertEqual(list(data.keys())[0], 'detail')
+        self.assertEqual(list(data.keys())[1], 'type')
+        self.assertEqual(data['type'], 'INVALID_REQ_METHOD')
 
     def test_search_fake(self):
         '''
@@ -96,8 +100,11 @@ class SubtitlesSearchTestCase(APITestCase):
         Simple check if it returns an empty dict: {}.
         '''
         response = self.client.get(f'{self.base_url}{FAKE_ID}')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
         data = response.json()
         self.assertIsInstance(data, dict)
-        self.assertDictEqual(data, {})
+        self.assertEqual(len(data.keys()), 2)
+        self.assertEqual(list(data.keys())[0], 'detail')
+        self.assertEqual(list(data.keys())[1], 'type')
+        self.assertEqual(data['type'], 'WRONG_ID')
