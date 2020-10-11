@@ -1,6 +1,6 @@
 <template>
   <main>
-    <p class="desc">Download subtitles for Movies, TV Shows and Anime in your preferred&nbsp;language.</p>
+    <p class="desc">Download subtitles for movies and shows in your preferred language.</p>
     <Search
       @update-lang="updateLang"
       @update-query="updateQuery"
@@ -59,7 +59,7 @@ main {
   margin: 0 auto 2em auto;
   line-height: 1.5em;
   font-size: 1.3em;
-  max-width: 35ch;
+  max-width: 30ch;
   text-align: center;
   color: #ddd;
 }

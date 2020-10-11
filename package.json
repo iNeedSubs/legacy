@@ -1,6 +1,6 @@
 {
   "name": "subtitles",
-  "description": "Download subtitles for Movies, TV Shows and Anime in your preferred language.",
+  "description": "Download subtitles for movies and shows in your preferred language.",
   "version": "0.1.0",
   "private": true,
   "scripts": {
