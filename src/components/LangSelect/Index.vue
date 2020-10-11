@@ -9,6 +9,7 @@
       <Options
         :showOptions="showOptions"
         @update-lang="updateLang"
+        @update-menu-visibility="toggleOptions"
       />
     </transition>
   </div>
@@ -51,7 +52,7 @@ export default defineComponent({
       window.removeEventListener('click', handleClick)
     })
 
-    const toggleOptions = () => showOptions.value = !showOptions.value
+    const toggleOptions = (newState: boolean) => showOptions.value = newState
 
     const updateLang = (newCode: LangCode) => {
       const newName = newCode.toUpperCase() as keyof typeof LangName
@@ -64,7 +65,7 @@ export default defineComponent({
       languages: LangName,
       showOptions,
       toggleOptions,
-      updateLang
+      updateLang,
     }
   }
 })
