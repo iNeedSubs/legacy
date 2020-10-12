@@ -80,6 +80,7 @@ export default defineComponent({
   justify-content: center;
   width: 60%;
   margin: 0 auto;
+  animation: showUp .4s cubic-bezier(0.2, 0.8, 0.3, 1.3);
 }
 
 .search {
@@ -168,6 +169,15 @@ button {
 
   .movie {
     border-radius: 0 0 0 5px;
+  }
+}
+
+@keyframes showUp {
+  from {
+    transform: translateY(100%)
+  }
+  to {
+    transform: translateY(0)
   }
 }
 
