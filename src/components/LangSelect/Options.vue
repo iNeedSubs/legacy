@@ -107,7 +107,7 @@ export default defineComponent({
   position: absolute;
   background: #51555c;
   border-radius: 5px;
-  scrollbar-color: #d65a31 #333942;
+  scrollbar-color: #de7b5a #333942;
   z-index: 2;
 
   &::-webkit-scrollbar {
