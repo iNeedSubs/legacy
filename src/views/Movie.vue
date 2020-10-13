@@ -9,8 +9,8 @@
     <transition name="bounceIn">
       <div v-if="loaded && !err" class="actions">
         <h3>Subtitles ({{movie.subtitles.length}})</h3>
-        <div v-if="movie.subtitles.length > 0" class="buttonContainer">
-          <LangSelect/>
+        <div class="buttonContainer">
+          <LangSelect @update-lang="updateLang"/>
         </div>
       </div>
     </transition>
