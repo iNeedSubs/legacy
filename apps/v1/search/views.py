@@ -2,6 +2,7 @@ from django.urls import reverse
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from .models import tmdb
+from .langs import languages
 
 
 EMPTY = [None, '']
@@ -84,6 +85,12 @@ class SearchSubtitles(GenericAPIView):
             return {
                 'detail': 'No ID has been passed',
                 'type': 'NO_ID'
+            }
+
+        if language not in languages:
+            return {
+                'detail': 'Unrecognized language code used',
+                'type': 'WRONG_LANG_CODE'
             }
 
         subtitles = tmdb.get_subtitles(imdb_id, language)
