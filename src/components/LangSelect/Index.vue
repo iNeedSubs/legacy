@@ -29,7 +29,8 @@ export default defineComponent({
     Options
   },
   setup() {
-    const name = ref(LangName.ENG)
+    const preferredLangName = localStorage.preferredLangName as LangName
+    const name = ref(preferredLangName || LangName.ENG)
     const showOptions = ref(false)
     const container = ref<HTMLDivElement>()
 
@@ -57,6 +58,9 @@ export default defineComponent({
     const updateLang = (newCode: LangCode) => {
       const newName = newCode.toUpperCase() as keyof typeof LangName
       name.value = LangName[newName]
+
+      localStorage.preferredLangCode = newCode
+      localStorage.preferredLangName = LangName[newName]
     }
 
     return {
