@@ -28,7 +28,8 @@ export default defineComponent({
     showOptions: Boolean
   },
   setup(props, { emit }) {
-    const code = ref(LangCode.ENGLISH)
+    const preferredLangCode = localStorage.preferredLangCode as LangCode
+    const code = ref(preferredLangCode || LangCode.ENGLISH)
     const searchLang = ref('')
     const options = ref<Array<HTMLParagraphElement>>([])
 
