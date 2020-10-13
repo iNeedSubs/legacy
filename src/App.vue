@@ -34,13 +34,11 @@ export default {
   width: 1em;
 
   &-track {
-    border-radius: 5px;
     background: #333942;
   }
 
   &-thumb {
-    border-radius: 5px;
-    background: #d65a31;
+    background: #de7b5a;
   }
 }
 
