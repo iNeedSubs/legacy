@@ -19,7 +19,7 @@
     </transition>
     <transition name="bounceIn">
       <p class="notice" v-if="loaded && !err && movie.subtitles.length === 0">
-        No subtitles have been found for this media.
+        No {{preferredLangName}} subtitles have been found for this media.
       </p>
     </transition>
     <transition name="bounceIn">
@@ -31,6 +31,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { LangName, LangCode } from '@/ts/languages';
 import { MovieSubtitle } from '@/ts/media';
 import LangSelect from '@/components/LangSelect/Index.vue'
 import Load from '@/components/Load.vue'
@@ -52,12 +53,18 @@ export default defineComponent({
     const err = ref('')
     const movie = ref<MovieSubtitle>()
 
+    const preferredLangName = localStorage.preferredLangName as LangCode || LangName.ENG
+
     const fetchSubtitles = async () => {
       loaded.value = false
       loading.value = true
 
+      const preferredLangLangCode = localStorage.preferredLangCode
+      const imdbID = `imdb_id=${route.params.id}`
+      const langParam = `${preferredLangLangCode ? `&lang=${preferredLangLangCode}` : ''}`
+
       try {
-        const req = await fetch(`/api/v1/search/subtitles?imdb_id=${route.params.id}`)
+        const req = await fetch(`/api/v1/search/subtitles?${imdbID}${langParam}`)
         const payload = await req.json()
 
         if (req.status !== 200) {
@@ -83,7 +90,8 @@ export default defineComponent({
       movie,
       err,
       loaded,
-      loading
+      loading,
+      preferredLangName
     }
   }
 })
