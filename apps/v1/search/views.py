@@ -101,4 +101,4 @@ class SearchSubtitles(GenericAPIView):
                 'type': 'WRONG_ID'
             }
 
-        return tmdb.get_subtitles(imdb_id, language)
+        return subtitles
