@@ -22,7 +22,7 @@
           @click="setFilter(Media.SHOW)"
         >TV Show</button>
       </div>
-      <LangSelect @update-lang="updateLang"/>
+      <LangSelect/>
     </div>
   </div>
 </template>
@@ -31,7 +31,6 @@
 import { defineComponent, ref } from 'vue'
 import Glasses from '@/assets/Glasses.vue'
 import LangSelect from './LangSelect/Index.vue'
-import { LangCode } from '@/ts/languages'
 import { Media } from '@/ts/media'
 
 export default defineComponent({
@@ -40,7 +39,6 @@ export default defineComponent({
     LangSelect
   },
   emits: [
-    'update-lang',
     'update-query',
     'update-type'
   ],
@@ -56,18 +54,12 @@ export default defineComponent({
       emit('update-type', type)
     }
 
-    const updateLang = (payload: LangCode) => {
-      window.scroll(0, 0)
-      emit('update-lang', payload)
-    }
-
     return {
       search,
       query,
       filter,
       setFilter,
       LangSelect,
-      updateLang,
       Media
     }
   }

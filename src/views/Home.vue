@@ -2,7 +2,6 @@
   <main>
     <p class="desc">Download subtitles for movies and shows in your preferred language.</p>
     <Search
-      @update-lang="updateLang"
       @update-query="updateQuery"
       @update-type="updateType"
     />
@@ -14,7 +13,6 @@
 import { ref } from 'vue'
 import Search from '@/components/Search.vue'
 import SearchResults from '@/components/SearchResults.vue'
-import { LangCode } from '@/ts/languages'
 import { Media } from '@/ts/media'
 
 export default {
@@ -24,15 +22,10 @@ export default {
   },
   setup() {
     const query = ref('')
-    const lang = ref(LangCode.ENGLISH)
     const mediaType = ref(Media.MOVIE)
 
     const updateQuery = (value: string) => {
       query.value = value
-    }
-
-    const updateLang = (newCode: LangCode) => {
-      lang.value = newCode
     }
 
     const updateType = (newType: Media) => {
@@ -41,7 +34,6 @@ export default {
 
     return {
       updateQuery,
-      updateLang,
       updateType,
       query,
       mediaType
