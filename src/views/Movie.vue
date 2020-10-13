@@ -49,19 +49,18 @@ export default defineComponent({
   setup() {
     const route = useRoute()
     const loaded = ref(false)
-    const loading = ref(true)
+    const loading = ref(false)
     const err = ref('')
     const movie = ref<MovieSubtitle>()
-
-    const preferredLangName = localStorage.preferredLangName as LangCode || LangName.ENG
+    const preferredLangName = ref(localStorage.preferredLangName as LangName || LangName.ENG)
+    const preferredLangLangCode = ref(localStorage.preferredLangCode as LangCode || LangCode.ENGLISH)
 
     const fetchSubtitles = async () => {
       loaded.value = false
       loading.value = true
 
-      const preferredLangLangCode = localStorage.preferredLangCode
       const imdbID = `imdb_id=${route.params.id}`
-      const langParam = `${preferredLangLangCode ? `&lang=${preferredLangLangCode}` : ''}`
+      const langParam = preferredLangLangCode.value ? `&lang=${preferredLangLangCode.value}` : ''
 
       try {
         const req = await fetch(`/api/v1/search/subtitles?${imdbID}${langParam}`)
@@ -86,12 +85,20 @@ export default defineComponent({
 
     fetchSubtitles()
 
+    const updateLang = async () => {
+      preferredLangName.value = localStorage.preferredLangName as LangName || LangName.ENG
+      preferredLangLangCode.value = localStorage.preferredLangCode as LangCode || LangCode.ENGLISH
+
+      await fetchSubtitles()
+    }
+
     return {
       movie,
       err,
       loaded,
       loading,
-      preferredLangName
+      preferredLangName,
+      updateLang
     }
   }
 })
