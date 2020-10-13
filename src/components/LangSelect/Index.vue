@@ -28,7 +28,7 @@ export default defineComponent({
     Button,
     Options
   },
-  setup() {
+  setup(props, { emit }) {
     const preferredLangName = localStorage.preferredLangName as LangName
     const name = ref(preferredLangName || LangName.ENG)
     const showOptions = ref(false)
@@ -61,6 +61,8 @@ export default defineComponent({
 
       localStorage.preferredLangCode = newCode
       localStorage.preferredLangName = LangName[newName]
+
+      emit('update-lang', newCode)
     }
 
     return {
