@@ -113,12 +113,10 @@ export default defineComponent({
   &::-webkit-scrollbar {
     &-track {
       border-radius: 0 5px 5px 0;
-      background: #333942;
     }
 
     &-thumb {
       border-radius: 0 5px 5px 0;
-      background: #d65a31;
     }
   }
 
