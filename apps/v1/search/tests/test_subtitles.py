@@ -25,7 +25,7 @@ class SubtitlesSearchTestCase(APITestCase):
             'title', 'poster', 'banner',
             'imdb_id', 'release_date', 'available_langs', 'subtitles'
         ]
-        sub_keys = ['name', 'language', 'download_url']
+        sub_keys = ['file_name', 'language', 'download_url']
 
         self.assertGreaterEqual(len(data.keys()), len(keys))
 

@@ -87,7 +87,7 @@ class TMDB(object):
                 continue
 
             current = {
-                'name': result.get('SubFileName'),
+                'file_name': result.get('SubFileName'),
                 'language': lang_id,
                 'download_url': result.get('SubDownloadLink')
             }
