@@ -10,7 +10,7 @@ export interface Movie {
 export interface MSubtitle {
   download_url: string;
   language: string;
-  name: string;
+  file_name: string;
 }
 
 export interface MovieSubtitle extends Movie {

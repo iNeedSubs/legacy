@@ -60,7 +60,7 @@ export default defineComponent({
       loading.value = true
 
       const imdbID = `imdb_id=${route.params.id}`
-      const langParam = preferredLangLangCode.value ? `&lang=${preferredLangLangCode.value}` : ''
+      const langParam = preferredLangLangCode.value ? `&lang=${preferredLangLangCode.value.toLowerCase()}` : ''
 
       try {
         const req = await fetch(`/api/v1/search/subtitles?${imdbID}${langParam}`)

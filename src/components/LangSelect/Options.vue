@@ -107,18 +107,16 @@ export default defineComponent({
   position: absolute;
   background: #51555c;
   border-radius: 5px;
-  scrollbar-color: #d65a31 #333942;
+  scrollbar-color: #de7b5a #333942;
   z-index: 2;
 
   &::-webkit-scrollbar {
     &-track {
       border-radius: 0 5px 5px 0;
-      background: #333942;
     }
 
     &-thumb {
       border-radius: 0 5px 5px 0;
-      background: #d65a31;
     }
   }
 

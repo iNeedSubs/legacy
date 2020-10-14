@@ -1,7 +1,7 @@
 <template>
   <div class="subtitles" v-if="subtitles.length > 0">
     <div class="subtitle" v-for="(subtitle, i) in subtitles" :key="i">
-      <p>{{subtitle.name}}</p>
+      <p>{{subtitle.file_name}}</p>
       <a class="download" :href="subtitle.download_url" download>
         <fa icon="download"/>
       </a>
