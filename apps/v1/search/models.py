@@ -74,7 +74,7 @@ class TMDB(object):
 
         media = self.get_media_from_id(imdb_id)
         available_langs = []
-        subtitles = []
+        subtitles: List[dict] = []
 
         for result in data:
 
@@ -92,6 +92,7 @@ class TMDB(object):
                 'download_url': result.get('SubDownloadLink')
             }
             if result.get('MovieKind') != 'movie':
+                current['season'] = int(result.get('SeriesSeason'))
                 current['episode'] = int(result.get('SeriesEpisode'))
 
             subtitles.append(current)
