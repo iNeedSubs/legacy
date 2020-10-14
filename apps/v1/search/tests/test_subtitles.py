@@ -50,9 +50,9 @@ class SubtitlesSearchTestCase(APITestCase):
 
                     self.assertEqual(len(first_sub.keys()), len(sub_keys))
 
-                    if 'episode' in first_sub.keys():
+                    if 'season' in first_sub.keys() and 'episode' in first_sub.keys():
                         self.assertEqual(
-                            len(first_sub.keys()) - 1,
+                            len(first_sub.keys()) - 2,
                             len(sub_keys)
                         )
 
