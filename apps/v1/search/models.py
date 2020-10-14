@@ -97,6 +97,12 @@ class TMDB(object):
 
             subtitles.append(current)
 
+        if 'season' in subtitles[0].keys() and 'episode' in subtitles[0].keys():
+            subtitles = sorted(
+                subtitles,
+                key=lambda key: (key['season'], key['episode'])
+            )
+
         return {} if media == {} else {
             **media,
             'available_langs': available_langs,
