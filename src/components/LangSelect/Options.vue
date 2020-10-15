@@ -36,6 +36,7 @@ export default defineComponent({
     const setLang = (newCode: LangCode) => {
       code.value = newCode
       emit('update-lang', newCode)
+      emit('update-menu-visibility', false)
     }
 
     const handleKbrd = (e: KeyboardEvent) => {
