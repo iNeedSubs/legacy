@@ -30,7 +30,7 @@ Download subtitles for movies and shows in your preferred language.
 Your system should have these installed before you continue with the local setup:
 
 - Python 3.8.x
-- NodeJS
+- NodeJS 14.x.x
 
 ### Installation
 
