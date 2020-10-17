@@ -97,10 +97,6 @@ a {
   &-enter-from,
   &-leave-to {
     transform: scale(.9);
-  }
-
-  &-enter-from,
-  &-leave-to {
     opacity: 0;
   }
 }
@@ -120,10 +116,6 @@ a {
   &-enter-from,
   &-leave-to {
     transform: scale(.9) translateY(-100%);
-  }
-
-  &-enter-from,
-  &-leave-to {
     opacity: 0;
   }
 }
