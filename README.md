@@ -34,7 +34,7 @@ Your system should have these installed before you continue with the local setup
 
 ### Installation
 
-Ignore step 5 for now even if Django tells you to do do so as this could pose errors
+Ignore step 5 for now even if Django tells you to do so as this could pose errors
 in the future since we don't currently need or have a database.
 
 1. Install pipenv: `pip install pipenv`.
