@@ -16,6 +16,7 @@ import SearchResults from '@/components/SearchResults.vue'
 import { Media } from '@/ts/media'
 
 export default {
+  name: 'Home',
   components: {
     Search,
     SearchResults
