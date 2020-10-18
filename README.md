@@ -41,7 +41,8 @@ in the future since we don't currently need or have a database.
 2. Install python dependencies by running `pipenv install`, which also creates a virtual env.
 3. Install node dependencies by running `yarn`.
 4. Create the `.env` file and fill it in using the variables listed below.
-5. Run `python manage.py migrate` if there are changes made to the database.
+5. Run `pipenv shell` to activate a sub shell for the virtual environment created.
+6. Run `python manage.py migrate` if there are changes made to the database.
 
 #### Environment Variables
 
