@@ -21,10 +21,7 @@ class SubtitlesSearchTestCase(APITestCase):
         Check if the result contains the correct keys
         ==============================================
         '''
-        keys = [
-            'title', 'poster', 'banner',
-            'imdb_id', 'release_date', 'available_langs', 'subtitles'
-        ]
+        keys = ['available_langs', 'subtitles']
         sub_keys = ['file_name', 'language', 'download_url']
 
         self.assertGreaterEqual(len(data.keys()), len(keys))
@@ -35,13 +32,9 @@ class SubtitlesSearchTestCase(APITestCase):
         )
 
         for key in data.keys():
-
             self.assertIn(key, keys)
-            if key == 'imdb_id':
-                self.assertNotIn(key, [None, ''])
 
             if key == 'subtitles':
-
                 self.assertGreaterEqual(len(data[key]), 0)
 
                 if len(data[key]) > 0:
