@@ -98,7 +98,7 @@ class SubtitlesSearchTestCase(APITestCase):
         Simple check if it returns an empty dict: {}.
         '''
         response = self.client.get(f'{self.base_url}{FAKE_ID}')
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
         data = response.json()
         self.assertIsInstance(data, dict)
