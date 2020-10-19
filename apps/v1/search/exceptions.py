@@ -10,7 +10,7 @@ def get_exception(key: str) -> int:
     '''
     EXCEPTIONS = {
         'NO_QUERY': 400,
-        'INVALID_TYPE': 404,
+        'INVALID_TYPE': 400,
         'INVALID_REQ_METHOD': 405,
         'NO_ID': 400,
         'NOT_FOUND': 404,
