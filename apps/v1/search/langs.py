@@ -92,6 +92,5 @@ languages = [
     'tuk',
     'ukr',
     'urd',
-    'vie',
-    'all'
+    'vie'
 ]
