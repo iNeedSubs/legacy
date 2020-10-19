@@ -18,7 +18,7 @@ def get_exception(key: str) -> int:
         'WRONG_ID': 404,
         'WRONG_RETURN_TYPE': 400
     }
-    return EXCEPTIONS[key]
+    return EXCEPTIONS.get(key, 500)
 
 
 def handle_405_exception(exc, context):
