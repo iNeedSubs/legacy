@@ -70,9 +70,8 @@ class TMDB(object):
                 headers=headers
             ).json()
         except:
-            data = {}
+            data = []
 
-        media = self.get_media_from_id(imdb_id)
         available_langs = []
         subtitles: List[dict] = []
 
@@ -98,14 +97,15 @@ class TMDB(object):
             subtitles.append(current)
 
         if len(subtitles) > 0:
+            if ('season' and 'episode') in subtitles[0].keys():
+                pass
             if 'season' in subtitles[0].keys() and 'episode' in subtitles[0].keys():
                 subtitles = sorted(
                     subtitles,
                     key=lambda key: (key['season'], key['episode'])
                 )
 
-        return {} if media == {} else {
-            **media,
+        return {} if data == [] else {
             'available_langs': available_langs,
             'subtitles': subtitles
         }
