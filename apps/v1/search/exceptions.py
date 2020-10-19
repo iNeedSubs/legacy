@@ -2,7 +2,7 @@ from rest_framework.views import exception_handler
 from rest_framework import status
 
 
-def get_exception(key: str) -> int:
+def get_status_code(key: str) -> int:
     '''
     Key: ErrType
     Value: Status Code
