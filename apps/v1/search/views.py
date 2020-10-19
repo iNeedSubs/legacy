@@ -82,7 +82,7 @@ class SearchSubtitles(GenericAPIView):
 
     def get_queryset(self):
         imdb_id: str or None = self.request.query_params.get('imdb_id')
-        language: str = self.request.query_params.get('lang', 'eng')
+        language: str = self.request.query_params.get('lang', 'all')
 
         if imdb_id in EMPTY:
             return {
