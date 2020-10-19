@@ -7,7 +7,7 @@ class SubtitlesSearchTestCase(APITestCase):
 
     def setUp(self) -> None:
         self.imdb_id = 'tt0468569'
-        self.base_url = '/api/v1/search/subtitles?imdb_id='
+        self.base_url = '/api/v1/subtitles?imdb_id='
 
     def test_search_valid(self):
         response = self.client.get(f'{self.base_url}{self.imdb_id}')
