@@ -41,8 +41,7 @@ class TMDB(object):
 
     def get_media_from_id(self, imdb_id) -> dict:
         '''
-        This method is purely for get_subtitles() function and use of
-        this method elsewhere should be avoided if possible.
+        Returns a list of movies with given IMDB ID from TMDB API.
         '''
         response: dict = requests.get(
             f'{self.external_id_url}/{imdb_id}?external_source=imdb_id&{self.api_key}'
