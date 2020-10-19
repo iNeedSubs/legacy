@@ -14,10 +14,8 @@ def get_exception(key: str) -> int:
         'INVALID_REQ_METHOD': 405,
         'NO_ID': 400,
         'NOT_FOUND': 404,
-        'INVALID_REQ_METHOD': 405,
         'WRONG_LANG_CODE': 400,
-        'WRONG_ID': 404,
-        'INVALID_REQ_METHOD': 405
+        'WRONG_ID': 404
     }
     return EXCEPTIONS[key]
 
