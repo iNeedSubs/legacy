@@ -15,6 +15,8 @@ def _get_response(queryset) -> Response:
     if isinstance(queryset, dict):
         if 'type' in queryset:
             status_code = get_status_code(queryset['type'])
+            if status_code == 500:
+                queryset['details'] = 'An internal server error has occurred.'
 
     return Response(queryset, status=status_code)
 
