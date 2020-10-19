@@ -3,6 +3,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from .models import tmdb
 from .langs import languages
+from .exceptions import get_exception
 
 
 EMPTY = [None, '']
@@ -12,7 +13,8 @@ def _get_response(queryset) -> Response:
     status_code = 200
 
     if isinstance(queryset, dict):
-        status_code = status_code if 'detail' not in queryset else 400
+        if 'type' in queryset:
+            status_code = get_exception(queryset['type'])
 
     return Response(queryset, status=status_code)
 
