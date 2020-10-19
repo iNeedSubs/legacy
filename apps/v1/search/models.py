@@ -82,7 +82,7 @@ class TMDB(object):
             if lang_id is not None and lang_id not in available_langs:
                 available_langs.append(lang_id)
 
-            if lang_id is None or lang_id != language:
+            if (lang_id is None or lang_id != language) and language != 'all':
                 continue
 
             current = {
