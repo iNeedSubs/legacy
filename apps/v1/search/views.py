@@ -82,7 +82,7 @@ class GetSubtitles(GenericAPIView):
 
     def get_queryset(self):
         imdb_id: str or None = self.request.query_params.get('imdb_id')
-        language: str = self.request.query_params.get('lang', 'all')
+        language: str = self.request.query_params.get('lang')
 
         if imdb_id in EMPTY:
             return {
@@ -90,11 +90,14 @@ class GetSubtitles(GenericAPIView):
                 'type': 'NO_ID'
             }
 
-        if language not in languages:
-            return {
-                'detail': 'Unrecognized language code used',
-                'type': 'WRONG_LANG_CODE'
-            }
+        if language not in EMPTY:
+            if language not in languages:
+                return {
+                    'detail': 'Unrecognized language code used',
+                    'type': 'WRONG_LANG_CODE'
+                }
+        else:
+            language = 'all'
 
         subtitles = tmdb.get_subtitles(imdb_id, language)
 
