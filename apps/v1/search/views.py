@@ -28,7 +28,7 @@ class Search(GenericAPIView):
         query: str or None = self.request.query_params.get('query')
         media_type: str = self.request.query_params.get('type')
         return_type: str = self.request.query_params.get('return', 'media')
-        language: str = self.request.query_params.get('lang', 'eng')
+        language: str = self.request.query_params.get('lang', 'all')
 
         if query in EMPTY:
             return {
