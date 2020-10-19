@@ -24,7 +24,7 @@ class Search(GenericAPIView):
 
     def get_queryset(self):
         query: str or None = self.request.query_params.get('query')
-        media_type: str = self.request.query_params.get('type', 'movie')
+        media_type: str = self.request.query_params.get('type')
         return_type: str = self.request.query_params.get('return', 'media')
         language: str = self.request.query_params.get('lang', 'eng')
 
@@ -34,11 +34,12 @@ class Search(GenericAPIView):
                 'type': 'NO_QUERY'
             }
 
-        if media_type not in ['tv', 'movie']:
+        if media_type in EMPTY or media_type not in ['show', 'movie']:
             return {
-                'detail': 'Unknown media type provided: movie or tv',
-                'type': 'WRONG_MEDIA_TYPE'
+                'detail': 'Type passed does not exist',
+                'type': 'INVALID_TYPE'
             }
+        media_type = 'tv' if media_type == 'show' else media_type
 
         media = tmdb.get_media(query, media_type.lower())
 
