@@ -56,26 +56,24 @@ class Search(GenericAPIView):
             }
 
 
-class SearchMedia(GenericAPIView):
+class GetMedia(GenericAPIView):
 
     def get(self, *args, **kwargs):
         return _get_response(self.get_queryset())
 
     def get_queryset(self):
-        query: str or None = self.request.query_params.get('query')
-        if query in EMPTY:
+        imdb_id: str or None = self.request.query_params.get('imdb_id')
+
+        if imdb_id in EMPTY:
             return {
-                'detail': 'No query has been passed or passed empty string',
-                'type': 'NO_QUERY'
+                'detail': 'No ID has been passed',
+                'type': 'NO_ID'
             }
 
-        if self.request.path == reverse('search_v1:movie'):
-            return tmdb.get_movie(query)
-        else:
-            return tmdb.get_show(query)
+        return tmdb.get_media_from_id(imdb_id)
 
 
-class SearchSubtitles(GenericAPIView):
+class GetSubtitles(GenericAPIView):
 
     def get(self, *args, **kwargs):
         return _get_response(self.get_queryset())
