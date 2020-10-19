@@ -15,7 +15,8 @@ def get_exception(key: str) -> int:
         'NO_ID': 400,
         'NOT_FOUND': 404,
         'WRONG_LANG_CODE': 400,
-        'WRONG_ID': 404
+        'WRONG_ID': 404,
+        'WRONG_RETURN_TYPE': 400
     }
     return EXCEPTIONS[key]
 
