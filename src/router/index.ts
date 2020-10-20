@@ -19,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/show/:id',
     name: 'show',
-    component: Show,
+    component: Movie,
   },
   {
     path: '/movie/:id',
