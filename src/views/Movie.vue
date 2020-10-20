@@ -15,7 +15,7 @@
       </div>
     </transition>
     <transition name="bounceIn">
-      <p class="err" v-if="subtitlesLoaded && subtitlesErr">Error: {{err}}</p>
+      <p class="err" v-if="subtitlesLoaded && subtitlesErr">Error: {{subtitlesErr}}</p>
     </transition>
     <transition name="bounceIn">
       <p class="notice" v-if="subtitlesLoaded && !subtitlesErr && subtitles.length === 0">
