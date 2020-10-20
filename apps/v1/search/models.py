@@ -96,8 +96,6 @@ class TMDB(object):
             subtitles.append(current)
 
         if len(subtitles) > 0:
-            if ('season' and 'episode') in subtitles[0].keys():
-                pass
             if 'season' in subtitles[0].keys() and 'episode' in subtitles[0].keys():
                 subtitles = sorted(
                     subtitles,
