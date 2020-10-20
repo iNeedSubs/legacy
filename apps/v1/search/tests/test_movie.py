@@ -10,7 +10,7 @@ class SearchMovieTestCase(APITestCase):
 
     def setUp(self) -> None:
         self.movie = 'the dark knight'
-        self.base_url = '/api/v1/search/movie?query='
+        self.base_url = '/api/v1/search?type=movie&query='
 
     def test_search_valid(self):
         '''

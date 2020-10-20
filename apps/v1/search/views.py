@@ -3,6 +3,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from .models import tmdb
 from .langs import languages
+from .exceptions import get_status_code
 
 
 EMPTY = [None, '']
@@ -12,7 +13,10 @@ def _get_response(queryset) -> Response:
     status_code = 200
 
     if isinstance(queryset, dict):
-        status_code = status_code if 'detail' not in queryset else 400
+        if 'type' in queryset:
+            status_code = get_status_code(queryset['type'])
+            if status_code == 500:
+                queryset['detail'] = 'An internal server error has occurred.'
 
     return Response(queryset, status=status_code)
 
@@ -24,9 +28,9 @@ class Search(GenericAPIView):
 
     def get_queryset(self):
         query: str or None = self.request.query_params.get('query')
-        media_type: str = self.request.query_params.get('type', 'movie')
+        media_type: str = self.request.query_params.get('type')
         return_type: str = self.request.query_params.get('return', 'media')
-        language: str = self.request.query_params.get('lang', 'eng')
+        language: str = self.request.query_params.get('lang', 'all')
 
         if query in EMPTY:
             return {
@@ -34,11 +38,12 @@ class Search(GenericAPIView):
                 'type': 'NO_QUERY'
             }
 
-        if media_type not in ['tv', 'movie']:
+        if media_type in EMPTY or media_type not in ['show', 'movie']:
             return {
-                'detail': 'Unknown media type provided: movie or tv',
-                'type': 'WRONG_MEDIA_TYPE'
+                'detail': 'Type passed does not exist',
+                'type': 'INVALID_TYPE'
             }
+        media_type = 'tv' if media_type == 'show' else media_type
 
         media = tmdb.get_media(query, media_type.lower())
 
@@ -53,33 +58,13 @@ class Search(GenericAPIView):
             }
 
 
-class SearchMedia(GenericAPIView):
-
-    def get(self, *args, **kwargs):
-        return _get_response(self.get_queryset())
-
-    def get_queryset(self):
-        query: str or None = self.request.query_params.get('query')
-        if query in EMPTY:
-            return {
-                'detail': 'No query has been passed or passed empty string',
-                'type': 'NO_QUERY'
-            }
-
-        if self.request.path == reverse('search_v1:movie'):
-            return tmdb.get_movie(query)
-        else:
-            return tmdb.get_show(query)
-
-
-class SearchSubtitles(GenericAPIView):
+class GetMedia(GenericAPIView):
 
     def get(self, *args, **kwargs):
         return _get_response(self.get_queryset())
 
     def get_queryset(self):
         imdb_id: str or None = self.request.query_params.get('imdb_id')
-        language: str = self.request.query_params.get('lang', 'eng')
 
         if imdb_id in EMPTY:
             return {
@@ -87,11 +72,32 @@ class SearchSubtitles(GenericAPIView):
                 'type': 'NO_ID'
             }
 
-        if language not in languages:
+        return tmdb.get_media_from_id(imdb_id)
+
+
+class GetSubtitles(GenericAPIView):
+
+    def get(self, *args, **kwargs):
+        return _get_response(self.get_queryset())
+
+    def get_queryset(self):
+        imdb_id: str or None = self.request.query_params.get('imdb_id')
+        language: str = self.request.query_params.get('lang')
+
+        if imdb_id in EMPTY:
             return {
-                'detail': 'Unrecognized language code used',
-                'type': 'WRONG_LANG_CODE'
+                'detail': 'No ID has been passed',
+                'type': 'NO_ID'
             }
+
+        if language not in EMPTY:
+            if language not in languages:
+                return {
+                    'detail': 'Unrecognized language code used',
+                    'type': 'WRONG_LANG_CODE'
+                }
+        else:
+            language = 'all'
 
         subtitles = tmdb.get_subtitles(imdb_id, language)
 

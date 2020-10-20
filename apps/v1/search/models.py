@@ -41,8 +41,7 @@ class TMDB(object):
 
     def get_media_from_id(self, imdb_id) -> dict:
         '''
-        This method is purely for get_subtitles() function and use of
-        this method elsewhere should be avoided if possible.
+        Returns a list of movies with given IMDB ID from TMDB API.
         '''
         response: dict = requests.get(
             f'{self.external_id_url}/{imdb_id}?external_source=imdb_id&{self.api_key}'
@@ -70,9 +69,8 @@ class TMDB(object):
                 headers=headers
             ).json()
         except:
-            data = {}
+            data = []
 
-        media = self.get_media_from_id(imdb_id)
         available_langs = []
         subtitles: List[dict] = []
 
@@ -83,7 +81,7 @@ class TMDB(object):
             if lang_id is not None and lang_id not in available_langs:
                 available_langs.append(lang_id)
 
-            if lang_id is None or lang_id != language:
+            if (lang_id is None or lang_id != language) and language != 'all':
                 continue
 
             current = {
@@ -104,8 +102,7 @@ class TMDB(object):
                     key=lambda key: (key['season'], key['episode'])
                 )
 
-        return {} if media == {} else {
-            **media,
+        return {} if data == [] else {
             'available_langs': available_langs,
             'subtitles': subtitles
         }

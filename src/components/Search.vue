@@ -13,13 +13,13 @@
       <div class="types">
         <button
           class="movie"
-          v-bind:class="{active: filter === Media.MOVIE}"
-          @click="setFilter(Media.MOVIE)"
+          v-bind:class="{active: filter === MediaType.MOVIE}"
+          @click="setFilter(MediaType.MOVIE)"
         >Movie</button>
         <button
           class="show"
-          v-bind:class="{active: filter === Media.SHOW}"
-          @click="setFilter(Media.SHOW)"
+          v-bind:class="{active: filter === MediaType.SHOW}"
+          @click="setFilter(MediaType.SHOW)"
         >TV Show</button>
       </div>
       <LangSelect/>
@@ -31,7 +31,7 @@
 import { defineComponent, ref } from 'vue'
 import Glasses from '@/assets/Glasses.vue'
 import LangSelect from './LangSelect/Index.vue'
-import { Media } from '@/ts/media'
+import { MediaType } from '@/ts/media'
 
 export default defineComponent({
   components: {
@@ -44,11 +44,11 @@ export default defineComponent({
   ],
   setup(props, { emit }) {
     const query = ref('')
-    const filter = ref(Media.MOVIE)
+    const filter = ref(MediaType.MOVIE)
 
     const search = () => emit('update-query', query.value)
 
-    const setFilter = (type: Media) => {
+    const setFilter = (type: MediaType) => {
       window.scroll(0, 0)
       filter.value = type
       emit('update-type', type)
@@ -60,7 +60,7 @@ export default defineComponent({
       filter,
       setFilter,
       LangSelect,
-      Media
+      MediaType
     }
   }
 })

@@ -7,7 +7,7 @@ class SubtitlesSearchTestCase(APITestCase):
 
     def setUp(self) -> None:
         self.imdb_id = 'tt0468569'
-        self.base_url = '/api/v1/search/subtitles?imdb_id='
+        self.base_url = '/api/v1/subtitles?imdb_id='
 
     def test_search_valid(self):
         response = self.client.get(f'{self.base_url}{self.imdb_id}')
@@ -21,10 +21,7 @@ class SubtitlesSearchTestCase(APITestCase):
         Check if the result contains the correct keys
         ==============================================
         '''
-        keys = [
-            'title', 'poster', 'banner',
-            'imdb_id', 'release_date', 'available_langs', 'subtitles'
-        ]
+        keys = ['available_langs', 'subtitles']
         sub_keys = ['file_name', 'language', 'download_url']
 
         self.assertGreaterEqual(len(data.keys()), len(keys))
@@ -35,13 +32,9 @@ class SubtitlesSearchTestCase(APITestCase):
         )
 
         for key in data.keys():
-
             self.assertIn(key, keys)
-            if key == 'imdb_id':
-                self.assertNotIn(key, [None, ''])
 
             if key == 'subtitles':
-
                 self.assertGreaterEqual(len(data[key]), 0)
 
                 if len(data[key]) > 0:
@@ -105,7 +98,7 @@ class SubtitlesSearchTestCase(APITestCase):
         Simple check if it returns an empty dict: {}.
         '''
         response = self.client.get(f'{self.base_url}{FAKE_ID}')
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
         data = response.json()
         self.assertIsInstance(data, dict)
