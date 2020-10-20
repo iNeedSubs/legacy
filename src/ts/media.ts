@@ -1,4 +1,4 @@
-export interface Movie {
+export interface MediaData {
   banner: string;
   poster: string;
   imdb_id: string;

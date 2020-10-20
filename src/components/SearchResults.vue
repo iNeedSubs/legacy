@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch, nextTick, onBeforeUpdate } from 'vue'
-import { Movie } from '@/ts/media'
+import { MediaData } from '@/ts/media'
 import Load from './Load.vue'
 import Media from './Media.vue'
 
@@ -40,7 +40,7 @@ export default defineComponent({
     mediaType: String
   },
   setup(props) {
-    const results = ref<Movie[]>([])
+    const results = ref<MediaData[]>([])
     const showResults = ref(false)
     const loading = ref(false)
     const loaded = ref(false)
@@ -65,7 +65,7 @@ export default defineComponent({
           return console.error('err', req)
         }
 
-        const payload = await req.json() as Movie[]
+        const payload = await req.json() as MediaData[]
 
         results.value = payload
         showResults.value = true
