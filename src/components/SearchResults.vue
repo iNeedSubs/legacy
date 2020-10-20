@@ -59,7 +59,7 @@ export default defineComponent({
       loaded.value = false
 
       try {
-        const req = await fetch(`/api/v1/search/${mediaType}?query=${query}`)
+        const req = await fetch(`/api/v1/search?type=${mediaType}&query=${query}`)
 
         if (req.status !== 200) {
           return console.error('err', req)
