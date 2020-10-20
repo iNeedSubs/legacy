@@ -17,7 +17,7 @@ export interface MovieSubtitle extends Movie {
   subtitles: Array<MSubtitle>;
 }
 
-export enum Media {
+export enum MediaType {
   MOVIE = 'movie',
   SHOW = 'show'
 }

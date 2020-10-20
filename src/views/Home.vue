@@ -13,7 +13,7 @@
 import { ref } from 'vue'
 import Search from '@/components/Search.vue'
 import SearchResults from '@/components/SearchResults.vue'
-import { Media } from '@/ts/media'
+import { MediaType } from '@/ts/media'
 
 export default {
   name: 'Home',
@@ -23,13 +23,13 @@ export default {
   },
   setup() {
     const query = ref('')
-    const mediaType = ref(Media.MOVIE)
+    const mediaType = ref(MediaType.MOVIE)
 
     const updateQuery = (value: string) => {
       query.value = value
     }
 
-    const updateType = (newType: Media) => {
+    const updateType = (newType: MediaType) => {
       mediaType.value = newType
     }
 
