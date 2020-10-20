@@ -1,3 +1,5 @@
+import { LangCode } from './languages';
+
 export interface MediaData {
   banner: string;
   poster: string;
@@ -7,14 +9,15 @@ export interface MediaData {
 }
 
 // subtitles for movies
-export interface MSubtitle {
+export interface Subtitle {
   download_url: string;
   language: string;
   file_name: string;
 }
 
-export interface MovieSubtitle extends Movie {
-  subtitles: Array<MSubtitle>;
+export interface MediaSubtitles {
+  available_langs: Array<LangCode>;
+  subtitles: Array<Subtitle>;
 }
 
 export enum MediaType {
