@@ -194,7 +194,7 @@ main {
   }
 
   .buttonContainer {
-    border-radius: 5px;
+    border-radius: 15px;
     overflow: hidden;
     background: #494d54;
   }

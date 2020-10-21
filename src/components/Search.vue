@@ -77,7 +77,7 @@ export default defineComponent({
 
 .search {
   position: relative;
-  border-radius: 5px;
+  border-radius: 15px;
   margin: 0 auto;
   background: #51555c;
   max-width: 600px;
@@ -92,7 +92,7 @@ export default defineComponent({
     margin: 10px;
     padding: 0 1em;
     background: #d65a31;
-    border-radius: 5px;
+    border-radius: 15px;
     color: #fff;
     transition: background .2s ease-in-out;
 
@@ -112,7 +112,7 @@ input {
   font-size: 18px;
   color: #fff;
   outline: none;
-  border-radius: 5px 5px 0 0;
+  border-radius: 15px 15px 0 0;
 }
 
 button {
@@ -127,7 +127,7 @@ button {
   grid-template-areas:
     "types"
     "lang";
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 15px 15px;
 
   button {
     background: #494d54;

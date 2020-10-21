@@ -30,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 .media {
   background: #2C343F;
-  border-radius: 5px;
+  border-radius: 15px;
   text-align: center;
   cursor: pointer;
   display: grid;
@@ -56,7 +56,7 @@ export default {
   left: 0;
   right: 0;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 15px;
   object-fit: cover;
   object-position: 0 80%;
   opacity: .1;

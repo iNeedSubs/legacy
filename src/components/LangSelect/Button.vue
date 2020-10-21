@@ -45,7 +45,7 @@ button {
   transition-property: background, color;
   width: 100%;
   box-shadow: 0px -1px 15px #22283155;
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 15px 15px;
 
   &:hover, &:focus {
     background: #6d707622;
@@ -67,7 +67,7 @@ button {
 @media only screen and (min-width: 500px) {
   button {
     box-shadow: none;
-    border-radius: 0 0 5px 0;
+    border-radius: 0 0 15px 0;
   }
 }
 </style>

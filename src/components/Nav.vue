@@ -19,8 +19,8 @@ nav {
   a {
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
-    padding: 5px 10px;
+    border-radius: 15px;
+    padding: 10px 15px;
     transition: background .1s ease-in-out;
 
     &:hover, &:focus {
