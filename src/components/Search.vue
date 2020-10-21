@@ -1,7 +1,5 @@
 <template>
-  <div class="glasses">
     <Glasses/>
-  </div>
   <div class="search">
     <div class="inputContainer">
       <input placeholder="Search" v-model="query" v-on:keyup.enter="search"/>
