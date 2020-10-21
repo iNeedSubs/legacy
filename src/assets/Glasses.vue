@@ -1,11 +1,30 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" width="240.002" viewBox="0 0 240.002 60.002">
-    <g transform="translate(-19.999 -60)">
-      <path fill="#dddddd" d="M-8390-1569h-90a5.006,5.006,0,0,1-5-5v-50a5.006,5.006,0,0,1,5-5h90a5.006,5.006,0,0,1,5,5v50A5.006,5.006,0,0,1-8390-1569Zm-80-55a5.006,5.006,0,0,0-5,5v40a5.006,5.006,0,0,0,5,5h70a5.006,5.006,0,0,0,5-5v-40a5.006,5.006,0,0,0-5-5Z" transform="translate(8505 1689.001)"/>
-      <path fill="#dddddd" d="M-8390-1569h-90a5.006,5.006,0,0,1-5-5v-50a5.006,5.006,0,0,1,5-5h90a5.006,5.006,0,0,1,5,5v50A5.006,5.006,0,0,1-8390-1569Zm-80-55a5.006,5.006,0,0,0-5,5v40a5.006,5.006,0,0,0,5,5h70a5.006,5.006,0,0,0,5-5v-40a5.006,5.006,0,0,0-5-5Z" transform="translate(8645 1689.001)"/>
-      <rect fill="#dddddd" width="50" height="10" transform="translate(115 85)"/>
-      <rect id="glowLeft" fill="#1780e8" opacity=".4" width="80" height="50" rx="5" transform="translate(30 65)"/>
-      <rect id="glowRight" fill="#eb5857" opacity=".4" width="80" height="50" rx="5" transform="translate(170 65)"/>
+  <div class="glasses">
+    <svg xmlns="http://www.w3.org/2000/svg" width="240" viewBox="0 0 240 60">
+      <defs>
+        <filter id="a" x="88" y="20" width="64" height="27" filterUnits="userSpaceOnUse">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feFlood flood-color="#222831" flood-opacity=".502"/>
+          <feComposite operator="in" in2="blur"/>
+          <feComposite in="SourceGraphic"/>
+        </filter>
+      </defs>
+      <g transform="translate(-1117 -321)">
+        <rect id="glowLeft" width="80" height="50" rx="10" transform="translate(1127.001 326)" fill="#1780e8" opacity=".5"/>
+        <g transform="translate(1127.001 326)" fill="none" stroke="#1780e8" stroke-width="5">
+          <rect width="80" height="50" rx="10" stroke="none"/>
+          <rect x="2.5" y="2.5" width="75" height="45" rx="7.5"/>
+        </g>
+        <path d="M1347 381h-80a10.011 10.011 0 01-10-10v-40a10.011 10.011 0 0110-10h80a10.011 10.011 0 0110 10v40a10.011 10.011 0 01-10 10zm-70-55a10.012 10.012 0 00-10 10v30a10.012 10.012 0 0010 10h60a10.011 10.011 0 0010-10v-30a10.011 10.011 0 00-10-10z" fill="#fff"/>
+        <path d="M1207 381h-80a10.011 10.011 0 01-10-10v-40a10.011 10.011 0 0110-10h80a10.011 10.011 0 0110 10v40a10.011 10.011 0 01-10 10zm-70-55a10.012 10.012 0 00-10 10v30a10.012 10.012 0 0010 10h60a10.011 10.011 0 0010-10v-30a10.011 10.011 0 00-10-10z" fill="#fff"/>
+        <g transform="translate(1117 321)" filter="url(#a)">
+          <rect width="46" height="9" rx="4.5" transform="translate(97 26)" fill="#fff"/>
+        </g>
+        <rect id="glowRight" width="80" height="50" rx="10" transform="translate(1267.001 326)" fill="#eb5857" opacity=".5"/>
+        <g transform="translate(1267.001 326)" fill="none" stroke="#eb5857" stroke-width="5">
+          <rect width="80" height="50" rx="10" stroke="none"/>
+          <rect x="2.5" y="2.5" width="75" height="45" rx="7.5"/>
+        </g>
     </g>
 
     <animate
@@ -30,6 +49,7 @@
       repeatCount="indefinite"
     />
   </svg>
+  </div>
 </template>
 
 <script>
