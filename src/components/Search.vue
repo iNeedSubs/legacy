@@ -150,6 +150,10 @@ button {
   }
 }
 
+input::placeholder {
+  color: #ddd;
+}
+
 .types {
   display: grid;
   grid-template-areas:
