@@ -160,11 +160,7 @@ input::placeholder {
     "movie"
     "show";
   grid-area: types;
-
-  .movie {
-    border-radius: 0 0 0 5px;
   }
-}
 
 @keyframes showUp {
   from {
@@ -190,6 +186,10 @@ input::placeholder {
   .filters {
     justify-content: space-between;
     grid-template-areas: "types lang";
+  }
+
+  .types .movie {
+    border-radius: 0 0 0 15px;
   }
 }
 </style>
