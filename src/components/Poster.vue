@@ -25,6 +25,7 @@ img.poster, .noImage {
   margin: 1em auto;
   border-radius: 15px;
   width: 100px;
+  height: 150px;
   transition: filter .2s ease-in-out;
 }
 
@@ -45,7 +46,6 @@ img.poster {
 
 .noImage {
   background: #3D454F;
-  height: 150px;
   filter: brightness(.9);
 }
 
