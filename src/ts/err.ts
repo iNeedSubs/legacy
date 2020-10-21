@@ -8,3 +8,7 @@ export enum ErrType {
   INVALID_REQ_METHOD = 'INVALID_REQ_METHOD'
 }
 
+export interface Error {
+  detail: string;
+  type: ErrType;
+}
