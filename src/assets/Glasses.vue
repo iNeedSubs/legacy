@@ -25,30 +25,30 @@
           <rect width="80" height="50" rx="10" stroke="none"/>
           <rect x="2.5" y="2.5" width="75" height="45" rx="7.5"/>
         </g>
-    </g>
+      </g>
 
-    <animate
-      xlink:href="#glowLeft"
-      attributeType="CSS"
-      attributeName="opacity"
-      values=".4;.5;.6;.7;.8;.7;.6;.5;.4"
-      dur="4s"
-      begin="0s"
-      calcMode="paced"
-      repeatCount="indefinite"
-    />
+      <animate
+        xlink:href="#glowLeft"
+        attributeType="CSS"
+        attributeName="opacity"
+        values=".5;.6;.5;.4;.5"
+        dur="10s"
+        begin="0s"
+        calcMode="paced"
+        repeatCount="indefinite"
+      />
 
-    <animate
-      xlink:href="#glowRight"
-      attributeType="CSS"
-      attributeName="opacity"
-      values=".4;.5;.6;.7;.8;.7;.6;.5;.4"
-      dur="4s"
-      begin="1s"
-      calcMode="paced"
-      repeatCount="indefinite"
-    />
-  </svg>
+      <animate
+        xlink:href="#glowRight"
+        attributeType="CSS"
+        attributeName="opacity"
+        values=".5;.6;.5;.4;.5"
+        dur="10s"
+        begin="5s"
+        calcMode="paced"
+        repeatCount="indefinite"
+      />
+    </svg>
   </div>
 </template>
 
