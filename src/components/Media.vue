@@ -83,6 +83,10 @@ p {
         padding: 0 1em;
       }
     }
+
+    .banner {
+      border-radius: 0 15px 15px 0;
+    }
   }
 }
 
