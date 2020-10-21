@@ -1,5 +1,5 @@
 <template>
-    <Glasses/>
+  <Glasses/>
   <div class="search">
     <div class="inputContainer">
       <input placeholder="Search" v-model="query" v-on:keyup.enter="search"/>
@@ -160,7 +160,7 @@ input::placeholder {
     "movie"
     "show";
   grid-area: types;
-  }
+}
 
 @keyframes showUp {
   from {
