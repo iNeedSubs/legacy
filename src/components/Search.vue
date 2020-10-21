@@ -68,7 +68,7 @@ export default defineComponent({
 .glasses {
   display: flex;
   justify-content: center;
-  width: 60%;
+  width: clamp(100px, 50vw, 240px);
   margin: 0 auto;
   animation: showUp .4s cubic-bezier(0.2, 0.8, 0.3, 1.3);
 }
