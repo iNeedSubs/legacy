@@ -29,6 +29,7 @@ export default {
 
 <style lang="scss" scoped>
 .media {
+  padding: .5em;
   background: #2C343F;
   border-radius: 15px;
   text-align: center;
