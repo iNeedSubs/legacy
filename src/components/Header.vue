@@ -22,7 +22,6 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  background: #d65a31;
   padding: 30px;
   text-align: center;
 }
