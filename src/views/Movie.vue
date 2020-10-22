@@ -152,7 +152,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 main {
-  padding: 30px;
+  padding: 0 30px;
 }
 
 ::v-deep {
@@ -211,6 +211,12 @@ main {
   ::v-deep .lang .options {
     width: 300px;
     left: unset;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  main {
+    padding: 30px;
   }
 }
 </style>

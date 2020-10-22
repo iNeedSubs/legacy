@@ -45,7 +45,7 @@ export default {
 
 <style scoped>
 main {
-  padding: 30px;
+  padding: 0 30px;
 }
 
 .desc {
@@ -56,5 +56,11 @@ main {
   text-align: center;
   font-family: 'Open Sans Bold';
   color: #ddd;
+}
+
+@media only screen and (min-width: 800px) {
+  main {
+    padding: 30px;
+  }
 }
 </style>
