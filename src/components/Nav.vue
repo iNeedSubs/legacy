@@ -24,11 +24,11 @@ nav {
     transition: background .1s ease-in-out;
 
     &:hover, &:focus {
-      background: #de7b5a55;
+      background: #de7b5a44;
     }
 
     &.router-link-exact-active {
-        background: #de7b5a;
+        background: #d65a31;
     }
   }
 }

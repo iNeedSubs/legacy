@@ -89,13 +89,13 @@ export default defineComponent({
    button {
     margin: 10px;
     padding: 0 1em;
-    background: #d65a31;
+    background: #de7b5a;
     border-radius: 15px;
     color: #fff;
     transition: background .2s ease-in-out;
 
     &:hover, &:focus {
-      background: #de7b5a;
+      background: #d65a31;
     }
   }
 }
@@ -141,7 +141,7 @@ button {
     }
 
     &.active {
-      background: #d65a31;
+      background: #de7b5a;
     }
 
     &:not(.active) {
