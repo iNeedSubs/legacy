@@ -51,8 +51,8 @@ main {
 .desc {
   margin: 0 auto 2em auto;
   line-height: 1.5em;
-  font-size: 1.5em;
-  max-width: 40ch;
+  font-size: clamp(1.1em, 4vw, 1.4em);
+  max-width: 37ch;
   text-align: center;
   font-family: 'Open Sans Bold';
   color: #ddd;
