@@ -1,6 +1,6 @@
 <template>
   <main>
-    <p class="desc">Download subtitles for movies and shows in your preferred language.</p>
+    <p class="desc">Download subtitles for movies and shows in your preferred language</p>
     <Search
       @update-query="updateQuery"
       @update-type="updateType"
@@ -51,9 +51,10 @@ main {
 .desc {
   margin: 0 auto 2em auto;
   line-height: 1.5em;
-  font-size: 1.3em;
-  max-width: 30ch;
+  font-size: 1.5em;
+  max-width: 40ch;
   text-align: center;
+  font-family: 'Open Sans Bold';
   color: #ddd;
 }
 </style>
