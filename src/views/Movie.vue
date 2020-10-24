@@ -155,16 +155,14 @@ main {
   padding: 0 30px;
 }
 
-::v-deep {
-  .media {
-    margin: 0 auto;
-    max-width: 500px;
-    margin-bottom: 2em;
-    cursor: default;
+::v-deep(.media) {
+  margin: 0 auto;
+  max-width: 500px;
+  margin-bottom: 2em;
+  cursor: default;
 
-    .poster, .noImage {
-      filter: brightness(1);
-    }
+  .poster, .noImage {
+    filter: brightness(1);
   }
 }
 
@@ -208,7 +206,7 @@ main {
     }
   }
 
-  ::v-deep .lang .options {
+  ::v-deep(.lang .options) {
     width: 300px;
     left: unset;
   }
