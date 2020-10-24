@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView, RedirectView
 
 urlpatterns = [
+    url('', include('pwa.urls')),
     path('admin', RedirectView.as_view(url='admin/')),
     path('admin/', admin.site.urls),
     path('api/v1/', include('apps.v1.search.urls')),
