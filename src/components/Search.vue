@@ -1,7 +1,5 @@
 <template>
-  <div class="glasses">
-    <Glasses/>
-  </div>
+  <Glasses/>
   <div class="search">
     <div class="inputContainer">
       <input placeholder="Search" v-model="query" v-on:keyup.enter="search"/>
@@ -70,14 +68,14 @@ export default defineComponent({
 .glasses {
   display: flex;
   justify-content: center;
-  width: 60%;
+  width: clamp(100px, 50vw, 240px);
   margin: 0 auto;
   animation: showUp .4s cubic-bezier(0.2, 0.8, 0.3, 1.3);
 }
 
 .search {
   position: relative;
-  border-radius: 5px;
+  border-radius: 15px;
   margin: 0 auto;
   background: #51555c;
   max-width: 600px;
@@ -91,13 +89,13 @@ export default defineComponent({
    button {
     margin: 10px;
     padding: 0 1em;
-    background: #d65a31;
-    border-radius: 5px;
+    background: #de7b5a;
+    border-radius: 15px;
     color: #fff;
     transition: background .2s ease-in-out;
 
     &:hover, &:focus {
-      background: #de7b5a;
+      background: #d65a31;
     }
   }
 }
@@ -112,7 +110,7 @@ input {
   font-size: 18px;
   color: #fff;
   outline: none;
-  border-radius: 5px 5px 0 0;
+  border-radius: 15px 15px 0 0;
 }
 
 button {
@@ -127,7 +125,7 @@ button {
   grid-template-areas:
     "types"
     "lang";
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 15px 15px;
 
   button {
     background: #494d54;
@@ -143,7 +141,7 @@ button {
     }
 
     &.active {
-      background: #d65a31;
+      background: #de7b5a;
     }
 
     &:not(.active) {
@@ -152,16 +150,16 @@ button {
   }
 }
 
+input::placeholder {
+  color: #ddd;
+}
+
 .types {
   display: grid;
   grid-template-areas:
     "movie"
     "show";
   grid-area: types;
-
-  .movie {
-    border-radius: 0 0 0 5px;
-  }
 }
 
 @keyframes showUp {
@@ -188,6 +186,10 @@ button {
   .filters {
     justify-content: space-between;
     grid-template-areas: "types lang";
+  }
+
+  .types .movie {
+    border-radius: 0 0 0 15px;
   }
 }
 </style>

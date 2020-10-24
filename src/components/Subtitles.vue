@@ -28,7 +28,7 @@ export default defineComponent({
 
 .subtitle {
   padding: 1em;
-  border-radius: 5px;
+  border-radius: 15px;
   background: #2C343F;
   display: grid;
   grid-template-columns: 1fr auto;
@@ -39,7 +39,7 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 15px;
     background: #D65A31;
     height: 40px;
     width: 40px;

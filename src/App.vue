@@ -68,7 +68,10 @@ body {
 }
 
 main {
+  margin: 0 auto;
+  position: relative;
   padding: 30px;
+  max-width: 1600px;
 }
 
 a {

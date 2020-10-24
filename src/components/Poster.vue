@@ -23,8 +23,9 @@ export default {
 <style lang="scss" scoped>
 img.poster, .noImage {
   margin: 1em auto;
-  border-radius: 5px;
+  border-radius: 15px;
   width: 100px;
+  height: 150px;
   transition: filter .2s ease-in-out;
 }
 
@@ -45,14 +46,13 @@ img.poster {
 
 .noImage {
   background: #3D454F;
-  height: 150px;
   filter: brightness(.9);
 }
 
 @media only screen and (min-width: 350px) {
   img.poster, .noImage {
     margin: unset;
-    border-radius: 5px 0 0 5px;
+    border-radius: 15px 0 0 15px;
   }
 }
 

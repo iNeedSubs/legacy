@@ -1,6 +1,6 @@
 <template>
   <main>
-    <p class="desc">Download subtitles for movies and shows in your preferred language.</p>
+    <p class="desc">Download subtitles for movies and shows in your preferred language</p>
     <Search
       @update-query="updateQuery"
       @update-type="updateType"
@@ -45,15 +45,22 @@ export default {
 
 <style scoped>
 main {
-  padding: 30px;
+  padding: 0 30px;
 }
 
 .desc {
   margin: 0 auto 2em auto;
   line-height: 1.5em;
-  font-size: 1.3em;
-  max-width: 30ch;
+  font-size: clamp(1.1em, 4vw, 1.4em);
+  max-width: 37ch;
   text-align: center;
+  font-family: 'Open Sans Bold';
   color: #ddd;
+}
+
+@media only screen and (min-width: 800px) {
+  main {
+    padding: 30px;
+  }
 }
 </style>

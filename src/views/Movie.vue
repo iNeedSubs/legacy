@@ -15,7 +15,7 @@
       </div>
     </transition>
     <transition name="bounceIn">
-      <p class="err" v-if="subtitlesLoaded && subtitlesErr">Error: {{err}}</p>
+      <ErrMessage :msg="subtitlesErr"/>
     </transition>
     <transition name="bounceIn">
       <p class="notice" v-if="subtitlesLoaded && !subtitlesErr && subtitles.length === 0">
@@ -32,11 +32,13 @@
 import { defineComponent, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { LangName, LangCode } from '@/ts/languages';
-import { MediaData } from '@/ts/media';
+import { Error } from '@/ts/err';
+import { MediaData, MediaSubtitles, Subtitle } from '@/ts/media';
 import LangSelect from '@/components/LangSelect/Index.vue'
 import Load from '@/components/Load.vue'
 import Media from '@/components/Media.vue'
 import Subtitles from '@/components/Subtitles.vue'
+import ErrMessage from '@/components/ErrMessage.vue'
 
 export default defineComponent({
   name: 'Movie',
@@ -44,7 +46,8 @@ export default defineComponent({
     LangSelect,
     Load,
     Media,
-    Subtitles
+    Subtitles,
+    ErrMessage
   },
   setup() {
     const route = useRoute()
@@ -58,7 +61,7 @@ export default defineComponent({
     const subtitlesErr = ref('')
 
     const mediaData = ref<MediaData>()
-    const subtitles = ref<MediaData>()
+    const subtitles = ref<Subtitle[]>()
 
     const fetchMediaData = async () => {
       mediaLoaded.value = false
@@ -99,14 +102,17 @@ export default defineComponent({
 
       try {
         const req = await fetch(`/api/v1/subtitles?${imdbID}${langParam}`)
-        const payload = await req.json()
 
         if (req.status !== 200) {
+          const payload = await req.json() as Error
+
           subtitlesLoaded.value = true
           subtitlesLoading.value = false
-          subtitlesErr.value = payload.detail || 'There has been an error'
+          subtitlesErr.value = payload.detail
           return
         }
+
+        const payload = await req.json() as MediaSubtitles
 
         subtitles.value = payload.subtitles
         subtitlesLoaded.value = true
@@ -146,7 +152,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 main {
-  padding: 30px;
+  padding: 0 30px;
 }
 
 ::v-deep {
@@ -171,17 +177,8 @@ main {
   z-index: -1;
 }
 
-.load {
-  right: 0;
-  left: calc(50% - 40px);
-  position: absolute;
-  text-align: center;
-  margin-top: 1em;
-  z-index: -1;
-}
-
-.err {
-  width: 50ch;
+.errMessage {
+  margin-top: 4em;
 }
 
 .actions {
@@ -194,7 +191,7 @@ main {
   }
 
   .buttonContainer {
-    border-radius: 5px;
+    border-radius: 15px;
     overflow: hidden;
     background: #494d54;
   }
@@ -214,6 +211,12 @@ main {
   ::v-deep .lang .options {
     width: 300px;
     left: unset;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  main {
+    padding: 30px;
   }
 }
 </style>

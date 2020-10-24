@@ -22,8 +22,7 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  background: #d65a31;
-  padding: 30px;
+  padding: 60px 30px;
   text-align: center;
 }
 
@@ -49,6 +48,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 30px;
   }
 
   div {

@@ -1,16 +1,18 @@
 <template>
   <div class="options" v-if="showOptions">
-    <p
-      v-for="(langName, langCode, i) in languages"
-      :ref="e => {options[i] = e}"
-      :key="langName"
-      :class="{active: code.toUpperCase() === langCode.toUpperCase()}"
-      @click="setLang(langCode)"
-      @keydown="e => { if (e.keyCode === 13) { setLang(langCode)} }"
-      tabindex="0"
-    >
-      {{langName}}
-    </p>
+    <div class="languages">
+      <p
+        v-for="(langName, langCode, i) in languages"
+        :ref="e => {options[i] = e}"
+        :key="langName"
+        :class="{active: code.toUpperCase() === langCode.toUpperCase()}"
+        @click="setLang(langCode)"
+        @keydown="e => { if (e.keyCode === 13) { setLang(langCode)} }"
+        tabindex="0"
+      >
+        {{langName}}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -98,27 +100,23 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .options {
+  background: #51555c;
+  overflow: hidden;
   margin: 0 auto;
-  height: 150px;
-  overflow-y: auto;
-  white-space: nowrap;
   top: calc(100% + 15px);
+  height: 150px;
   right: 0;
   left: 0;
   position: absolute;
-  background: #51555c;
-  border-radius: 5px;
-  scrollbar-color: #de7b5a #333942;
+  border-radius: 15px;
   z-index: 2;
 
-  &::-webkit-scrollbar {
-    &-track {
-      border-radius: 0 5px 5px 0;
-    }
-
-    &-thumb {
-      border-radius: 0 5px 5px 0;
-    }
+  .languages {
+    white-space: nowrap;
+    overflow-y: auto;
+    height: inherit;
+    width: inherit;
+    scrollbar-color: #de7b5a #333942;
   }
 
   p {

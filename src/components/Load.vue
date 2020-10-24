@@ -13,7 +13,7 @@
   div {
     display: inline-block;
     position: absolute;
-    border-radius: 5px;
+    border-radius: 15px;
     left: 8px;
     width: 16px;
     background: #ddd;

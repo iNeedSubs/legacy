@@ -19,16 +19,16 @@ nav {
   a {
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
-    padding: 5px 10px;
+    border-radius: 15px;
+    padding: 10px 15px;
     transition: background .1s ease-in-out;
 
     &:hover, &:focus {
-      background: #de7b5a55;
+      background: #de7b5a44;
     }
 
     &.router-link-exact-active {
-        background: #de7b5a;
+        background: #d65a31;
     }
   }
 }
