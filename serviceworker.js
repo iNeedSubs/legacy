@@ -1,4 +1,4 @@
-const staticCacheName = "django-pwa-v" + new Date().getTime();
+const staticCacheName = 'django-pwa-v' + new Date().getTime();
 const filesToCache = [
     '/offline/',
     '/static/icons/16.png',
@@ -18,7 +18,7 @@ const filesToCache = [
 ];
 
 // Cache on install
-self.addEventListener("install", event => {
+self.addEventListener('install', event => {
     this.skipWaiting();
     event.waitUntil(
         caches.open(staticCacheName)
@@ -34,7 +34,7 @@ self.addEventListener('activate', event => {
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames
-                    .filter(cacheName => (cacheName.startsWith("django-pwa-")))
+                    .filter(cacheName => (cacheName.startsWith('django-pwa-')))
                     .filter(cacheName => (cacheName !== staticCacheName))
                     .map(cacheName => caches.delete(cacheName))
             );
