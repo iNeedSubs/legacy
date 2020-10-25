@@ -3,8 +3,11 @@ const filesToCache = [
     '/offline/',
     '/static/icons/16.png',
     '/static/icons/32.png',
-    '/static/icons/64.png',
+    '/static/icons/64_box.png',
+    '/static/icons/128_box.png',
     '/static/icons/128.png',
+    '/static/icons/256.png',
+    // '/static/splash_screen.png'
     // '/static/icons/splash-640x1136.png',
     // '/static/icons/splash-750x1334.png',
     // '/static/icons/splash-1242x2208.png',
