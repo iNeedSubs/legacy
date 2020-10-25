@@ -3,18 +3,20 @@
   <div class="search">
     <div class="inputContainer">
       <input placeholder="Search" v-model="query" v-on:keyup.enter="search"/>
-      <button @click="search">
+      <button aria-label="Search" @click="search">
         <fa icon="search"/>
       </button>
     </div>
     <div class="filters">
       <div class="types">
         <button
+          :aria-label="`${MediaType.MOVIE} Filter`"
           class="movie"
           v-bind:class="{active: filter === MediaType.MOVIE}"
           @click="setFilter(MediaType.MOVIE)"
         >Movie</button>
         <button
+          :aria-label="`${MediaType.SHOW} Filter`"
           class="show"
           v-bind:class="{active: filter === MediaType.SHOW}"
           @click="setFilter(MediaType.SHOW)"

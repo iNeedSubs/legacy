@@ -1,5 +1,5 @@
 <template>
-  <button @click="toggleOptions" class="lang">
+  <button aria-label="Download Subtitle File" @click="toggleOptions" class="lang">
     {{name}}
     <fa
       class="downIcon"

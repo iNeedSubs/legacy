@@ -1,6 +1,7 @@
 <template>
   <div ref="container" class="lang">
     <Button
+      aria-label="Toggle Language Menu Visibility"
       :name="name"
       :showOptions="showOptions"
       @update-menu-visibility="toggleOptions"
