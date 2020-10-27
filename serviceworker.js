@@ -7,7 +7,7 @@ const filesToCache = [
     '/static/icons/32x32_box.png',
     '/static/icons/64x64.png',
     '/static/icons/64x64_box.png',
-    '/static/icons/128.png',
+    '/static/icons/128x128.png',
     '/static/icons/128x128_box.png',
     '/static/icons/256x256.png',
     '/static/icons/256x256_box.png',
