@@ -141,12 +141,24 @@ PWA_APP_ICONS = [
     {
         'src': '/static/icons/256x256_box.png',
         'sizes': '256x256'
+    },
+    {
+        'src': '/static/icons/512x512_maskable.png',
+        'type': 'image/png',
+        'sizes': '512x512',
+        'purpose': 'maskable'
     }
 ]
 PWA_APP_ICONS_APPLE = [
     {
         'src': '/static/icons/256x256_box.png',
         'sizes': '256x256'
+    },
+    {
+        'src': '/static/icons/512x512_maskable.png',
+        'type': 'image/png',
+        'sizes': '512x512',
+        'purpose': 'maskable'
     }
 ]
 # PWA_APP_DIR = 'ltr'
