@@ -3,7 +3,7 @@
     <div class="subtitle" v-for="(subtitle, i) in subtitles" :key="i">
       <p>{{subtitle.file_name}}</p>
       <a class="download" :href="subtitle.download_url" download>
-        <fa icon="download"/>
+        <DownloadIcon/>
       </a>
     </div>
   </div>
@@ -11,9 +11,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import DownloadIcon from '@/assets/icons/Download.vue'
 
 export default defineComponent({
   name: 'Subtitles',
+  components: {
+    DownloadIcon
+  },
   props: {
     subtitles: Array
   }
