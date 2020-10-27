@@ -9,6 +9,7 @@
     <transition name="bounceIn">
       <Options
         :showOptions="showOptions"
+        :availableLangs="langs"
         @update-lang="updateLang"
         @update-menu-visibility="toggleOptions"
       />
@@ -25,6 +26,9 @@ import Options from './Options.vue'
 export default defineComponent({
   name: 'LangSelect',
   emits: ['update-lang'],
+  props: {
+    langs: Array
+  },
   components: {
     Button,
     Options

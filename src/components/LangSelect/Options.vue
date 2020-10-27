@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUpdate, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, defineComponent, onBeforeUpdate, onMounted, onUnmounted, ref, watch } from 'vue'
 import { LangName, LangCode } from '@/ts/languages'
 
 export default defineComponent({
@@ -27,7 +27,8 @@ export default defineComponent({
     'update-menu-visibility'
   ],
   props: {
-    showOptions: Boolean
+    showOptions: Boolean,
+    availableLangs: Array
   },
   setup(props, { emit }) {
     const preferredLangCode = localStorage.preferredLangCode as LangCode
@@ -88,10 +89,25 @@ export default defineComponent({
       searchLang.value = ''
     })
 
+    // TODO: written with intent to work, needs to be polished and re-written
+    const availableLangs = computed(() => {
+      if (!props.availableLangs) return;
+
+      const langs: {[x: string]: LangName} = {}
+
+      for (const lang of props.availableLangs) {
+        const code = (lang as LangCode).toUpperCase()
+
+        langs[code] = LangName[code as keyof typeof LangName]
+      }
+
+      return langs
+    })
+
     return {
       code,
       setLang,
-      languages: LangName,
+      languages: availableLangs.value || LangName,
       options
     }
   }

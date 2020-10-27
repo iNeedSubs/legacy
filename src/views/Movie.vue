@@ -10,7 +10,7 @@
       <div v-if="subtitlesLoaded && !subtitlesErr" class="actions">
         <h3>Subtitles ({{subtitles.length}})</h3>
         <div class="buttonContainer">
-          <LangSelect @update-lang="updateLang"/>
+          <LangSelect @update-lang="updateLang" :langs="availableLangs"/>
         </div>
       </div>
     </transition>
@@ -56,6 +56,7 @@ export default defineComponent({
     const mediaLoading = ref(false)
     const mediaErr = ref('')
 
+    const availableLangs = ref<LangCode[]>()
     const subtitlesLoaded = ref(false)
     const subtitlesLoading = ref(false)
     const subtitlesErr = ref('')
@@ -115,6 +116,7 @@ export default defineComponent({
         const payload = await req.json() as MediaSubtitles
 
         subtitles.value = payload.subtitles
+        availableLangs.value = payload.available_langs
         subtitlesLoaded.value = true
         subtitlesLoading.value = false
       } catch (e) {
@@ -140,6 +142,7 @@ export default defineComponent({
       mediaLoaded,
       mediaLoading,
       mediaErr,
+      availableLangs,
       subtitlesLoaded,
       subtitlesLoading,
       subtitlesErr,
