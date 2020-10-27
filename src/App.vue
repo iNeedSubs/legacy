@@ -86,6 +86,7 @@ a {
   overflow: visible;
   vertical-align: -.125em;
   width: 1em;
+  fill: #ffffff;
 }
 
 .bounceIn {
