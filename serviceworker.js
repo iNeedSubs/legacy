@@ -7,17 +7,16 @@ const filesToCache = [
     '/static/icons/128_box.png',
     '/static/icons/128.png',
     '/static/icons/256.png',
-    // '/static/splash_screen.png'
-    // '/static/icons/splash-640x1136.png',
-    // '/static/icons/splash-750x1334.png',
-    // '/static/icons/splash-1242x2208.png',
-    // '/static/icons/splash-1125x2436.png',
-    // '/static/icons/splash-828x1792.png',
-    // '/static/icons/splash-1242x2688.png',
-    // '/static/icons/splash-1536x2048.png',
-    // '/static/icons/splash-1668x2224.png',
-    // '/static/icons/splash-1668x2388.png',
-    // '/static/icons/splash-2048x2732.png'
+    '/static/splashscreens/640x1136.png',
+    '/static/splashscreens/750x1334.png',
+    '/static/splashscreens/1242x2208.png',
+    '/static/splashscreens/1125x2436.png',
+    '/static/splashscreens/828x1792.png',
+    '/static/splashscreens/1242x2688.png',
+    '/static/splashscreens/1536x2048.png',
+    '/static/splashscreens/1668x2224.png',
+    '/static/splashscreens/1668x2388.png',
+    '/static/splashscreens/2048x2732.png'
 ];
 
 // Cache on install
