@@ -1,20 +1,10 @@
 import { mount } from '@vue/test-utils'
-import { FontAwesomeIcon } from '../../../src/plugins/fa'
 import { LangName } from '../../../src/ts/languages'
 import Button from '../../../src/components/LangSelect/Button'
-
-const defaults = {
-  global: {
-    components: {
-      'fa': FontAwesomeIcon
-    }
-  }
-}
 
 describe('Language Selection / Button', () => {
   it('shows the correct language name passed from props', () => {
     const wrapper = mount(Button, {
-      ...defaults,
       props: {
         name: LangName.RUS
       }
@@ -26,7 +16,7 @@ describe('Language Selection / Button', () => {
 
   describe('[EVENT] update-menu-visibility', () => {
     it('emits btn on click', async () => {
-      const wrapper = mount(Button, defaults)
+      const wrapper = mount(Button)
       const btn = wrapper.find('button')
       await btn.trigger('click')
 
@@ -35,7 +25,6 @@ describe('Language Selection / Button', () => {
 
     it('returns opposite boolean state of showOptions', async () => {
       const wrapper = mount(Button, {
-        ...defaults,
         props: {
           showOptions: false
         }
