@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'pwa',
     'corsheaders',
     'rest_framework',
-    'apps.v1.search'
+    'apps.v1.search',
+    'apps.robots'
 ]
 
 MIDDLEWARE = [
