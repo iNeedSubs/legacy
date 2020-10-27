@@ -4,7 +4,7 @@
     <div class="inputContainer">
       <input placeholder="Search" v-model="query" v-on:keyup.enter="search"/>
       <button aria-label="Search" @click="search">
-        <fa icon="search"/>
+        <SearchIcon/>
       </button>
     </div>
     <div class="filters">
@@ -32,11 +32,13 @@ import { defineComponent, ref } from 'vue'
 import Glasses from '@/assets/Glasses.vue'
 import LangSelect from './LangSelect/Index.vue'
 import { MediaType } from '@/ts/media'
+import SearchIcon from '@/assets/icons/Search.vue'
 
 export default defineComponent({
   components: {
     Glasses,
-    LangSelect
+    LangSelect,
+    SearchIcon
   },
   emits: [
     'update-query',
