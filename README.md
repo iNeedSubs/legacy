@@ -1,4 +1,4 @@
-# <img height="45" src="./public/static/icons/128.png" align="top"> Subtitles
+# <img height="45" src="./public/static/icons/128x128.png" align="top"> Subtitles
 
 https://subtitles.pw/
 
