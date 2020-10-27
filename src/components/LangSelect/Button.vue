@@ -1,20 +1,23 @@
 <template>
   <button aria-label="Download Subtitle File" @click="toggleOptions" class="lang">
     {{name}}
-    <fa
+    <ChevronDownIcon
       class="downIcon"
       :class="{active: showOptions}"
-      icon="angle-down"
     />
   </button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import ChevronDownIcon from '@/assets/icons/ChevronDown.vue'
 
 export default defineComponent({
   name: 'LangSelectButton',
   emits: ['update-menu-visibility'],
+  components: {
+    ChevronDownIcon
+  },
   props: {
       name: String,
       showOptions: Boolean
