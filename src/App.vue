@@ -62,7 +62,8 @@ html, body {
 }
 
 body {
-  font-family: 'Open Sans Regular';
+  font-family: 'Open Sans Regular', sans-serif;
+  font-display: swap;
   background: #222831;
   color: #fff;
 }
