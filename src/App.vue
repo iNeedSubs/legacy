@@ -20,16 +20,19 @@ export default {
 <style lang="scss">
 @font-face {
   font-family: 'Open Sans Bold';
+  font-display: swap;
   src: url("assets/fonts/open_sans_bold.ttf");
 }
 
 @font-face {
   font-family: 'Open Sans Regular';
+  font-display: swap;
   src: url("assets/fonts/open_sans_regular.ttf");
 }
 
 @font-face {
   font-family: 'Open Sans Light';
+  font-display: swap;
   src: url("assets/fonts/open_sans_light.ttf");
 }
 
@@ -63,7 +66,6 @@ html, body {
 
 body {
   font-family: 'Open Sans Regular', sans-serif;
-  font-display: swap;
   background: #222831;
   color: #fff;
 }
