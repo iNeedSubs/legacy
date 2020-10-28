@@ -13,7 +13,7 @@ main {
 
 h3 {
   margin-bottom: 1em;
-  font-family: 'Open Sans Bold';
+  font-family: 'Open Sans Bold', sans-serif;
 }
 
 p {

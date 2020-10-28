@@ -110,7 +110,7 @@ input {
   width: 100%;
   min-width: 0;
   border: none;
-  font-family: 'Open Sans Regular';
+  font-family: 'Open Sans Regular', sans-serif;
   font-size: 18px;
   color: #fff;
   outline: none;
@@ -135,7 +135,7 @@ button {
     background: #494d54;
     padding: .5em 1em;
     color: #fff;
-    font-family: 'Open Sans Bold';
+    font-family: 'Open Sans Bold', sans-serif;
     font-size: 18px;
     transition: .2s ease-in-out;
     transition-property: background, color;

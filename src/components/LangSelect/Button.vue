@@ -42,7 +42,7 @@ button {
   background: #494d54;
   padding: .5em 1em;
   color: #fff;
-  font-family: 'Open Sans Bold';
+  font-family: 'Open Sans Bold', sans-serif;
   font-size: 18px;
   transition: .1s ease-in-out;
   transition-property: background, color;

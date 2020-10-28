@@ -54,7 +54,7 @@ main {
   font-size: clamp(1.1em, 4vw, 1.4em);
   max-width: 37ch;
   text-align: center;
-  font-family: 'Open Sans Bold';
+  font-family: 'Open Sans Bold', sans-serif;
   color: #ddd;
 }
 
