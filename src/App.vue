@@ -30,12 +30,6 @@ export default {
   src: url("assets/fonts/open_sans_regular.ttf");
 }
 
-@font-face {
-  font-family: 'Open Sans Light';
-  font-display: swap;
-  src: url("assets/fonts/open_sans_light.ttf");
-}
-
 ::-webkit-scrollbar {
   width: 1em;
 
