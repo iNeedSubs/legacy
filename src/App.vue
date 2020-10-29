@@ -21,13 +21,13 @@ export default {
 @font-face {
   font-family: 'Open Sans Bold';
   font-display: swap;
-  src: url("assets/fonts/open_sans_bold.ttf");
+  src: url("assets/fonts/open_sans_bold_subset.woff2");
 }
 
 @font-face {
   font-family: 'Open Sans Regular';
   font-display: swap;
-  src: url("assets/fonts/open_sans_regular.ttf");
+  src: url("assets/fonts/open_sans_regular_subset.woff2");
 }
 
 ::-webkit-scrollbar {
