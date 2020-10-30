@@ -71,8 +71,6 @@ export default defineComponent({
 
         results.value = payload
         showResults.value = true
-        loading.value = false
-        loaded.value = true
 
         await nextTick()
 
@@ -82,6 +80,9 @@ export default defineComponent({
         })
       } catch (e) {
         err.value = e
+      } finally {
+        loading.value = false
+        loaded.value = true
       }
     }
 

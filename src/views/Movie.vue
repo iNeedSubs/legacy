@@ -80,11 +80,10 @@ export default defineComponent({
           return
         }
 
-        mediaLoaded.value = true
-        mediaLoading.value = false
         mediaData.value = payload
       } catch (e) {
         mediaErr.value = e
+      } finally {
         mediaLoaded.value = true
         mediaLoading.value = false
       }
@@ -117,10 +116,9 @@ export default defineComponent({
 
         subtitles.value = payload.subtitles
         availableLangs.value = payload.available_langs
-        subtitlesLoaded.value = true
-        subtitlesLoading.value = false
       } catch (e) {
         subtitlesErr.value = e
+      } finally {
         subtitlesLoaded.value = true
         subtitlesLoading.value = false
       }
