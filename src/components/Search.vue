@@ -2,7 +2,12 @@
   <Glasses/>
   <div class="search">
     <div class="inputContainer">
-      <input placeholder="Search" v-model="query" v-on:keyup.enter="search"/>
+      <input
+        placeholder="Search"
+        v-model="query"
+        v-on:keyup.enter="search"
+        aria-label="Search"
+      />
       <button aria-label="Search" @click="search">
         <SearchIcon/>
       </button>
