@@ -1,5 +1,6 @@
 const staticCacheName = 'django-pwa-v' + new Date().getTime();
 const filesToCache = [
+    '/', // should be start_url
     '/offline/',
     '/static/icons/16x16.png',
     '/static/icons/16x16_box.png',

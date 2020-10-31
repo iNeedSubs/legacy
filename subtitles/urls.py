@@ -19,6 +19,8 @@ from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.views.generic import TemplateView, RedirectView
+from subtitles.views import VueView
+
 
 urlpatterns = [
     url('', include('pwa.urls')),
@@ -26,7 +28,7 @@ urlpatterns = [
     path('admin', RedirectView.as_view(url='admin/')),
     path('admin/', admin.site.urls),
     path('api/v1/', include('apps.v1.search.urls')),
-    url(r'^.*', TemplateView.as_view(template_name='index.html'), name='app')
+    url(r'^.*', VueView.as_view(), name='app')
 ]
 
 if settings.DEBUG:

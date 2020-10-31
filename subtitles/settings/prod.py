@@ -25,6 +25,8 @@ MIDDLEWARE += [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+WHITENOISE_MAX_AGE = 86400
+
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUD_NAME'),
