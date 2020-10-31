@@ -21,14 +21,20 @@ nav {
     text-decoration: none;
     border-radius: 15px;
     padding: 10px 15px;
-    transition: background .1s ease-in-out;
+    transition: .2s ease-in-out;
+    transition-property: background, box-shadow;
 
     &:hover, &:focus {
-      background: #de7b5a44;
+      background: #69321F;
     }
 
     &.router-link-exact-active {
-        background: #d65a31;
+      background: #D44206;
+      cursor: default;
+
+      &:hover, &:focus {
+        box-shadow: 0 0 10px #D44206;
+      }
     }
   }
 }

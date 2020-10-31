@@ -98,7 +98,7 @@ export default defineComponent({
    button {
     margin: 10px;
     padding: 0 1em;
-    background: #de7b5a;
+    background: #BC5938;
     border-radius: 15px;
     color: #fff;
     transition: background .2s ease-in-out;
@@ -150,7 +150,7 @@ button {
     }
 
     &.active {
-      background: #de7b5a;
+      background: #BC5938;
     }
 
     &:not(.active) {

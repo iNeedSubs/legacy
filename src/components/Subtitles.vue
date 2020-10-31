@@ -44,7 +44,7 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     border-radius: 15px;
-    background: #D65A31;
+    background: #BC5938;
     height: 40px;
     width: 40px;
     text-align: center;
@@ -56,7 +56,7 @@ export default defineComponent({
     }
 
     &:hover, &:focus {
-      background: #de7b5a;
+      background: #D44206;
     }
   }
 

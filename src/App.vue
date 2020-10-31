@@ -38,7 +38,7 @@ export default {
   }
 
   &-thumb {
-    background: #de7b5a;
+    background: #BC5938;
   }
 }
 

@@ -132,7 +132,7 @@ export default defineComponent({
     overflow-y: auto;
     height: inherit;
     width: inherit;
-    scrollbar-color: #de7b5a #333942;
+    scrollbar-color: #BC5938 #333942;
   }
 
   p {
