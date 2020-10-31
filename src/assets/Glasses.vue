@@ -1,6 +1,6 @@
 <template>
   <div class="glasses">
-    <svg xmlns="http://www.w3.org/2000/svg" width="240" viewBox="0 0 240 60">
+    <svg xmlns="http://www.w3.org/2000/svg" width="240" viewBox="0 0 240 60" aria-label="Glasses Illustration">
       <defs>
         <filter id="a" x="88" y="20" width="64" height="27" filterUnits="userSpaceOnUse">
           <feGaussianBlur stdDeviation="3" result="blur"/>

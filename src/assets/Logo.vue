@@ -1,5 +1,5 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" width="128" height="88" viewBox="0 0 128 88">
+  <svg xmlns="http://www.w3.org/2000/svg" width="128" height="88" viewBox="0 0 128 88" aria-label="Logo">
     <g transform="translate(0 -20)">
       <g transform="translate(0 20)" fill="#222831" stroke="#fff" stroke-width="5">
         <rect width="128" height="88" rx="20" stroke="none"/>

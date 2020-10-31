@@ -1,5 +1,5 @@
 <template>
-  <div class="sadFace">
+  <div class="sadFace" aria-label="Sad Face Illustration">
     <Glasses/>
     <SadMouth/>
   </div>
