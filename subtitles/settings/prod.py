@@ -25,7 +25,7 @@ MIDDLEWARE += [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-WHITENOISE_MAX_AGE = 31536000
+WHITENOISE_MAX_AGE = 86400
 
 
 CLOUDINARY_STORAGE = {

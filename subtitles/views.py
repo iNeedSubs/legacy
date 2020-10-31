@@ -12,7 +12,7 @@ class VueView(TemplateView):
         )
 
         # Add Cache-Control and Expires headers
-        patch_response_headers(response, cache_timeout=31536000)
+        patch_response_headers(response, cache_timeout=86400)
 
         # Return response
         return response
