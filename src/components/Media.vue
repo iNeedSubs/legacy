@@ -7,6 +7,7 @@
         v-if="data.banner"
         :src="data.banner"
         loading="lazy"
+        alt="Media Banner"
       />
       <p>{{data.title}}</p>
     </div>

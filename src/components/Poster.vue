@@ -1,5 +1,11 @@
 <template>
-  <img class="poster" v-if="src" :src="src" loading="lazy"/>
+  <img
+    class="poster"
+    v-if="src"
+    :src="src"
+    loading="lazy"
+    alt="Media Poster"
+  />
   <div class="noImage" v-else>
     <Logo/>
   </div>
