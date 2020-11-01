@@ -1,7 +1,7 @@
 <template>
   <main>
-    <h3>Developer Note</h3>
-    <p>Hi there, we're currently still working on this page, check back here soon!</p>
+    <h3>Attributions</h3>
+    <p>We are using OpenSubtitles for media data its subtitle files</p>
   </main>
 </template>
 
