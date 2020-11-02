@@ -21,6 +21,9 @@
       </div>
     </div>
   </transition>
+  <transition name="bounceIn">
+    <ErrBubble v-if="err" :msg="err"/>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -28,12 +31,15 @@ import { defineComponent, ref, watch, nextTick, onBeforeUpdate } from 'vue'
 import { MediaData } from '@/ts/media'
 import Load from './Load.vue'
 import Media from './Media.vue'
+import ErrBubble from '@/components/ErrBubble.vue'
+import { Error } from '@/ts/err'
 
 export default defineComponent({
   name: 'SearchResults',
   components: {
     Load,
-    Media
+    Media,
+    ErrBubble
   },
   props: {
     query: String,
@@ -61,9 +67,15 @@ export default defineComponent({
       try {
         const req = await fetch(`/api/v1/search?type=${mediaType}&query=${query}`)
 
+        if (req.status === 500) {
+          err.value = 'Something went wrong with the server'
+          return
+        }
+
         if (req.status !== 200) {
-          // TODO: show as notification
-          // return console.error('err', req)
+          const payload = await req.json() as Error
+          err.value = payload.detail
+
           return
         }
 
@@ -117,6 +129,10 @@ export default defineComponent({
   text-align: center;
   margin-top: 1em;
   z-index: -1;
+}
+
+.errBubble {
+  margin-top: 2em;
 }
 
 .searchResults {
