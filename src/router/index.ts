@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import About from '../views/About.vue';
 import Contact from '../views/Contact.vue';
 import Movie from '../views/Movie.vue';
+import Show from '../views/Show.vue';
 import Home from '../views/Home.vue';
 
 const routes: Array<RouteRecordRaw> = [
@@ -16,14 +17,14 @@ const routes: Array<RouteRecordRaw> = [
     component: Contact,
   },
   {
-    path: '/show/:id',
-    name: 'show',
-    component: Movie,
-  },
-  {
     path: '/movie/:id',
     name: 'movie',
     component: Movie
+  },
+  {
+    path: '/show/:id',
+    name: 'show',
+    component: Show,
   },
   {
     path: '/',
