@@ -87,7 +87,7 @@ export default defineComponent({
         await nextTick()
 
         // scrolls to first element in results
-        resultItems.value[0].scrollIntoView({
+        resultItems.value[0]?.scrollIntoView({
           block: 'center'
         })
       } catch (e) {
