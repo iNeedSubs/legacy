@@ -64,31 +64,6 @@ export default defineComponent({
     const mediaData = ref<MediaData>()
     const subtitles = ref<Subtitle[]>()
 
-    const fetchMediaData = async () => {
-      mediaLoaded.value = false
-      mediaLoading.value = true
-      mediaErr.value = ''
-
-      try {
-        const req = await fetch(`/api/v1/media?imdb_id=${route.params.id}`)
-        const payload = await req.json()
-
-        if (req.status !== 200) {
-          mediaLoaded.value = true
-          mediaLoading.value = false
-          mediaErr.value = payload.detail || 'There has been an error'
-          return
-        }
-
-        mediaData.value = payload
-      } catch (e) {
-        mediaErr.value = e
-      } finally {
-        mediaLoaded.value = true
-        mediaLoading.value = false
-      }
-    }
-
     const preferredLangName = ref(localStorage.preferredLangName as LangName || LangName.ENG)
     const preferredLangLangCode = ref(localStorage.preferredLangCode as LangCode || LangCode.ENGLISH)
 
@@ -101,21 +76,33 @@ export default defineComponent({
       const langParam = preferredLangLangCode.value ? `&lang=${preferredLangLangCode.value.toLowerCase()}` : ''
 
       try {
-        const req = await fetch(`/api/v1/subtitles?${imdbID}${langParam}`)
+        const cacheItemName = `imdb_id-${route.params.id}-lang-${preferredLangLangCode.value}`
+        const cache = sessionStorage.getItem(cacheItemName)
 
-        if (req.status !== 200) {
-          const payload = await req.json() as Error
+        if (!cache) {
+          const req = await fetch(`/api/v1/subtitles?${imdbID}${langParam}`)
 
-          subtitlesLoaded.value = true
-          subtitlesLoading.value = false
-          subtitlesErr.value = payload.detail
-          return
+          if (req.status !== 200) {
+            const payload = await req.json() as Error
+
+            subtitlesLoaded.value = true
+            subtitlesLoading.value = false
+            subtitlesErr.value = payload.detail
+            return
+          }
+
+          const payload = await req.json() as MediaSubtitles
+
+          subtitles.value = payload.subtitles
+          availableLangs.value = payload.available_langs
+
+          sessionStorage.setItem(cacheItemName, JSON.stringify(payload))
+        } else {
+          const payload = JSON.parse(cache) as MediaSubtitles
+
+          subtitles.value = payload.subtitles
+          availableLangs.value = payload.available_langs
         }
-
-        const payload = await req.json() as MediaSubtitles
-
-        subtitles.value = payload.subtitles
-        availableLangs.value = payload.available_langs
       } catch (e) {
         subtitlesErr.value = e
       } finally {
@@ -124,8 +111,41 @@ export default defineComponent({
       }
     }
 
+    const fetchMediaData = async () => {
+      mediaLoaded.value = false
+      mediaLoading.value = true
+      mediaErr.value = ''
+
+      try {
+        const cacheItemName = `imdb_id-${route.params.id}`
+        const cache = sessionStorage.getItem(cacheItemName)
+
+        if (!cache) {
+          const req = await fetch(`/api/v1/media?imdb_id=${route.params.id}`)
+          const payload = await req.json()
+
+          if (req.status !== 200) {
+            mediaLoaded.value = true
+            mediaLoading.value = false
+            mediaErr.value = payload.detail || 'There has been an error'
+            return
+          }
+
+          mediaData.value = payload
+        } else {
+          mediaData.value = JSON.parse(cache)
+        }
+
+        fetchSubtitles()
+      } catch (e) {
+        mediaErr.value = e
+      } finally {
+        mediaLoaded.value = true
+        mediaLoading.value = false
+      }
+    }
+
     fetchMediaData()
-    fetchSubtitles()
 
     const updateLang = async () => {
       preferredLangName.value = localStorage.preferredLangName as LangName || LangName.ENG

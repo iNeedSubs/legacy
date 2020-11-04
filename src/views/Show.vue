@@ -7,7 +7,7 @@
       <Media v-if="mediaLoaded && !mediaErr" :data="mediaData"/>
     </transition>
     <transition name="bounceIn">
-      <div v-if="subtitlesLoaded && !subtitlesErr" class="actions">
+      <div v-if="availableLangs" class="actions">
         <h3>Subtitles ({{total}})</h3>
         <div class="buttonContainer">
           <LangSelect @update-lang="updateLang" :langs="availableLangs"/>
@@ -74,33 +74,22 @@ export default defineComponent({
     const seasons = ref<Seasons>()
     const total = ref(0)
 
-    const fetchMediaData = async () => {
-      mediaLoaded.value = false
-      mediaLoading.value = true
-      mediaErr.value = ''
-
-      try {
-        const req = await fetch(`/api/v1/media?imdb_id=${route.params.id}`)
-        const payload = await req.json()
-
-        if (req.status !== 200) {
-          mediaLoaded.value = true
-          mediaLoading.value = false
-          mediaErr.value = payload.detail || 'There has been an error'
-          return
-        }
-
-        mediaData.value = payload
-      } catch (e) {
-        mediaErr.value = e
-      } finally {
-        mediaLoaded.value = true
-        mediaLoading.value = false
-      }
-    }
-
     const preferredLangName = ref(localStorage.preferredLangName as LangName || LangName.ENG)
     const preferredLangLangCode = ref(localStorage.preferredLangCode as LangCode || LangCode.ENGLISH)
+
+    const organizeSubtitles = (subtitles: ShowSubtitle[]) => {
+      const list: Seasons = {}
+
+      for (const subtitle of subtitles) {
+        const season = subtitle.season.toString()
+
+        list[season]
+          ? list[season].push(subtitle)
+          : list[season] = [subtitle]
+      }
+
+      return list
+    }
 
     const fetchSubtitles = async () => {
       subtitlesLoaded.value = false
@@ -111,31 +100,37 @@ export default defineComponent({
       const langParam = preferredLangLangCode.value ? `&lang=${preferredLangLangCode.value.toLowerCase()}` : ''
 
       try {
-        const req = await fetch(`/api/v1/subtitles?${imdbID}${langParam}`)
+        const cacheItemName = `imdb_id-${route.params.id}-lang-${preferredLangLangCode.value}`
+        const cache = sessionStorage.getItem(cacheItemName)
 
-        if (req.status !== 200) {
-          const payload = await req.json() as Error
+        if (!cache) {
+          const req = await fetch(`/api/v1/subtitles?${imdbID}${langParam}`)
 
-          subtitlesLoaded.value = true
-          subtitlesLoading.value = false
-          subtitlesErr.value = payload.detail
-          return
+          if (req.status !== 200) {
+            const payload = await req.json() as Error
+
+            subtitlesLoaded.value = true
+            subtitlesLoading.value = false
+            subtitlesErr.value = payload.detail
+            return
+          }
+
+          const payload = await req.json() as ShowSubtitles
+          const subtitles: Seasons = organizeSubtitles(payload.subtitles)
+
+          seasons.value = subtitles
+          total.value = payload.subtitles.length
+          availableLangs.value = payload.available_langs
+
+          sessionStorage.setItem(cacheItemName, JSON.stringify(payload))
+        } else {
+          const payload = JSON.parse(cache) as ShowSubtitles
+          const subtitles: Seasons = organizeSubtitles(payload.subtitles)
+
+          seasons.value = subtitles
+          total.value = payload.subtitles.length
+          availableLangs.value = payload.available_langs
         }
-
-        const payload = await req.json() as ShowSubtitles
-        const subtitles: Seasons = {}
-
-        for (const sub of payload.subtitles) {
-          const season = sub.season.toString()
-
-          subtitles[season]
-            ? subtitles[season].push(sub)
-            : subtitles[season] = [sub]
-        }
-
-        seasons.value = subtitles
-        total.value = payload.subtitles.length
-        availableLangs.value = payload.available_langs
       } catch (e) {
         subtitlesErr.value = e
       } finally {
@@ -144,8 +139,41 @@ export default defineComponent({
       }
     }
 
+    const fetchMediaData = async () => {
+      mediaLoaded.value = false
+      mediaLoading.value = true
+      mediaErr.value = ''
+
+      try {
+        const cacheItemName = `imdb_id-${route.params.id}`
+        const cache = sessionStorage.getItem(cacheItemName)
+
+        if (!cache) {
+          const req = await fetch(`/api/v1/media?imdb_id=${route.params.id}`)
+          const payload = await req.json()
+
+          if (req.status !== 200) {
+            mediaLoaded.value = true
+            mediaLoading.value = false
+            mediaErr.value = payload.detail || 'There has been an error'
+            return
+          }
+
+          mediaData.value = payload
+        } else {
+          mediaData.value = JSON.parse(cache)
+        }
+
+        fetchSubtitles()
+      } catch (e) {
+        mediaErr.value = e
+      } finally {
+        mediaLoaded.value = true
+        mediaLoading.value = false
+      }
+    }
+
     fetchMediaData()
-    fetchSubtitles()
 
     const updateLang = async () => {
       preferredLangName.value = localStorage.preferredLangName as LangName || LangName.ENG

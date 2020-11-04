@@ -3,7 +3,7 @@
     <Load v-if="loading"/>
   </transition>
   <transition name="bounceIn">
-    <div class="searchResults" v-if="showResults">
+    <div class="searchResults" v-if="showResults && !err">
       <h3>Results ({{results.length}})</h3>
       <p v-if="err.length > 1">Error: {{err}}</p>
       <p v-if="results.length === 0">Nothing has been found with that name.</p>
@@ -65,23 +65,32 @@ export default defineComponent({
       loaded.value = false
 
       try {
-        const req = await fetch(`/api/v1/search?type=${mediaType}&query=${query}`)
+        const cacheItemName = `mediaType-${mediaType}-query-${query}`
+        const cache = sessionStorage.getItem(cacheItemName)
 
-        if (req.status === 500) {
-          err.value = 'Something went wrong with the server'
-          return
+        if (!cache) {
+          const req = await fetch(`/api/v1/search?type=${mediaType}&query=${query}`)
+
+          if (req.status === 500) {
+            err.value = 'Something went wrong with the server'
+            return
+          }
+
+          if (req.status !== 200) {
+            const payload = await req.json() as Error
+            err.value = payload.detail
+
+            return
+          }
+
+          const payload = await req.json() as MediaData[]
+
+          sessionStorage.setItem(cacheItemName, JSON.stringify(payload))
+          results.value = payload
+        } else {
+          results.value = JSON.parse(cache) as MediaData[]
         }
 
-        if (req.status !== 200) {
-          const payload = await req.json() as Error
-          err.value = payload.detail
-
-          return
-        }
-
-        const payload = await req.json() as MediaData[]
-
-        results.value = payload
         showResults.value = true
 
         await nextTick()
