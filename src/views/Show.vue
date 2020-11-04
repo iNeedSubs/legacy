@@ -202,7 +202,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 main {
-  padding: 0 30px;
+  padding: 0 30px 30px 30px;
 }
 
 ::v-deep(.media) {
@@ -248,7 +248,6 @@ main {
 .seasons {
   display: grid;
   gap: 2em 0;
-  margin-bottom: 30px;
 
   .season {
     h4 {
