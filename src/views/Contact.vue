@@ -1,15 +1,22 @@
 <template>
   <main>
     <section>
-      <h3>👨‍💻 Maintainer</h3>
+      <h3>👨‍💻 Maintainers</h3>
       <p>If you have:</p>
       <ul>
         <li>A question about something</li>
         <li>Found a bug somewhere</li>
         <li>Something else on your mind</li>
       </ul>
-      <p>You can email me at the address down here:</p>
-      <a class="email" href="mailto:eray_chumak@protonmail.com">eray_chumak@protonmail.com</a>
+      <p>You can email us at one of the addresses down here:</p>
+      <div class="emails">
+        <a href="mailto:eray_chumak@protonmail.com">
+          <p>eray_chumak@protonmail.com</p>
+        </a>
+        <a href="mailto:williamlaw.3001@gmail.com">
+          <p>williamlaw.3001@gmail.com</p>
+        </a>
+      </div>
     </section>
     <section>
       <h3>⌨️ Our repository</h3>
@@ -50,19 +57,34 @@ p {
 
 a {
   border-radius: 15px;
-  background: #BC5938;
   padding: 0 5px;
+  transition: background .2s ease-in-out;
 }
 
-.email {
+.emails {
   margin-top: 1em;
-  display: inline-block;
-  padding: 5px 10px;
+  display: grid;
+  justify-content: start;
+  gap: 1em;
+
+  a {
+    background: #BC5938;
+    padding: 5px 10px;
+
+    &:hover, &:focus {
+      background: #d65a31;
+    }
+  }
 }
+
 
 .github {
   background: #24292e;
   border: 1px solid white;
+
+  &:hover, &:focus {
+    background: #353a3f;
+  }
 }
 
 
