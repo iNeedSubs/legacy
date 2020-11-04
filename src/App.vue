@@ -1,10 +1,12 @@
 <template>
   <Header/>
-  <router-view v-slot="{Component}">
-    <keep-alive include="Home">
-      <component :is="Component"/>
-    </keep-alive>
-  </router-view>
+    <router-view v-slot="{Component}">
+      <keep-alive include="Home">
+        <transition name="fade" mode="out-in">
+          <component :is="Component"/>
+        </transition>
+      </keep-alive>
+    </router-view>
 </template>
 
 <script lang="ts">
@@ -84,6 +86,24 @@ a {
   vertical-align: -.125em;
   width: 1em;
   fill: #ffffff;
+}
+
+.fade {
+  &-enter-active,
+  &-leave-active {
+    transition: .2s ease-in-out;
+    transition-property: opacity;
+  }
+
+  &-enter-to,
+  &-leave-from {
+    opacity: 1;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
 }
 
 .bounceIn {
