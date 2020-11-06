@@ -28,6 +28,12 @@ urlpatterns = [
     path('admin', RedirectView.as_view(url='admin/')),
     path('admin/', admin.site.urls),
     path('api/v1/', include('apps.v1.search.urls')),
+    path('sitemap.xml',
+         TemplateView.as_view(
+             template_name='sitemap.xml',
+             content_type='text/xml'
+        )
+    ),
     url(r'^.*', VueView.as_view(), name='app')
 ]
 
