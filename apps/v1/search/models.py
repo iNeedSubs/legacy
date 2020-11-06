@@ -61,7 +61,7 @@ class TMDB(object):
 
     def get_subtitles(self, imdb_id: str, language: str) -> List[dict]:
         subtitles_url = 'https://rest.opensubtitles.org/search'
-        headers = {'User-Agent': 'TemporaryUserAgent'}
+        headers = {'User-Agent': 'SubtitlesPW'}
 
         try:
             data: List[dict] = requests.get(
