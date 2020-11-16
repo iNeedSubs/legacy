@@ -27,16 +27,3 @@ class TestRobotsTxt(TestCase):
             response.status_code,
             status.HTTP_405_METHOD_NOT_ALLOWED
         )
-
-    def test_alias_url(self):
-        '''
-        Test if the alias url redirects the user back to the correct url.
-        '''
-        response = self.client.get(reverse('robots:alias'))
-        self.assertRedirects(
-            response=response,
-            expected_url=reverse('robots:txt'),
-            status_code=status.HTTP_302_FOUND,
-            target_status_code=status.HTTP_200_OK,
-            fetch_redirect_response=False
-        )
