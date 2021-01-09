@@ -23,7 +23,6 @@ from subtitles.views import VueView
 
 
 urlpatterns = [
-    url('', include('pwa.urls')),
     path('', include('apps.robots.urls')),
     path('admin', RedirectView.as_view(url='admin/')),
     path('admin/', admin.site.urls),
@@ -32,8 +31,8 @@ urlpatterns = [
          TemplateView.as_view(
              template_name='sitemap.xml',
              content_type='text/xml'
-        )
-    ),
+         )
+         ),
     url(r'^.*', VueView.as_view(), name='app')
 ]
 

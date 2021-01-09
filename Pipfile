@@ -17,7 +17,6 @@ psycopg2 = "*"
 pillow = "*"
 django-cors-headers = "*"
 djangorestframework = "*"
-django-pwa = "*"
 
 [requires]
 python_version = "3.8"

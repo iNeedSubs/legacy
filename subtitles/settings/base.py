@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pwa',
     'corsheaders',
     'rest_framework',
     'apps.v1.search',
@@ -124,88 +123,3 @@ STATICFILES_DIRS = [
 REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'apps.v1.search.exceptions.handle_405_exception'
 }
-
-
-# Progessive Web App Settings
-
-PWA_APP_NAME = 'Subtitles'
-PWA_APP_DESCRIPTION = 'Download subtitles for movies and shows in your preferred language.'
-PWA_APP_THEME_COLOR = '#222831'
-PWA_APP_BACKGROUND_COLOR = '#222831'
-PWA_APP_DISPLAY = 'standalone'
-PWA_APP_SCOPE = '/'
-PWA_APP_ORIENTATION = 'any'
-PWA_APP_START_URL = '/'
-PWA_APP_STATUS_BAR_COLOR = 'default'
-PWA_APP_ICONS = [
-    {
-        'src': '/static/icons/16x16.png',
-        'type': 'image/png',
-        'sizes': '16x16'
-    },
-    {
-        'src': '/static/icons/32x32.png',
-        'type': 'image/png',
-        'sizes': '32x32'
-    },
-    {
-        'src': '/static/icons/64x64.png',
-        'type': 'image/png',
-        'sizes': '64x64'
-    },
-    {
-        'src': '/static/icons/128x128.png',
-        'type': 'image/png',
-        'sizes': '128x128'
-    },
-    {
-        'src': '/static/icons/256x256_box.png',
-        'type': 'image/png',
-        'sizes': '256x256'
-    },
-    {
-        'src': '/static/icons/512x512_maskable.png',
-        'type': 'image/png',
-        'sizes': '512x512',
-        'purpose': 'maskable'
-    }
-]
-PWA_APP_ICONS_APPLE = [
-    {
-        'src': '/static/icons/16x16.png',
-        'type': 'image/png',
-        'sizes': '16x16'
-    },
-    {
-        'src': '/static/icons/32x32.png',
-        'type': 'image/png',
-        'sizes': '32x32'
-    },
-    {
-        'src': '/static/icons/64x64.png',
-        'type': 'image/png',
-        'sizes': '64x64'
-    },
-    {
-        'src': '/static/icons/128x128.png',
-        'type': 'image/png',
-        'sizes': '128x128'
-    },
-    {
-        'src': '/static/icons/256x256_box.png',
-        'type': 'image/png',
-        'sizes': '256x256'
-    },
-    {
-        'src': '/static/icons/512x512_maskable.png',
-        'type': 'image/png',
-        'sizes': '512x512',
-        'purpose': 'maskable'
-    }
-]
-# PWA_APP_DIR = 'ltr'
-PWA_APP_LANG = 'en-US'
-
-PWA_SERVICE_WORKER_PATH = os.path.join(
-    BASE_DIR / 'serviceworker.js'
-)
