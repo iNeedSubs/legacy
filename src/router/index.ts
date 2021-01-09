@@ -4,6 +4,7 @@ import Contact from '../views/Contact.vue';
 import Movie from '../views/Movie.vue';
 import Show from '../views/Show.vue';
 import Home from '../views/Home.vue';
+import NotFound from '../views/NotFound.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -30,6 +31,10 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'home',
     component: Home,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFound
   }
 ];
 
