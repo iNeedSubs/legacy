@@ -56,7 +56,7 @@ SETTING=subtitles.settings.dev
 
 ### Running
 
-You can either run the production preview which hosted by Django or run the development server made by Vue with features such as hot reloading which is ideal when developing.
+You can either run the production preview which is hosted by Django or run the development server made by Vue with features such as hot reloading which is ideal when developing.
 
 #### Production preview
 1. Build the frontend with `yarn build`.
