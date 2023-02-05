@@ -1,6 +1,10 @@
 # <img height="45" src="./public/static/icons/128x128.png" align="top"> Subtitles
 
-https://subtitles.pw/
+https://subtitles.spimy.dev
+
+Hosted on my own server with [NGINX](https://www.nginx.com/) working as the reverse proxy to the gunicorn socket.
+
+Free SSL/TSL provided by [Let's Encrypt](https://letsencrypt.org/) using [CertBot](https://certbot.eff.org/).
 
 Download subtitles for movies and shows in your preferred language.
 
